@@ -1,0 +1,150 @@
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+html {
+    font-size: 16px;
+}
+
+html,
+body {
+    width: 100%;
+    height: 100%;
+    background-color: #eeeeee;
+}
+
+input::placeholder {
+    color: #757575;
+}
+
+/* ヘッダー */
+.header {
+    /* position: fixed; */
+    /* top: 0; */
+    /* left: 0; */
+    height: 6.25rem;
+}
+
+.header__container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    padding: 0 2rem;
+    /* flex-shrink: 0; */
+    /* z-index: 100; */
+}
+
+.header__logo {
+    margin-right: auto;
+    font-size: 2rem;
+    color: #3460f6;
+}
+
+/* モーダルウィンドウ */
+.modal-button {
+    display: inline-block;
+    width: 2.5rem;
+    height: 1.88rem;
+    position: relative;
+    cursor: pointer;
+}
+
+.modal-button span,
+.modal-button span::before,
+.modal-button span::after {
+    display: block;
+    background-color: #3460f6;
+    height: 0.25rem;
+    width: 100%;
+    position: absolute;
+    left: 0;
+    transition: all 0.3s ease;
+}
+
+.modal-button span::before,
+.modal-button span::after {
+    content: '';
+}
+
+.modal-button span::before {
+    top: -0.5rem;
+    width: 50%;
+}
+
+.modal-toggle {
+    display: none;
+}
+
+.modal {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    justify-content: center;
+    align-items: center;
+}
+
+.modal-toggle:checked + .modal {
+    display: flex;
+}
+
+.modal-content {
+    background-color: #fff;
+    padding: 1rem;
+    border-radius: 0.5rem;
+    position: relative;
+}
+
+.modal-content__close {
+    position: absolute;
+    top: 1rem;
+    right: 1rem;
+    width: 1.5rem;
+    height: 1.5rem;
+    background: #3460f6;
+    border: 0.13rem solid #fff;
+    border-radius: 0.25rem;
+    cursor: pointer;
+}
+
+.modal-content__close::before,
+.modal-content__close::after {
+    content: '';
+    position: absolute;
+    width: 2rem;
+    height: 0.13rem;
+    background-color: #3460f6;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%) rotate(45deg);
+}
+
+.model-content__close::after {
+    transform: translate(-50%, -50%) rotate(-45deg);
+}
+.modal-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.modal-list__item {
+    margin: 1rem 0;
+}
+
+.modal-list__link {
+    color: #3460f6;
+    text-decoration: none;
+}
+
+@media (max-width: 768px) {
+    html {
+        font-size: 14px;
+    }
+}
