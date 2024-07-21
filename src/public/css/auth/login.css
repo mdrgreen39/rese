@@ -1,0 +1,111 @@
+.login-form {
+    width: 90%;
+    max-width: 25rem;
+    margin: 0 auto;
+    padding: 1.75rem;
+    border-radius: 0.38rem;
+    box-shadow: 0.25rem 0.25rem 0.25rem rgba(0, 0, 0, 0.4);
+    background-color: #fff;
+    position: relative;
+    overflow: hidden;
+}
+
+.login-form__heading {
+    background-color: #3460f6;
+    color: #fff;
+    padding: 1rem;
+    margin: -1.75rem -1.75rem 1rem -1.75rem;
+    text-align: left;
+    font-size: 1rem;
+    font-weight: 500;
+    border-top-left-radius: 0.38rem;
+    border-top-right-radius: 0.38rem;
+}
+
+.login-form__inner {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.login-form__form {
+    width: 100%;
+    margin-bottom: 1rem;
+    position: relative;
+}
+
+.login-form__group {
+    width: 100%;
+    /* margin-bottom: 0.5rem; */
+    /* position: relative; */
+}
+
+.login-form__input-container {
+    position: relative;
+    display: flex;
+    align-items: center;
+}
+
+.login-form__email-icon {
+    width: 1.5rem;
+    height: 1.5rem;
+    margin: 1rem 0.5rem 0 0;
+}
+
+.login-form__password-icon {
+    width: 1.5rem;
+    height: 1.5rem;
+    margin: 1rem 0.5rem 0 0;
+}
+
+.login-form__input {
+    flex: 1;
+    /* width: 100%; */
+    padding: 1rem 0.5rem 0 0.06rem;
+    border-bottom: 0.06rem solid #000;
+    outline: none;
+}
+
+.login-form__input:focus {
+    border-bottom: 0.13rem solid #757575;
+}
+
+.login-form__error-message {
+    /* white-space: nowrap; */
+    font-size: 1rem;
+    color: #cf2222;
+    margin-left: 2.5rem;
+    /* bottom: -20px; */
+    /* left: 0; */
+    /* display: none; */
+}
+
+.login-form__button-container {
+    display: flex;
+    justify-content: flex-end;
+    margin-top: 1.5rem;
+}
+
+.login-form__button {
+    padding: 0.5rem 1rem;
+    background-color: #3460f6;
+    color: #fff;
+    border: none;
+    border-radius: 0.38rem;
+    font-size: 0.75rem;
+    cursor: pointer;
+
+    &:hover {
+        opacity: 0.7;
+    }
+}
+
+@media (max-width: 768px) {
+    .register-form {
+        width: 100%;
+        margin: 0 auto;
+    }
+    .login-form__error-message {
+        font-size: 0.75rem;
+    }
+}

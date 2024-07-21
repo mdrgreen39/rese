@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\ShopController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -13,6 +14,8 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::get('/auth/login', [ShopController::class,'showLoginForm'])->name('login');
+
+Route::get('/thanks', function () {
+    return view('thanks');
+})->name('registration.thanks');
