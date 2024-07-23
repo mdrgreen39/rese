@@ -1,7 +1,7 @@
 .login-form {
     width: 90%;
     max-width: 25rem;
-    margin: 0 auto;
+    margin: 12rem auto;
     padding: 1.75rem;
     border-radius: 0.38rem;
     box-shadow: 0.25rem 0.25rem 0.25rem rgba(0, 0, 0, 0.4);
@@ -103,7 +103,7 @@
 @media (max-width: 768px) {
     .register-form {
         width: 100%;
-        margin: 0 auto;
+        margin: 10rem auto;
     }
     .login-form__error-message {
         font-size: 0.75rem;

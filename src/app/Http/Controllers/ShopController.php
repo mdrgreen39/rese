@@ -11,4 +11,9 @@ class ShopController extends Controller
     {
         return view('auth.login');
     }
+
+    public function index(Request $request)
+    {
+        return view('index');
+    }
 }

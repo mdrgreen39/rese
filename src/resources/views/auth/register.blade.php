@@ -4,21 +4,19 @@
 <link rel="stylesheet" href="{{ asset('css/auth/register.css') }}">
 @endsection
 
-@section('modal')
+@section('nav')
 
-<label class="modal-button" for="check">
+<input class="hamburger-input" type="checkbox" id="check">
+<label class="hamburger-label" for="check">
     <span></span>
 </label>
-<input class="modal-toggle" type="checkbox" id="check">
-<div class="modal">
-    <div class="modal-content">
-        <label class="modal-content__close" for="check"></label>
-        <ul class="modal-list">
-            <li class="modal-list__item"><a class="modal-list__link" href="/login">Login</a></li>
-        </ul>
-    </div>
-
-</div>
+<nav class="header-nav">
+    <ul class="header-nav__list">
+        <li class="header-nav__item"><a class="header-nav__link" href="/">Home</a></li>
+        <li class="header-nav__item"><a class="header-nav__link" href="/register">Registration</a></li>
+        <li class="header-nav__item"><a class="header-nav__link" href="/login">Login</a></li>
+    </ul>
+</nav>
 
 
 @endsection
