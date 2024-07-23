@@ -11,7 +11,7 @@
 </label>
 <nav class="header-nav">
     <ul class="header-nav__list">
-        <li class="header-nav__item"><a class="header-nav__link" href="">Home</a></li>
+        <li class="header-nav__item"><a class="header-nav__link" href="/">Home</a></li>
         <li class="header-nav__item"><a class="header-nav__link" href="/register">Registration</a></li>
         <li class="header-nav__item"><a class="header-nav__link" href="/login">Login</a></li>
     </ul>
