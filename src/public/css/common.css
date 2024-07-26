@@ -65,7 +65,7 @@ input::placeholder {
 }
 
 /* ハンバーガーメニュー */
-.hamburger-input[type="checkbox"] {
+.hamburger-input {
     opacity: 0;
     visibility: hidden;
     position: absolute;
@@ -110,17 +110,17 @@ input::placeholder {
     bottom: -0.63rem;
 }
 
-.hamburger-input[type="checkbox"]:checked+.hamburger-label span {
+.hamburger-input:checked + .hamburger-label span {
     background-color: transparent;
 }
 
-.hamburger-input[type="checkbox"]:checked+.hamburger-label span::before {
+.hamburger-input:checked + .hamburger-label span::before {
     top: 0;
     transform: rotate(45deg);
     width: 100%;
 }
 
-.hamburger-input[type="checkbox"]:checked+.hamburger-label span::after {
+.hamburger-input:checked + .hamburger-label span::after {
     bottom: 0;
     transform: rotate(-45deg);
     width: 100%;
@@ -147,8 +147,7 @@ input::placeholder {
     margin: 0.75rem 0;
 }
 
-.header-nav__link,
-.header-nav__link--button {
+.header-nav__link {
     display: block;
     font-size: 1.5rem;
     color: #3460f6;
@@ -161,6 +160,23 @@ input::placeholder {
         }
 }
 
+.header-nav__link--button {
+    display: block;
+    font-size: 1.5rem;
+    color: #3460f6;
+    padding: 0.5rem 3.13rem;
+    text-align: center;
+    width: 100%;
+    border: none;
+    background: none;
+
+    /* text-decoration: none; */
+    &:hover {
+        color: #fff;
+        background-color: #3460f6;
+    }
+}
+
 /* .header-nav__link--button { */
     /* color: #fff; */
     /* background-color: #3460f6; */
@@ -168,9 +184,33 @@ input::placeholder {
 
 
 
-.hamburger-input[type="checkbox"]:checked ~ .header-nav {
+.hamburger-input:checked ~ .header-nav {
     top: 50%;
     transform: translate(-50%, -50%);
+}
+
+@media (max-width: 900px) {
+
+    html {
+        font-size: 14px;
+    }
+
+    .header__container {
+        margin-left: 0;
+    }
+
+    .header-nav {
+        width: 100vw;
+        height: 100vh;
+        top: 0;
+        left: -100vw;
+        transform: none;
+    }
+
+    .hamburger-input:checked~.header-nav {
+        left: 0;
+        transform: translate(0, -50%);
+    }
 }
 
 @media (max-width: 768px) {
@@ -190,7 +230,7 @@ input::placeholder {
         transform: none;
     }
 
-    .hamburger-input[type="checkbox"]:checked ~ .header-nav {
+    .hamburger-input:checked ~ .header-nav {
         left: 0;
         transform: translate(0, -50%);
     }

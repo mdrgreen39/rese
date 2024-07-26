@@ -11,6 +11,8 @@
 </label>
 <nav class="header-nav">
     <ul class="header-nav__list">
+        <li class="header-nav__item"><a class="header-nav__link" href="/">Home</a></li>
+        <li class="header-nav__item"><a class="header-nav__link" href="/register">Registration</a></li>
         <li class="header-nav__item"><a class="header-nav__link" href="/login">Login</a></li>
     </ul>
 </nav>
@@ -21,14 +23,8 @@
 @section('content')
 <div class="thanks-form">
     <h2 class="thanks-form__heading">会員登録ありがとうございます</h2>
-    <div class="thanks-form__inner">
-
-        <div class="thanks-form__button-container">
-            <a class="thanks-form__button" href="/login">ログインする</a>
-        </div>
-
-
-
+    <div class="thanks-form__button-container">
+        <a class="thanks-form__button" href="/login">ログインする</a>
     </div>
 </div>
 

@@ -23,40 +23,34 @@
 @section('content')
 <div class="login-form">
     <h2 class="login-form__heading">Login</h2>
-    <div class="login-form__inner">
-        <form class="login-form__form" action="/login" method="post" novalidate>
-            @csrf
-            <div class="login-form__group">
-                <div class="login-form__input-container">
-                    <img class="login-form__email-icon" src="/images/icons/icon_email.svg" alt="email_icon">
-                    <input class="login-form__input" type="email" name="email" id="email" placeholder="Email" value="{{ old('email') }}">
-                </div>
-
-                <p class="login-form__error-message">
-                    @error('email')
-                    {{ $message }}
-                    @enderror
-                </p>
+    <form class="login-form__form" action="/login" method="post" novalidate>
+        @csrf
+        <div class="login-form__group">
+            <div class="login-form__input-container">
+                <img class="login-form__email-icon" src="/images/icons/icon_email.svg" alt="email_icon">
+                <input class="login-form__input" type="email" name="email" id="email" placeholder="Email" value="{{ old('email') }}">
             </div>
-            <div class="login-form__group">
-                <div class="login-form__input-container">
-                    <img class="login-form__password-icon" src="/images/icons/icon_password.svg" alt="password_icon">
-                    <input class="login-form__input" type="password" name="password" id="password" placeholder="Password" value="{{ old('password') }}">
-
-                </div>
-                <p class="login-form__error-message">
-                    @error('password')
-                    {{ $message }}
-                    @enderror
-                </p>
+            <p class="login-form__error-message">
+                @error('email')
+                {{ $message }}
+                @enderror
+            </p>
+        </div>
+        <div class="login-form__group">
+            <div class="login-form__input-container">
+                <img class="login-form__password-icon" src="/images/icons/icon_password.svg" alt="password_icon">
+                <input class="login-form__input" type="password" name="password" id="password" placeholder="Password" value="{{ old('password') }}">
             </div>
-            <div class="login-form__button-container">
-                <button class="login-form__button" type="submit">ログイン</button>
-            </div>
-
-
-        </form>
-    </div>
+            <p class="login-form__error-message">
+                @error('password')
+                {{ $message }}
+                @enderror
+            </p>
+        </div>
+        <div class="login-form__button-container">
+            <button class="login-form__button" type="submit">ログイン</button>
+        </div>
+    </form>
 </div>
 
 

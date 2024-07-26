@@ -1,11 +1,13 @@
 .thanks-form {
     width: 90%;
-    max-width: 25rem;
-    margin: 0 auto;
-    padding: 5rem;
-    border-radius: 0.375rem;
+    max-width: 30rem;
+    margin: 12rem auto;
+    padding: 6rem;
+    border-radius: 0.38rem;
     box-shadow: 0.25rem 0.25rem 0.25rem rgba(0, 0, 0, 0.4);
     background-color: #fff;
+    position: relative;
+    overflow: hidden;
 }
 
 .thanks-form__heading {
@@ -14,15 +16,15 @@
     padding: 1rem;
     margin: -1rem -1rem 1rem -1rem;
     text-align: center;
-    font-size: 1rem;
+    font-size: 1.25rem;
     font-weight: 500;
 }
 
-.thanks-form__inner {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-}
+/* .thanks-form__inner { */
+    /* display: flex; */
+    /* flex-direction: column; */
+    /* align-items: center; */
+/* } */
 
 /* .thanks-form__form { */
     /* width: 100%; */
@@ -43,13 +45,13 @@
 
 .thanks-form__button {
     display: inline-block;
-    padding: 0.25rem 0.625rem;
+    padding: 0.5rem 1rem;
     background-color: #3460f6;
     color: #fff;
     text-decoration: none;
     border: none;
-    border-radius: 0.1875rem;
-    font-size: 0.5rem;
+    border-radius: 0.19rem;
+    font-size: 0.75rem;
     text-align: center;
     cursor: pointer;
 
@@ -61,6 +63,6 @@
 @media (max-width: 768px) {
     .thanks-form {
         width: 100%;
-        margin: 0 auto;
+        margin: 10rem auto;
     }
 }

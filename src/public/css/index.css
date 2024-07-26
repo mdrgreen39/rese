@@ -1,8 +1,8 @@
-.flex__item {
-    display: flex;
-    justify-content: wrap;
-    gap: 1rem;
-}
+/* .flex__item { */
+    /* display: flex; */
+    /* justify-content: wrap; */
+    /* gap: 1rem; */
+/* } */
 
 .shop{
     margin-top: 5rem;
@@ -19,7 +19,7 @@
     display: flex;
     flex-wrap: wrap;
     gap: 1rem;
-    justify-content: space-between;
+    justify-content: flex-start;
 }
 
 .shop-wrap__item {
@@ -123,6 +123,15 @@
 .shop-wrap__item-toggle-heart:checked + .shop-wrap__item-heart::before,
 .shop-wrap__item-toggle-heart:checked + .shop-wrap__item-heart::after {
     background: #ec3323;
+}
+
+@media (max-width: 900px) {
+
+
+    .shop-wrap__item {
+        flex: 1 1 calc(33.333% - 1rem);
+        max-width: calc(33.333% - 1rem);
+    }
 }
 
 @media (max-width: 768px) {
