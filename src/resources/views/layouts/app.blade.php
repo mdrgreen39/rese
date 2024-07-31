@@ -14,12 +14,17 @@
 <body>
     <header class="header">
         <div class="header__container">
-            @yield('nav')
+
             <h1 class="header__logo">Rese</h1>
 
         </div>
+        @yield('search')
+
+
 
     </header>
+    @yield('nav')
+
     <div class="content">
         @yield('content')
     </div>

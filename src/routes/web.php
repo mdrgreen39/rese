@@ -16,7 +16,12 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/auth/login', [ShopController::class,'showLoginForm'])->name('login');
 
-Route::get('/', [ShopController::class, 'index'])->name('all-shops');
 Route::get('/thanks', function () {
     return view('thanks');
 })->name('registration.thanks');
+
+Route::get('/', [ShopController::class, 'index'])->name('shops.index');
+Route::get('/search', [ShopController::class, 'search'])->name('search.results');
+
+
+Route::get('/detail/{shop_id}', [ShopController::class, 'show'])->name('shop.detail');

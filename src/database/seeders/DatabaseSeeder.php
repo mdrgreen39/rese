@@ -3,6 +3,7 @@
 namespace Database\Seeders;
 
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
+use Illuminate\Support\Facades\App;
 use Illuminate\Database\Seeder;
 
 class DatabaseSeeder extends Seeder
@@ -18,5 +19,18 @@ class DatabaseSeeder extends Seeder
         //     'name' => 'Test User',
         //     'email' => 'test@example.com',
         // ]);
+
+        $this->call([
+            PrefectureTableSeeder::class,
+            GenresTableSeeder::class,
+        ]);
+
+        if (App::environment('local')) {
+            $this->call([
+                PrefectureTableSeeder::class,
+                GenresTableSeeder::class,
+                ShopsTableSeeder::class,
+            ]);
+        }
     }
 }

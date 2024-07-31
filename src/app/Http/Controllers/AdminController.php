@@ -11,13 +11,13 @@ use App\Models\Genre;
 
 class AdminController extends Controller
 {
-    /* 店舗情報追加ページ表示*/
+
     public function create()
     {
         $prefectures = Prefecture::all();
         $genres = Genre::all();
 
-        return view('admin.create_shop', compact('prefectures', 'genres'));
+        return view('admin.shop_register', compact('prefectures', 'genres'));
     }
 
     /* 店舗情報追加処理 */
@@ -30,13 +30,9 @@ class AdminController extends Controller
         $shop->description = $request->description;
 
         if ($request->hasFile('image')) {
-            $shop->image = $request->file('image')->store('shop', 'public');
+            $shop->image = $request->file('image')->store('shops', 'public');
         }
 
-        if ($request->has('new_genre')) {
-            $genre = Genre::firstOrCreate(['name' => $request->new_genre]);
-            $shop->genre_id = $request->genre_id;
-        }
 
         $shop->save();
 
@@ -50,17 +46,13 @@ class AdminController extends Controller
         return view('shops.edit', compact('shop'));
     }
 
-    public function update(ShopRequset $request, $id)
+    public function update(ShopRequest $request, $id)
     {
         $shop = Shop::findOrFail($id);
         $prefecture = Prefecture::find($request->prefecture_id);
         $genre = Genre::find($request->genre_id);
         $shop->description = $request->description;
 
-        if ($request->has('new_genre')) {
-            $genre = Genre::firstOrCreate(['name' => $request->new_genre]);
-            $shop->genre_id = $request->genre_id;
-        }
 
         if ($request->hasFile('image')) {
             if ($shop->image) {
