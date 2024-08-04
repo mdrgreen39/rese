@@ -61,6 +61,11 @@
 }
 
 @media (max-width: 768px) {
+
+    .header {
+        height: 0;
+    }
+    
     .thanks-form {
         width: 100%;
         margin: 10rem auto;

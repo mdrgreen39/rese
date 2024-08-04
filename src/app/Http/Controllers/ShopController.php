@@ -11,10 +11,10 @@ use App\Models\Genre;
 class ShopController extends Controller
 {
     /* ログインページ表示 */
-    public function showLoginForm()
-    {
-        return view('auth.login');
-    }
+    // public function showLoginForm()
+    // {
+        // return view('auth.login');
+    // }
 
     /* 店舗一覧TOPページ表示*/
     public function index(Request $request)
@@ -58,7 +58,7 @@ class ShopController extends Controller
         $genre = $shop->genre;
 
         // 予約フォーム用のデータを生成
-        $startTime = '17:00';
+        $startTime = '11:00';
         $endTime = '21:00';
         $interval = 30; // 分
 

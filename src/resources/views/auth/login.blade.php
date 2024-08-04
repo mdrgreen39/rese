@@ -21,7 +21,16 @@
 @endsection
 
 @section('content')
+
+@if (session('message'))
+<div class="login-form__session-message">
+    {{ session('message') }}
+</div>
+@endif
+
+
 <div class="login-form">
+
     <h2 class="login-form__heading">Login</h2>
     <form class="login-form__form" action="/login" method="post" novalidate>
         @csrf

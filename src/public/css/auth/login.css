@@ -1,3 +1,10 @@
+.login-form__session-message {
+    margin: 12rem auto 0 auto;
+    text-align: center;
+    color: #cf2222;
+
+}
+
 .login-form {
     width: 90%;
     max-width: 25rem;
@@ -104,9 +111,20 @@
     }
 }
 
+
+
 @media (max-width: 768px) {
-    .register-form {
-        width: 100%;
+    
+    .header {
+        height: 8.35rem;
+    }
+
+    .header__container {
+        padding-bottom: 0;
+    }
+
+    .login-form {
+        /* width: 90%; */
         margin: 10rem auto;
     }
     .login-form__error-message {

@@ -45,7 +45,7 @@
 <div class="detail">
     <div class="detail-container">
         <div class="detail-heading">
-            <button class="detail-heading__button-before" type="submit">&lt;</button>
+            <a class="detail-heading__button-before" href="{{ route('shops.index') }}">&lt;</a>
             <h2 class="detail-heading__name">{{ $shop->name }}</h2>
         </div>
         <img class="detail-container__photo" src="{{ asset('storage/' . $shop->image) }}" alt="{{ $shop->name }}">
@@ -58,20 +58,22 @@
         </div>
     </div>
 
+    
     <div class="reserve-form">
         <h2 class="reserve-form__heading">予約</h2>
-        <form class="reserve-form__form" action="" method="" novalidate>
+        <form class="reserve-form__form" action="{{ route('reservations.store', ['shop' => $shop->id] )}}" method="post" novalidate>
             @csrf
             <div class="reserve-form__group">
 
-                <input class="reserve-form__select-date" type="date" name="date" id="date" max="9999-12-31" value="" required>
+                <input class="reserve-form__select-date" type="date" name="date" id="date" max="9999-12-31" value="" required novalidate>
                 <p class="reserve-form__error-message">
                     @error('date')
                     {{ $message }}
                     @enderror
                 </p>
                 <div class="reserve-form__select-wrapper">
-                    <select class="reserve-form__select-time" type="time" id="time" name="time" required>
+                    <select class="reserve-form__select-time" type="time" id="time" name="time" required novalidate>
+                        <option value="" disabled selected>予約時間を選択してください</option>
                         @foreach ($times as $time)
                         <option value="{{ $time }}">{{ $time }}
                         </option>
@@ -81,12 +83,13 @@
                 </div>
 
                 <p class="reserve-form__error-message">
-                    @error('reserve-time')
+                    @error('time')
                     {{ $message }}
                     @enderror
                 </p>
                 <div class="reserve-form__select-wrapper">
-                    <select class="reserve-form__select-number" id="number" name="number" required>
+                    <select class="reserve-form__select-number" id="people" name="people" required novalidate>
+                        <option value="" disabled selected>予約人数を選択してください</option>
                         @foreach ($numberOfPeople as $number)
                         <option value=" {{ $number }} ">{{ $number }}人</option>
                         @endforeach
@@ -94,7 +97,7 @@
                     <img class="reserve-form__caretdown-icon" src="/images/icons/icon_caretdown.svg" alt="caretdown_icon">
                 </div>
                 <p class="reserve-form__error-message">
-                    @error('number')
+                    @error('people')
                     {{ $message }}
                     @enderror
                 </p>
@@ -123,12 +126,13 @@
 
             </div>
             <div class="reserve-form__button-container">
-                <button class="reserve-form__button-change" type="submit">変更する</button>
-
-                <button class="reserve-form__button-decide" type="submit">予約する</button>
+                <button class="reserve-form__button" type="submit">予約する</button>
             </div>
 
         </form>
+        
+        
+
     </div>
 
 </div>

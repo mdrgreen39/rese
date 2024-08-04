@@ -57,8 +57,9 @@ input::placeholder {
     align-items: center;
     width: 100%;
     margin: 0 auto;
+    /* padding: 0 1rem; */
     /* margin-left: 5rem; */
-    max-width: 75rem;
+    /* max-width: 75rem; */
 }
 
 .header__logo {
@@ -223,6 +224,7 @@ input::placeholder {
 }
 
 @media (max-width: 768px) {
+
     html {
         font-size: 14px;
     }
@@ -233,11 +235,15 @@ input::placeholder {
         height: 20rem
     }
 
+
     .header__container {
         margin-left: 0;
         padding-bottom: 1rem;
     }
 
+    .hamburger-label {
+            top: 4rem;
+    }
 
 
     /* .header__container { */
