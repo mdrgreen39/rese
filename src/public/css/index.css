@@ -197,14 +197,14 @@
     background: #ec3323;
 }
 
-@media (max-width: 900px) {
+/* @media (max-width: 900px) { */
 
 
-    .shop-wrap__item {
-        flex: 1 1 calc(33.333% - 1rem);
-        max-width: calc(33.333% - 1rem);
-    }
-}
+    /* .shop-wrap__item { */
+        /* flex: 1 1 calc(33.333% - 1rem); */
+        /* max-width: calc(33.333% - 1rem); */
+    /* } */
+/* } */
 
 @media (max-width: 768px) {
 

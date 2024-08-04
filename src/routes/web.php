@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\ShopController;
+use App\Http\Controllers\ReservationController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -14,7 +15,7 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/auth/login', [ShopController::class,'showLoginForm'])->name('login');
+// Route::get('/auth/login', [ShopController::class,'showLoginForm'])->name('login');
 
 Route::get('/thanks', function () {
     return view('thanks');
@@ -25,3 +26,11 @@ Route::get('/search', [ShopController::class, 'search'])->name('search.results')
 
 
 Route::get('/detail/{shop_id}', [ShopController::class, 'show'])->name('shop.detail');
+
+Route::middleware('auth')->group(function ()
+{
+    // Route::post('/shops/{shop}/reservations', [ReservationController::class, 'store'])->name('reservations.store');
+    Route::get('/done', [ReservationController::class, 'done'])->name('reservation.done');
+});
+
+Route::post('/shops/{shop}/reservations', [ReservationController::class, 'store'])->middleware('custom_auth')->name('reservations.store');
