@@ -19,35 +19,39 @@ class ShopController extends Controller
     /* 店舗一覧TOPページ表示*/
     public function index(Request $request)
     {
+        $searchTerm = $request->input('searchTerm', ''); // デフォルト値として空文字を設定
+        $prefectureId = $request->input('prefectureId', ''); // デフォルト値として空文字を設定
+        $genreId = $request->input('genreId', ''); // デフォルト値として空文字を設定
+
         $shops = Shop::with('prefecture', 'genre')->get();
         $prefectures = Prefecture::all();
         $genres = Genre::all();
 
-        return view('index', compact('shops', 'prefectures', 'genres'));
+        return view('index', compact('shops', 'prefectures', 'genres', 'searchTerm', 'prefectureId', 'genreId'));
     }
 
 
     /* 検索機能 */
-    public function search(Request $request)
-    {
-        $query = Shop::query();
+    // public function search(Request $request)
+    // {
+        // $query = Shop::query();
 
-        if ($request->has('prefecture_id') && $request->input('prefecture_id') != 'All area') {
-            $query->where('prefecture_id', $request->input('prefecture_id'));
-        }
+        // if ($request->has('prefecture_id') && $request->input('prefecture_id') != 'All area') {
+            // $query->where('prefecture_id', $request->input('prefecture_id'));
+        // }
 
-        if ($request->has('genre_id') && $request->input('genre_id') != 'All genre') {
-            $query->where('genre_id', $request->input('genre_id'));
-        }
+        // if ($request->has('genre_id') && $request->input('genre_id') != 'All genre') {
+            // $query->where('genre_id', $request->input('genre_id'));
+        // }
 
-        if ($request->has('search') && !empty($request->input('search'))) {
-            $query->where('name', 'like', '%' .  $request->input('search') . '%');
-        }
+        // if ($request->has('search') && !empty($request->input('search'))) {
+            // $query->where('name', 'like', '%' .  $request->input('search') . '%');
+        // }
 
-        $shops = $query->get();
+        // $shops = $query->get();
 
-        return view('results', compact('shops'));
-    }
+        // return view('results', compact('shops'));
+    // }
 
     /* 店舗詳細ページ表示*/
     public function show($shop_id)

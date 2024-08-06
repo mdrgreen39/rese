@@ -63,8 +63,7 @@
 
 .reserve-form {
     width: 48%;
-    margin: 0 auto;
-    margin-bottom: 2rem;
+    margin: 0 auto 2rem;
     padding: 1.75rem;
     border-radius: 0.38rem;
     box-shadow: 0.25rem 0.25rem 0.25rem rgba(0, 0, 0, 0.4);
@@ -88,7 +87,7 @@
     margin-bottom: 1rem;
 }
 
-.reserve-form__group {
+reserve-form__group {
     width: 100%;
     font-size: 0.75rem;
 }
@@ -98,7 +97,7 @@
     width: 50%;
     background-color: #fff;
     padding: 0.5rem;
-    margin: 0.5rem 0 0.75rem;
+    margin: 0.5rem 0 0;
     border-radius: 0.38rem;
     outline: none;
 }
@@ -108,7 +107,7 @@
 .reserve-form__select-wrapper {
     display: flex;
     align-items: center;
-    margin-bottom: 0.75rem;
+    margin-top: 0.75rem;
     /* 上下のマージンを揃える */
     background-color: #fff;
     border-radius: 0.38rem;
@@ -151,7 +150,7 @@
     /* white-space: nowrap; */
     font-size: 0.75rem;
     color: #fff;
-    margin-left: 1.5rem;
+    margin: 0.25rem;
     /* bottom: -20px; */
     /* left: 0; */
     /* display: none; */

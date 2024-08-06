@@ -21,9 +21,17 @@ class ReservationRequest extends FormRequest
      */
     public function rules(): array
     {
+        $now = new \DateTime();
+        $minDatetime = (clone $now)->modify('+3 hours');
+
         return [
             'date' => ['required', 'date'],
-            'time' => ['required', 'date_format:H:i'],
+            'time' => ['required', 'date_format:H:i', function ($attribute, $value, $fail) use ($minDatetime) {
+                $inputDate = \DateTime::createFromFormat('Y-m-d', $value);
+                if ($inputDate < $minDatetime) {
+                    $fail('現在時刻から3時間後以降でなければなりません。');
+                }
+            }],
             'people' => ['required', 'integer', 'min:1'],
         ];
     }
