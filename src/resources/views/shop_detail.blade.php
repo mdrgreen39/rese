@@ -58,82 +58,8 @@
         </div>
     </div>
 
-    
-    <div class="reserve-form">
-        <h2 class="reserve-form__heading">予約</h2>
-        <form class="reserve-form__form" action="{{ route('reservations.store', ['shop' => $shop->id] )}}" method="post" novalidate>
-            @csrf
-            <div class="reserve-form__group">
 
-                <input class="reserve-form__select-date" type="date" name="date" id="date" max="9999-12-31" value="" required novalidate>
-                <p class="reserve-form__error-message">
-                    @error('date')
-                    {{ $message }}
-                    @enderror
-                </p>
-                <div class="reserve-form__select-wrapper">
-                    <select class="reserve-form__select-time" type="time" id="time" name="time" required novalidate>
-                        <option value="" disabled selected>予約時間を選択してください</option>
-                        @foreach ($times as $time)
-                        <option value="{{ $time }}">{{ $time }}
-                        </option>
-                        @endforeach
-                    </select>
-                    <img class="reserve-form__caretdown-icon" src="/images/icons/icon_caretdown.svg" alt="caretdown_icon">
-                </div>
-
-                <p class="reserve-form__error-message">
-                    @error('time')
-                    {{ $message }}
-                    @enderror
-                </p>
-                <div class="reserve-form__select-wrapper">
-                    <select class="reserve-form__select-number" id="people" name="people" required novalidate>
-                        <option value="" disabled selected>予約人数を選択してください</option>
-                        @foreach ($numberOfPeople as $number)
-                        <option value=" {{ $number }} ">{{ $number }}人</option>
-                        @endforeach
-                    </select>
-                    <img class="reserve-form__caretdown-icon" src="/images/icons/icon_caretdown.svg" alt="caretdown_icon">
-                </div>
-                <p class="reserve-form__error-message">
-                    @error('people')
-                    {{ $message }}
-                    @enderror
-                </p>
-
-            </div>
-
-            <div class="reserve-form__confirm">
-                <table class="reserve-form__confirm-table">
-                    <tr>
-                        <th>Shop</th>
-                        <td>仙人</td>
-                    </tr>
-                    <tr>
-                        <th>Date</th>
-                        <td>2024-07-30</td>
-                    </tr>
-                    <tr>
-                        <th>TIme</th>
-                        <td>17:00</td>
-                    </tr>
-                    <tr>
-                        <th>Number</th>
-                        <td>1人</td>
-                    </tr>
-                </table>
-
-            </div>
-            <div class="reserve-form__button-container">
-                <button class="reserve-form__button" type="submit">予約する</button>
-            </div>
-
-        </form>
-        
-        
-
-    </div>
+    @livewire('reservation-form', ['shop' => $shop, 'times' => $times, 'numberOfPeople' => $numberOfPeople])
 
 </div>
 

@@ -38,43 +38,35 @@
 
 @endsection
 @section('search')
-<div class="header-search-container">
-    <form class="header-search-form" action="/search" method="get">
-        @csrf
-        <div class="header-search__select-group">
-            <div class="header-search__select-wrapper">
-                <select class="header-search__select" name="prefecture_id" id="prefecture_id">
-                    <option class=>All area</option>
-                    @foreach($prefectures as $prefecture)
-                    <option value="{{ $prefecture->id }}">{{ $prefecture->name }}</option>
-                    @endforeach
-                </select>
-                <img class="header-search__caretdown-icon" src="/images/icons/icon_caretdown.svg" alt="caretdown_icon">
-            </div>
-            <div class="header-search__select-wrapper">
-                <select class="header-search__select" name="genre_id" id="genre_id">
-                    <option>All genre</option>
-                    @foreach($genres as $genre)
-                    <option value="{{ $genre->id }}">{{ $genre->name }}</option>
-                    @endforeach
-                </select>
-                <img class="header-search__caretdown-icon" src="/images/icons/icon_caretdown.svg" alt="caretdown_icon">
-            </div>
-        </div>
 
-        <div class="header-search__input-group">
-            <button class="header-search__button" type="submit"><img class="header-search__button-icon" src="/images/icons/icon_search.svg" alt="search_icon"></button>
-            <input class="header-search__input" type="text" name="search" placeholder="Search ...">
-        </div>
-
-    </form>
-</div>
+@php
+// デフォルト値を設定
+$searchTerm = $searchTerm ?? '';
+$prefectureId = $prefectureId ?? '';
+$genreId = $genreId ?? '';
+@endphp
 
 
+@livewire('shop-search')
 
 @endsection
 
 @section('content')
+
+@section('content')
+
+@php
+// デフォルト値を設定
+$searchTerm = $searchTerm ?? '';
+$prefectureId = $prefectureId ?? '';
+$genreId = $genreId ?? '';
+@endphp
+
+
+
+@if($shops->isEmpty())
+
+
 
 <div class="shop">
     <div class="shop-container">
@@ -102,5 +94,13 @@
         </div>
     </div>
 </div>
+@else
+@livewire('shop-search-results', [
+'prefectureId' => $prefectureId ?? '',
+'genreId' => $genreId ?? '',
+'searchTerm' => $searchTerm ?? '',
+])
+
+@endif
 
 @endsection
