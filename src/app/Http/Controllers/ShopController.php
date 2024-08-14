@@ -19,13 +19,15 @@ class ShopController extends Controller
     /* 店舗一覧TOPページ表示*/
     public function index(Request $request)
     {
-        $searchTerm = $request->input('searchTerm', ''); // デフォルト値として空文字を設定
-        $prefectureId = $request->input('prefectureId', ''); // デフォルト値として空文字を設定
-        $genreId = $request->input('genreId', ''); // デフォルト値として空文字を設定
+        $searchTerm = $request->input('searchTerm', '');
+        $prefectureId = $request->input('prefectureId', '');
+        $genreId = $request->input('genreId', '');
 
         $shops = Shop::with('prefecture', 'genre')->get();
         $prefectures = Prefecture::all();
         $genres = Genre::all();
+
+        // logger()->info('Shops data:', ['shops' => $shops]);
 
         return view('index', compact('shops', 'prefectures', 'genres', 'searchTerm', 'prefectureId', 'genreId'));
     }

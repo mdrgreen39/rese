@@ -199,6 +199,72 @@ input::placeholder {
     transform: translate(-50%, -50%);
 }
 
+
+
+/* お気に入りマーク */
+.heart-toggle {
+    display: none;
+}
+
+.heart-toggle-wrapper {
+    display: inline-block;
+    text-decoration: none;
+}
+
+.heart-icon {
+    position: relative;
+    width: 1rem;
+    height: 2rem;
+    cursor: pointer;
+    display: inline-block;
+    transition: background-color 0.3s;
+}
+
+.heart-icon::before,
+.heart-icon::after {
+    content: "";
+    position: absolute;
+    width: 1.5rem;
+    height: 2rem;
+    border-radius: 50% 50% 0 0;
+    /* transform: rotate(-45deg); */
+    /* transform-origin: 0 100%; */
+    background-color: #eeeeee;
+    transition: background-color 0.3s;
+}
+
+.heart-icon::before {
+    top: 0;
+    left: 0;
+    transform: rotate(-50deg);
+    transform-origin: 0 100%;
+}
+
+.heart-icon::after {
+    top: 0;
+    left: -1.5rem;
+    transform: rotate(50deg);
+    transform-origin: 100% 100%;
+}
+
+.heart-toggle:checked + .heart-icon::before,
+.heart-toggle:checked + .heart-icon::after {
+    background: #ec3323;
+}
+
+
+.debug-content {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    background: #fff;
+    padding: 20px;
+    z-index: 9999;
+    /* 高いz-indexで最前面に表示 */
+}
+
+
 @media (max-width: 900px) {
 
     html {
@@ -223,6 +289,10 @@ input::placeholder {
     }
 }
 
+
+
+
+
 @media (max-width: 768px) {
 
     html {
@@ -238,7 +308,7 @@ input::placeholder {
 
     .header__container {
         margin-left: 0;
-        padding-bottom: 1rem;
+        padding-bottom: 3rem;
     }
 
     .hamburger-label {

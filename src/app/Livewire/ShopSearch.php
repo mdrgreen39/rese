@@ -36,15 +36,6 @@ class ShopSearch extends Component
     {
         $this->validateOnly($propertyName);
 
-        // dd('Dispatching event', [
-        // 'searchTerm' => $this->searchTerm,
-        // 'prefectureId' => $this->prefectureId,
-        // 'genreId' => $this->genreId,
-        // ]);
-
-        // dd('Updated property', $propertyName, $this->{$propertyName});
-
-
 
         logger()->info('Updated property', [
             'property' => $propertyName,

@@ -26,7 +26,8 @@ class CustomAuthenticate extends Middleware
     public function handle($request, Closure $next, ...$guards)
     {
         if (!Auth::guard(current($guards))->check()) {
-            return redirect()->route('login')->with('message', '予約するにはログインが必要です');
+            $message = '予約するには会員登録が必要です。<br>すでに会員登録済みの方は<a href="' . route('login') . '">こちら</a>からログインしてください。';
+            return redirect()->route('register')->with('message', $message);
         }
 
         return $next($request);
