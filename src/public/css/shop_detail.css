@@ -257,6 +257,12 @@ reserve-form__group {
         z-index: 0;
     }
 
+    .reserve-form__confirm {
+        margin-bottom: 3rem;
+            /* ボタンとの間隔を確保 */
+    }
+    
+
 
     
 }

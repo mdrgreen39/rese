@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('css')
-<link rel="stylesheet" href="{{ asset('css/shop_detail.css') }}">
+<link rel="stylesheet" href="{{ asset('css/mypage.css') }}">
 @endsection
 
 @section('nav')
@@ -19,7 +19,7 @@
                 <button class="header-nav__link--button" type="submit">Logout</button>
             </form>
         </li>
-        <li class="header-nav__item"><a class="header-nav__link" href="">Mypage</a></li>
+        <li class="header-nav__item"><a class="header-nav__link" href="{{ route('user.mypage') }}">Mypage</a></li>
     </ul>
 </nav>
 
@@ -30,69 +30,70 @@
 @section('content')
 
 <div class="mypage">
+
     <div class="mypage-heading">
-        <h2 class="mypage-heading__name">testさん</h2>
+        <h2 class="mypage-heading__name">{{ Auth::user()->name }}さん</h2>
     </div>
-    <div class="mypage-reserve-container">
-        <h3 class="mypage-reserve__heading">予約状況</h3>
-        <div class="mypage-reserve__confirm">
-            <div class="mypage-reserve__confirm-title">
-                <img src="" alt="">
-                <p class="">予約1</p>
-                <input type="checkbox">
-                <label for="">
-                    <span></span>
-                </label>
+    <div class="mypage-content">
+        <div class="mypage-reserve">
+            <h3 class="mypage-reserve__heading">予約状況</h3>
+            <div class="mypage-reserve__confirm">
+                <div class="mypage-reserve__confirm-top">
+                    <img class="mypage-reserve__confirm-icon" src="/images/icons/icon_clock.svg" alt="clock_icon">
+                    <p class="mypage-reserve__confirm-title">予約1</p>
+                    <input type="checkbox" id="toggle-check">
+                    <label for="toggle-check" class="toggle-label">
+                        <span class="toggle-checkmark"></span>
+                    </label>
+                </div>
+                <table class="mypage-reserve__confirm-table">
+                    <tr>
+                        <th>Shop</th>
+                        <td>仙人</td>
+                    </tr>
+                    <tr>
+                        <th>Date</th>
+                        <td>2021-04-01</td>
+                    </tr>
+                    <tr>
+                        <th>Time</th>
+                        <td>17:00</td>
+                    </tr>
+                    <tr>
+                        <th>Number</th>
+                        <td>1人</td>
+                    </tr>
+                </table>
             </div>
-            <table class="mypage-reserve__confirm-table">
-                <tr>
-                    <th>Shop</th>
-                    <td>仙人</td>
-                </tr>
-                <tr>
-                    <th>Date</th>
-                    <td>2021-04-01</td>
-                </tr>
-                <tr>
-                    <th>Time</th>
-                    <td>17:00</td>
-                </tr>
-                <tr>
-                    <th>Number</th>
-                    <td>1人</td>
-                </tr>
-            </table>
         </div>
-    </div>
 
-    <div class="shop">
-        <h3 class="mypage-reserve__heading">予約状況</h3>
-        <div class="shop-container">
-            <div class="shop-wrap">
-                @foreach($shops as $shop)
-                <div class="shop-wrap__item">
-                    <img class="shop-wrap__item-photo" src="{{ asset('storage/' . $shop->image) }}" alt="{{ $shop->name }}">
-                    <div class="shop-wrap__item-content">
-                        <h2 class="shop-wrap__item-name">{{ $shop->name }}</h2>
-                        <ul class="shop-wrap__item-tag-container">
-                            <li class="shop-wrap__item-tag">#{{ $shop->prefecture->name }}</li>
-                            <li class="shop-wrap__item-tag">#{{ $shop->genre->name }}</li>
-                        </ul>
+        <div class="mypage-favorite">
+            <h3 class="mypage-favorite__heading">お気に入り店舗</h3>
+            <div class="mypage-favorite-container">
+                <div class="mypage-favorite-wrap">
+                    @foreach($favoriteShops as $shop)
+                    <div class="mypage-favorite-wrap__item">
+                        <img class="mypage-favorite-wrap__item-photo" src="{{ asset('storage/' . $shop->image) }}" alt="{{ $shop->name }}">
+                        <div class="mypage-favorite-wrap__item-content">
+                            <h2 class="mypage-favorite-wrap__item-name">{{ $shop->name }}</h2>
+                            <ul class="mypage-favorite-wrap__item-tag-container">
+                                <li class="mypage-favorite-wrap__item-tag">#{{ $shop->prefecture->name }}</li>
+                                <li class="mypage-favorite-wrap__item-tag">#{{ $shop->genre->name }}</li>
+                            </ul>
 
-                        <div class="shop-wrap__item-container">
-                            <a class="shop-wrap__item-button" href="{{ route('shop.detail', ['shop_id' => $shop->id]) }}">詳しく見る</a>
-                            <input class="shop-wrap__item-toggle-heart" type="checkbox" id="toggle-heart-{{ $shop->id }}">
-                            <label class="shop-wrap__item-heart" for="toggle-heart-{{ $shop->id }}"></label>
+                            <div class="mypage-favorite-wrap__item-container">
+                                <a class="mypage-favorite-wrap__item-button" href="{{ route('shop.detail', ['shop_id' => $shop->id]) }}">詳しく見る</a>
+
+                                @livewire('favorite-toggle', ['shop' => $shop], key('favorite-toggle-' . $shop->id))
+
+                            </div>
                         </div>
                     </div>
+                    @endforeach
                 </div>
-                @endforeach
             </div>
         </div>
     </div>
-
-
 </div>
-
 
 @endsection

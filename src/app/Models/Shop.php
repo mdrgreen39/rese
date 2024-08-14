@@ -4,6 +4,8 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
+
 
 class Shop extends Model
 {
@@ -21,5 +23,11 @@ class Shop extends Model
     public function prefecture()
     {
         return $this->belongsTo(Prefecture::class);
+    }
+
+    public function favoritedByUsers(): BelongsToMany
+    {
+        return $this->belongsToMany(User::class, 'favorites')
+        ->withTimestamps();
     }
 }

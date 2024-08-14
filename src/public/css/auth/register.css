@@ -1,3 +1,18 @@
+.register-form__session-message {
+    margin: 12rem auto 0 auto;
+    text-align: center;
+    color: #000;
+}
+
+.register-form__session-message a {
+    cursor: pointer;
+
+        &:hover {
+            background-color: #3460f6;
+            color: #fff;
+        }
+}
+
 .register-form {
     width: 90%;
     max-width: 25rem;

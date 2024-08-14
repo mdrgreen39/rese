@@ -16,8 +16,13 @@
 
                     <div class="shop-wrap__item-container">
                         <a class="shop-wrap__item-button" href="{{ route('shop.detail', ['shop_id' => $shop->id]) }}">詳しく見る</a>
-                        <input class="shop-wrap__item-toggle-heart" type="checkbox" id="toggle-heart-{{ $shop->id }}">
-                        <label class="shop-wrap__item-heart" for="toggle-heart-{{ $shop->id }}"></label>
+
+                        
+                        @livewire('favorite-toggle', ['shop' => $shop], key('favorite-toggle-' . $shop->id))
+                        
+                        <!-- <a class="heart-toggle-wrapper" href="/register"> -->
+                            <!-- <label class="heart-icon"></label></a> -->
+                    
                     </div>
 
                 </div>
@@ -25,6 +30,7 @@
             @endforeach
 
         </div>
+        
     </div>
     @endif
 </div>

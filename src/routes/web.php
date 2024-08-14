@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\MyPageController;
 use App\Http\Controllers\ShopController;
 use App\Http\Controllers\ReservationController;
 use Illuminate\Support\Facades\Route;
@@ -30,8 +31,8 @@ Route::get('/detail/{shop_id}', [ShopController::class, 'show'])->name('shop.det
 
 Route::middleware('auth')->group(function ()
 {
-    // Route::post('/shops/{shop}/reservations', [ReservationController::class, 'store'])->name('reservations.store');
     Route::get('/done', [ReservationController::class, 'done'])->name('reservation.done');
+    Route::get('/mypage', [MyPageController::class,'index'])->name('user.mypage');
 });
 
 Route::post('/shops/{shop}/reservations', [ReservationController::class, 'store'])->middleware('custom_auth')->name('reservations.store');

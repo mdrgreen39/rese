@@ -22,6 +22,15 @@
 @endsection
 
 @section('content')
+
+@if (session('message'))
+<div class="register-form__session-message">
+
+    {!! session('message') !!}
+
+</div>
+@endif
+
 <div class="register-form">
     <h2 class="register-form__heading">Registration</h2>
     <form class="register-form__form" action="/register" method="post" novalidate>
