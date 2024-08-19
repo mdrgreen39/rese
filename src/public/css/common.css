@@ -253,6 +253,8 @@ input::placeholder {
 }
 
 
+
+/* 後で消す */
 .debug-content {
     position: fixed;
     top: 0;

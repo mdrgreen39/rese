@@ -8,7 +8,7 @@
                     <option value="{{ $prefecture->id }}">{{ $prefecture->name }}</option>
                     @endforeach
                 </select>
-                <img class="header-search__caretdown-icon" src="/images/icons/icon_caretdown.svg" alt="caretdown_icon">
+                <i class="fa-solid fa-caret-down fa-xl"></i>
             </div>
             <div class="header-search__select-wrapper">
                 <select class="header-search__select" wire:model.live="genreId" name="genre_id" id="genre_id">
@@ -17,12 +17,12 @@
                     <option value="{{ $genre->id }}">{{ $genre->name }}</option>
                     @endforeach
                 </select>
-                <img class="header-search__caretdown-icon" src="/images/icons/icon_caretdown.svg" alt="caretdown_icon">
+                <i class="fa-solid fa-caret-down fa-xl"></i>
             </div>
         </div>
 
         <div class="header-search__input-group">
-            <img class="header-search__search-icon" src="/images/icons/icon_search.svg" alt="search_icon"></button>
+            <i class="fa-solid fa-magnifying-glass"></i>
             <input class="header-search__input" wire:model.live.debounce.300ms="searchTerm" type="text" name="search" placeholder="Search ...">
         </div>
 

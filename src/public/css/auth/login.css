@@ -2,7 +2,6 @@
     margin: 12rem auto 0 auto;
     text-align: center;
     color: #000;
-
 }
 
 .login-form {
@@ -56,18 +55,6 @@
     align-items: center;
 }
 
-.login-form__email-icon {
-    width: 1.5rem;
-    height: 1.5rem;
-    margin: 1rem 0.5rem 0 0;
-}
-
-.login-form__password-icon {
-    width: 1.5rem;
-    height: 1.5rem;
-    margin: 1rem 0.5rem 0 0;
-}
-
 .login-form__input {
     flex: 1;
     /* width: 100%; */
@@ -109,6 +96,15 @@
     &:hover {
         opacity: 0.7;
     }
+}
+
+/* 登録フォームアイコン */
+.fa-envelope {
+    margin: 1rem 0.5rem 0 0;
+}
+
+.fa-lock {
+    margin: 1rem 0.5rem 0 0;
 }
 
 
