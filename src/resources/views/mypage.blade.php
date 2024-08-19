@@ -35,37 +35,8 @@
         <h2 class="mypage-heading__name">{{ Auth::user()->name }}さん</h2>
     </div>
     <div class="mypage-content">
-        <div class="mypage-reserve">
-            <h3 class="mypage-reserve__heading">予約状況</h3>
-            <div class="mypage-reserve__confirm">
-                <div class="mypage-reserve__confirm-top">
-                    <img class="mypage-reserve__confirm-icon" src="/images/icons/icon_clock.svg" alt="clock_icon">
-                    <p class="mypage-reserve__confirm-title">予約1</p>
-                    <input type="checkbox" id="toggle-check">
-                    <label for="toggle-check" class="toggle-label">
-                        <span class="toggle-checkmark"></span>
-                    </label>
-                </div>
-                <table class="mypage-reserve__confirm-table">
-                    <tr>
-                        <th>Shop</th>
-                        <td>仙人</td>
-                    </tr>
-                    <tr>
-                        <th>Date</th>
-                        <td>2021-04-01</td>
-                    </tr>
-                    <tr>
-                        <th>Time</th>
-                        <td>17:00</td>
-                    </tr>
-                    <tr>
-                        <th>Number</th>
-                        <td>1人</td>
-                    </tr>
-                </table>
-            </div>
-        </div>
+
+        @livewire('reservation-list')
 
         <div class="mypage-favorite">
             <h3 class="mypage-favorite__heading">お気に入り店舗</h3>

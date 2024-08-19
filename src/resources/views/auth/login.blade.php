@@ -36,7 +36,7 @@
         @csrf
         <div class="login-form__group">
             <div class="login-form__input-container">
-                <img class="login-form__email-icon" src="/images/icons/icon_email.svg" alt="email_icon">
+                <i class="fa-solid fa-envelope fa-xl"></i>
                 <input class="login-form__input" type="email" name="email" id="email" placeholder="Email" value="{{ old('email') }}">
             </div>
             <p class="login-form__error-message">
@@ -47,7 +47,7 @@
         </div>
         <div class="login-form__group">
             <div class="login-form__input-container">
-                <img class="login-form__password-icon" src="/images/icons/icon_password.svg" alt="password_icon">
+                <i class="fa-solid fa-lock fa-xl"></i>
                 <input class="login-form__input" type="password" name="password" id="password" placeholder="Password" value="{{ old('password') }}">
             </div>
             <p class="login-form__error-message">

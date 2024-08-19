@@ -1,7 +1,7 @@
 <div class="shop">
     <div class="shop-container">
         @if($shops->isEmpty())
-        <p class="result__text">該当する店舗が見つかりませんでした</p>
+        <p class="no-results__text">該当する店舗が見つかりませんでした</p>
         @else
         <div class="shop-wrap">
             @foreach($shops as $shop)
@@ -17,12 +17,22 @@
                     <div class="shop-wrap__item-container">
                         <a class="shop-wrap__item-button" href="{{ route('shop.detail', ['shop_id' => $shop->id]) }}">詳しく見る</a>
 
-                        
+                        @if(auth()->check())
                         @livewire('favorite-toggle', ['shop' => $shop], key('favorite-toggle-' . $shop->id))
-                        
+
+                        @else
+
+                        <form action="/register" method="post" style="display: inline;">
+                            @csrf
+                            <input type="hidden" name="message" value="お気に入りに追加するには会員登録が必要です。<br>すでに会員登録済みの方は<a href='/login'>こちら</a>からログインしてください。">
+                            <button type="submit" class="heart-toggle-wrapper" style="background: none; border: none;">
+                                <span class="heart-icon"></span>
+                            </button>
+                        </form>
+
                         <!-- <a class="heart-toggle-wrapper" href="/register"> -->
-                            <!-- <label class="heart-icon"></label></a> -->
-                    
+                        <!-- <label class="heart-icon"></label></a> -->
+                        @endif
                     </div>
 
                 </div>
@@ -30,7 +40,7 @@
             @endforeach
 
         </div>
-        
+
     </div>
     @endif
 </div>

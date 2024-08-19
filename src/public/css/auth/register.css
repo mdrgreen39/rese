@@ -66,24 +66,6 @@
     align-items: center;
 }
 
-.register-form__user-icon {
-    width: 1.5rem;
-    height: 1.5rem;
-    margin: 1rem 0.5rem 0 0;
-}
-
-.register-form__email-icon {
-    width: 1.5rem;
-    height: 1.5rem;
-    margin: 1rem 0.5rem 0 0;
-}
-
-.register-form__password-icon {
-    width: 1.5rem;
-    height: 1.5rem;
-    margin: 1rem 0.5rem 0 0;
-}
-
 .register-form__input {
     flex: 1;
     /* width: 100%; */
@@ -132,6 +114,20 @@
         opacity: 0.7;
     }
 }
+
+/* 登録フォームアイコン */
+.fa-user {
+    margin: 1rem 0.5rem 0 0;
+}
+
+.fa-envelope {
+    margin: 1rem 0.5rem 0 0;
+}
+
+.fa-lock {
+    margin: 1rem 0.5rem 0 0;
+}
+
 
 @media (max-width: 768px) {
 

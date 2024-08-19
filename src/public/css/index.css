@@ -36,34 +36,28 @@
     -moz-appearance: none;
 }
 
-.header-search__caretdown-icon {
-    width: 1.5rem;
-    height: 1.5rem;
-    opacity: 0.2;
-    pointer-events: none;
-}
-
 .header-search__input-group {
     display: flex;
     align-items: center;
     width: 20rem;
 }
 
-.header-search__search-icon {
-    width: 1.5rem;
-    height: 1.5rem;
-    margin-left: 0.5rem;
-    background-color: #fff;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    opacity: 0.2;
-}
-
-
 .header-search__input {
     padding: 0.63rem;
     flex: 1;
+}
+
+/* 検索フォームアイコン */
+.fa-caret-down {
+    margin-right: 0.5rem;
+    color: #1d2f4e;
+    opacity: 0.2;
+    pointer-events: none;
+}
+
+.fa-magnifying-glass {
+    margin-left: 1rem;
+    opacity: 0.2;
 }
 
 .shop{
@@ -144,7 +138,9 @@
     margin-bottom: 0.5rem;
 }
 
-
+.no-results__text {
+    text-align: center;
+}
 
 /* @media (max-width: 900px) { */
 

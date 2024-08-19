@@ -18,7 +18,7 @@
                     </option>
                     @endforeach
                 </select>
-                <img class="reserve-form__caretdown-icon" src="/images/icons/icon_caretdown.svg" alt="caretdown_icon">
+                <i class="fa-solid fa-caret-down fa-xl"></i>
             </div>
 
             <p class="reserve-form__error-message">
@@ -33,7 +33,7 @@
                     <option value=" {{ $number }} ">{{ $number }}人</option>
                     @endforeach
                 </select>
-                <img class="reserve-form__caretdown-icon" src="/images/icons/icon_caretdown.svg" alt="caretdown_icon">
+                <i class="fa-solid fa-caret-down fa-xl"></i>
             </div>
             <p class="reserve-form__error-message">
                 @error('people')
@@ -59,7 +59,11 @@
                 </tr>
                 <tr>
                     <th>Number</th>
-                    <td>{{ $people }}</td>
+                    <td>
+                        @if($people)
+                        {{ $people }}人
+                        @endif
+                    </td>
                 </tr>
             </table>
 

@@ -62,12 +62,21 @@
 
 @media (max-width: 768px) {
 
+
     .header {
-        height: 0;
-    }
+            height: 8.35rem;
+        }
+    
+    .header__container {
+            padding-bottom: 0;
+        }
     
     .thanks-form {
-        width: 100%;
+        width: 90%;
         margin: 10rem auto;
     }
+
+    .thanks-form__heading {
+            font-size: 1.2rem;
+        }
 }

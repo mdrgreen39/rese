@@ -24,7 +24,7 @@ class ReservationForm extends Component
 
     public function updatedPeople($value)
     {
-        $this->people = $value . '人';
+        $this->people = $value;
     }
 
     public function render()

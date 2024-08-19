@@ -4,6 +4,7 @@ use App\Http\Controllers\MyPageController;
 use App\Http\Controllers\ShopController;
 use App\Http\Controllers\ReservationController;
 use Illuminate\Support\Facades\Route;
+use Laravel\Fortify\Fortify;
 use Livewire\Livewire;
 
 /*
@@ -16,6 +17,11 @@ use Livewire\Livewire;
 | be assigned to the "web" middleware group. Make something great!
 |
 */
+
+Route::middleware(['set-register-message'])->group(function () {
+    Fortify::registerView(fn () => view('auth.register'));
+});
+
 
 // Route::get('/auth/login', [ShopController::class,'showLoginForm'])->name('login');
 
@@ -31,8 +37,10 @@ Route::get('/detail/{shop_id}', [ShopController::class, 'show'])->name('shop.det
 
 Route::middleware('auth')->group(function ()
 {
+    Route::get('/mypage', [MyPageController::class, 'index'])->name('user.mypage');
     Route::get('/done', [ReservationController::class, 'done'])->name('reservation.done');
-    Route::get('/mypage', [MyPageController::class,'index'])->name('user.mypage');
+    Route::get('/deleted', [ReservationController::class, 'deleted'])->name('reservation.deleted');
+    Route::get('/updated', [ReservationController::class, 'updated'])->name('reservation.updated');
 });
 
 Route::post('/shops/{shop}/reservations', [ReservationController::class, 'store'])->middleware('custom_auth')->name('reservations.store');

@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Models\Shop;
 use App\Models\Prefecture;
 use App\Models\Genre;
+use App\Models\Reservation;
 
 class MyPageController extends Controller
 {
@@ -21,7 +22,8 @@ class MyPageController extends Controller
         $favoriteShops = $user->favorites()->with('prefecture', 'genre')->get();
         $prefectures = Prefecture::all();
         $genres = Genre::all();
+        $reservations = $user->reservations()->with('shop')->get();
 
-        return view('mypage', compact('favoriteShops', 'prefectures', 'genres'));
+        return view('mypage', compact('favoriteShops', 'prefectures', 'genres', 'reservations'));
     }
 }

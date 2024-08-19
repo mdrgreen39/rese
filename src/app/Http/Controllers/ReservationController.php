@@ -29,4 +29,16 @@ class ReservationController extends Controller
     {
         return view('done');
     }
+
+    /* 予約削除完了ページ表示 */
+    public function deleted()
+    {
+        return view('deleted');
+    }
+
+    /* 予約更新完了ページ表示 */
+    public function updated()
+    {
+        return view('updated');
+    }
 }
