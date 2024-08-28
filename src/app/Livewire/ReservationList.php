@@ -3,8 +3,12 @@
 namespace App\Livewire;
 
 use App\Http\Requests\ReservationRequest;
-use Livewire\Component;
 use App\Models\Reservation;
+use App\Jobs\GenerateQrCode;
+use Endroid\QrCode\QrCode;
+use Endroid\QrCode\Writer\PngWriter;
+use Illuminate\Support\Facades\Storage;
+use Livewire\Component;
 use Illuminate\Support\Facades\Validator;
 
 
@@ -98,7 +102,17 @@ public function rules(): array
         $reservation->date = $this->date;
         $reservation->time = $this->time;
         $reservation->people = $this->people;
+
+        // 古いQRコードの削除
+        if ($reservation->qr_code_path) {
+            Storage::disk('public')->delete($reservation->qr_code_path);
+        }
+
         $reservation->save();
+
+        // QRコード生成のジョブをディスパッチ
+        GenerateQrCode::dispatch($reservation);
+
 
         // 編集モードを終了
         $this->editingReservationId = null;
@@ -107,28 +121,48 @@ public function rules(): array
     }
 
 
-
-
-
-
-
-
-
-
-
-
-
     public function deleteReservation($reservationId)
     {
-        // Reservation を削除
-        $reservation = Reservation::findOrFail($reservationId);
-        $reservation->delete();
+        // トランザクション開始
+        \DB::beginTransaction();
 
-        // 削除後、予約リストを更新
-        $this->reservations = auth()->user()->reservations()->with('shop')->get();
+        try {
+            // Reservation を取得
+            $reservation = Reservation::findOrFail($reservationId);
 
-       // リダイレクトして deleted.blade.php を表示
-        return redirect()->route('reservation.deleted');
+            logger()->info('Found reservation ID: ' . $reservationId);
+
+            // Reservation を削除
+            $reservation->delete();
+            logger()->info('Reservation deleted successfully.');
+
+            // QRコードファイルの削除（存在する場合のみ）
+            if ($reservation->qr_code_path && Storage::disk('public')->exists($reservation->qr_code_path)) {
+                try {
+                Storage::disk('public')->delete($reservation->qr_code_path);
+            } catch (\Exception $e) {
+                    logger()->error('Failed to delete QR code file: ' . $e->getMessage());
+                }
+            }
+
+            // トランザクションをコミット
+            \DB::commit();
+
+            logger()->info('Transaction committed.');
+
+
+            // 予約リストを更新
+            $this->reservations = auth()->user()->reservations()->with('shop')->get();
+
+            // リダイレクトして deleted.blade.php を表示
+            return redirect()->route('reservation.deleted');
+        } catch (\Exception $e) {
+            // エラーが発生した場合はトランザクションをロールバック
+            \DB::rollBack();
+            // エラーハンドリング、例: ログ記録やエラーメッセージの表示
+            return back()->withErrors(['error' => '予約削除に失敗しました。']);
+        }
+
     }
 
 
