@@ -66,7 +66,7 @@
 
 
                 <i class="fa-solid fa-caret-down fa-xl"></i>
-                
+
             </div>
             <p class="mypage-reserve-form__error-message">
                 @error('people')
@@ -96,6 +96,10 @@
                 <td>{{ $reservation->people }}人</td>
             </tr>
         </table>
+        <div class="mypage-reserve__confirm-check">
+            <p class="mypage-reserve__confirm-check-text">QRコードを来店時に店舗スタッフに見せてください</p>
+            <img class="mypage-reserve__confirm-check-qrcoad" src="{{ asset('storage/' . $reservation->qr_code_path) }}" alt="QRコード">
+        </div>
     </div>
     @endforeach
     @else
