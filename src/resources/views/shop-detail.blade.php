@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('css')
-<link rel="stylesheet" href="{{ asset('css/shop_detail.css') }}">
+<link rel="stylesheet" href="{{ asset('css/shop-detail.css') }}">
 @endsection
 
 @section('nav')
@@ -56,6 +56,11 @@
             </ul>
             <p class="detail-container__description">{{ $shop->description }}</p>
         </div>
+        @if($canReview)
+
+        @livewire('review-form', ['shop' => $shop])
+
+        @endif
     </div>
 
 

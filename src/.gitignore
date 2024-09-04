@@ -7,6 +7,8 @@
 /vendor
 .env
 .env.backup
+/env
+.env.local
 .env.production
 .phpunit.result.cache
 Homestead.json
@@ -17,3 +19,9 @@ yarn-error.log
 /.fleet
 /.idea
 /.vscode
+docker/mysql/data/
+docker/mysql/data/binlog.*
+docker/mysql/data/#ib_16384_0.dblwr
+docker/mysql/data/#innodb_redo/
+docker/mysql/data/ibdata1
+

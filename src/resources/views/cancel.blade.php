@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('css')
-<link rel="stylesheet" href="{{ asset('css/store/checkin.css') }}">
+<link rel="stylesheet" href="{{ asset('css/cancel.css') }}">
 @endsection
 
 @section('nav')
@@ -27,23 +27,12 @@
 
 @section('content')
 
-<div class="checkin-form">
-    @if (session('success'))
-    <h2 class="checkin-form__heading">{{ session('success') }}</h2>
-    @elseif (session('error'))
-    <h2 class="checkin-form__heading">{{ session('error') }}</h2>
-    @elseif (session('info'))
-    <h2 class="checkin-form__heading">{{ session('info') }}</h2>
-    @else
-    <h2 class="checkin-form__heading">メッセージがありません</h2>
-    @endif
-
-    <div class="checkin-form__button-container">
-        <a class="checkin-form__button" href="{{ route('shops.index') }}">戻る</a>
+<div class="cancel-form">
+    <h2 class="cancel-form__heading">予約はキャンセルされました</h2>
+    <div class="cancel-form__button-container">
+        <a class="cancel-form__button" href="{{ route('shops.index') }}">戻る</a>
     </div>
 </div>
-
-
 
 
 @endsection
