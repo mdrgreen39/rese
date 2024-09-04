@@ -2,6 +2,8 @@
     <h3 class="mypage-reserve__heading">予約状況</h3>
 
 
+
+
     @if(!empty($reservations) && $reservations->count() > 0)
     @foreach ($reservations as $reservation)
     <div class="mypage-reserve__confirm">
@@ -79,6 +81,15 @@
         @endif
 
         <table class="mypage-reserve__confirm-table">
+            @if ($errors->any())
+            <div class="mypage-reserve-form__error-message">
+                <ul>
+                    @foreach ($errors->all() as $error)
+                    <li>{{ $error }}</li>
+                    @endforeach
+                </ul>
+            </div>
+            @endif
             <tr>
                 <th>Shop</th>
                 <td>{{ $reservation->shop->name }}</td>

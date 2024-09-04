@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('css')
-<link rel="stylesheet" href="{{ asset('css/store/checkin.css') }}">
+<link rel="stylesheet" href="{{ asset('css/review-success.css') }}">
 @endsection
 
 @section('nav')
@@ -27,23 +27,13 @@
 
 @section('content')
 
-<div class="checkin-form">
-    @if (session('success'))
-    <h2 class="checkin-form__heading">{{ session('success') }}</h2>
-    @elseif (session('error'))
-    <h2 class="checkin-form__heading">{{ session('error') }}</h2>
-    @elseif (session('info'))
-    <h2 class="checkin-form__heading">{{ session('info') }}</h2>
-    @else
-    <h2 class="checkin-form__heading">メッセージがありません</h2>
-    @endif
-
-    <div class="checkin-form__button-container">
-        <a class="checkin-form__button" href="{{ route('shops.index') }}">戻る</a>
+<div class="review-form">
+    <h2 class="review-form__heading">{{ $shop->name }}へのレビューを投稿完了しました</h2>
+    <p class="review-form__text">ご意見をお寄せいただきありがとうございます</p>
+    <div class="review-form__button-container">
+        <a class="review-form__button" href="{{ route('shops.index') }}">戻る</a>
     </div>
 </div>
-
-
 
 
 @endsection

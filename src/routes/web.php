@@ -41,16 +41,25 @@ Route::get('/detail/{shop_id}', [ShopController::class, 'show'])->name('shop.det
 Route::middleware('auth')->group(function ()
 {
     Route::get('/mypage', [MyPageController::class, 'index'])->name('user.mypage');
-    Route::get('/done', [ReservationController::class, 'done'])->name('reservation.done');
+    Route::get('/done', [ReservationController::class, 'done'])->name('reservation.success');
+    Route::get('/cancel', [ReservationController::class, 'cancel'])->name('reservation.cancel');
     Route::get('/deleted', [ReservationController::class, 'deleted'])->name('reservation.deleted');
     Route::get('/updated', [ReservationController::class, 'updated'])->name('reservation.updated');
+    // Route::post('/shops/{shop}/review', [ShopController::class, 'store'])->name('review.store');
+    Route::get('/shops/{shop}/review-success', [ShopController::class, 'showReviewSuccess'])->name('review.success');
+
+
+
 });
 
 Route::post('/shops/{shop}/reservations', [ReservationController::class, 'store'])->middleware('custom_auth')->name('reservations.store');
 
-Route::get('/store/verify/{id}', [ReservationController::class, 'verify'])->name('reservation.verify');
 
+//お店のmiddlewareを付与する
+Route::get('/store/verify/{id}', [StoreController::class, 'verify'])->name('reservation.verify');
 Route::get('/store/checkin', [StoreController::class, 'showCheckinPage'])->name('reservation.checkin');
+
+
 
 
 

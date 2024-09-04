@@ -10,6 +10,9 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
 use SimpleSoftwareIO\QrCode\Facades\QrCode;
+use Stripe\Stripe;
+use Stripe\Checkout\Session as StripeSession;
+use Stripe\Checkout\Session;
 
 
 class ReservationController extends Controller
@@ -17,6 +20,7 @@ class ReservationController extends Controller
     /* 予約処理 */
     public function store(ReservationRequest $request, Shop $shop)
     {
+        // 予約情報の保存
         $reservation = new Reservation();
         $reservation->date = $request->input('date');
         $reservation->time = $request->input('time');
@@ -25,39 +29,65 @@ class ReservationController extends Controller
         $reservation->user_id = Auth::id();
         $reservation->save();
 
+        // StripeのAPIキーを設定
+        Stripe::setApiKey(config('services.stripe.secret'));
+
+        // Stripe Checkoutセッションの作成
+        $session = StripeSession::create([
+            'payment_method_types' => ['card'],
+            'line_items' => [[
+                'price_data' => [
+                    'currency' => 'jpy', // 通貨を設定
+                    'product_data' => [
+                        'name' => 'Reservation Deposit',
+                    ],
+                    'unit_amount' => 1000, // デポジット額（例: 1000円）
+                ],
+                'quantity' => 1,
+            ]],
+            'mode' => 'payment',
+            'success_url' => route('reservation.success', ['session_id' => '{CHECKOUT_SESSION_ID}', 'reservation_id' => $reservation->id]),
+            'cancel_url' => route('reservation.cancel'),
+        ]);
+
         // QRコード生成のジョブをディスパッチ
         GenerateQrCode::dispatch($reservation)->onQueue('default');
 
-        return redirect()->route('reservation.done');
+        // Stripe Checkoutページにリダイレクト
+        return redirect($session->url);
     }
 
-
-    /* QRコードでの予約確認 */
-    public function verify($id)
+    public function success(Request $request)
     {
-        $reservation = Reservation::find($id);
+        $sessionId = $request->query('session_id');
+        $reservationId = $request->query('reservation_id');
 
-        if (!$reservation) {
-            return redirect()->route('reservation.checkin')
-            ->with('error', '予約が見つかりません。');
+        // StripeのAPIキーを設定
+        Stripe::setApiKey(config('services.stripe.secret'));
+
+        // セッションIDを使用してCheckoutセッションを取得
+        $session = StripeSession::retrieve($sessionId);
+
+        if ($session->payment_status === 'paid') {
+            // 支払いが成功した場合、予約を確定
+            $reservation = Reservation::find($reservationId);
+            $reservation->status = 'confirmed'; // 状態を「確定」に変更
+            $reservation->save();
+            return view('done');
         }
 
-        if ($reservation->visited_at) {
-            return redirect()->route('reservation.checkin')
-            ->with('info', '来店確認は既に完了しています。');
-        }
-
-        // 来店確認処理
-        $reservation->visited_at = now();
-
-        // レビュー書き込み可能のフラグを立てる
-        $reservation->can_review = true;
-        $reservation
-        ->save();
-
-        return redirect()->route('reservation.checkin')
-        ->with('success', '来店確認が完了しました。');
+        // 支払い失敗時の処理
+        return redirect()->route('reservation.cancel');
     }
+
+    public function cancel()
+    {
+        // キャンセルページの処理
+        return view('cancel');
+    }
+
+
+    
 
     /* 予約完了ページ表示 */
     public function done()

@@ -3,9 +3,13 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use App\Http\Requests\ReviewRequest;
 use App\Models\Shop;
 use App\Models\Prefecture;
 use App\Models\Genre;
+use App\Models\Reservation;
+use App\Models\Review;
 
 
 class ShopController extends Controller
@@ -31,29 +35,6 @@ class ShopController extends Controller
 
         return view('index', compact('shops', 'prefectures', 'genres', 'searchTerm', 'prefectureId', 'genreId'));
     }
-
-
-    /* 検索機能 */
-    // public function search(Request $request)
-    // {
-        // $query = Shop::query();
-
-        // if ($request->has('prefecture_id') && $request->input('prefecture_id') != 'All area') {
-            // $query->where('prefecture_id', $request->input('prefecture_id'));
-        // }
-
-        // if ($request->has('genre_id') && $request->input('genre_id') != 'All genre') {
-            // $query->where('genre_id', $request->input('genre_id'));
-        // }
-
-        // if ($request->has('search') && !empty($request->input('search'))) {
-            // $query->where('name', 'like', '%' .  $request->input('search') . '%');
-        // }
-
-        // $shops = $query->get();
-
-        // return view('results', compact('shops'));
-    // }
 
     /* 店舗詳細ページ表示*/
     public function show($shop_id)
@@ -81,10 +62,59 @@ class ShopController extends Controller
         // 人数の選択肢を生成
         $numberOfPeople = range(1, 10); // 1から10人までの選択肢
 
-        return view('shop_detail', compact('shop', 'prefecture', 'genre', 'times', 'numberOfPeople'));
-
-    }
+        // 現在のユーザーの予約を取得（例: 最新の予約）
+        $reservations = Reservation::where('shop_id', $shop_id)
+            ->where('user_id', auth()->id())
+            ->get();
     
+        // ユーザーが来店したかどうかを判断するロジック
+        $canReview = $reservations->contains(function ($reservation) {
+            return $reservation->can_review && $reservation->visited_at !== null;
+        });
+
+        // ビューにデータを渡す
+        return view('shop-detail', compact('shop', 'prefecture', 'genre', 'times', 'numberOfPeople', 'reservations', 'canReview'));
+    }
+
+    // public function store(ReviewRequest $request, Shop $shop)
+    // {
+        // logger()->info('Store method called');
+
+        // $reservation = Auth::user()->reservations()->where('shop_id', $shop->id)->first();
+
+        // if (!$reservation || !$reservation->can_review) {
+            // return redirect()->back()->with('error', 'レビューを投稿する権限がありません。');
+        // }
+
+        // logger()->info('Reservation found, proceeding to save review');
+
+
+        // Review::create([
+            // 'user_id' => Auth::id(),
+            // 'shop_id' => $shop->id,
+            // 'rating' => $request->input('rating'),
+            // 'comment' => $request->input('comment'),
+        // ]);
+
+        // $reservation->can_review = false;
+        // $reservation->save();
+
+        // logger()->info('Review saved successfully');
+
+        // return redirect()->route('review.success', ['shop' => $shop->id]);
+    // }
+// }
+
+
+    /* レビュー投稿完了ページ表示 */
+    public function showReviewSuccess(Shop $shop)
+    {
+        return view('review-success', compact('shop'));
+    }
+
+    
+
+
 
 }
 

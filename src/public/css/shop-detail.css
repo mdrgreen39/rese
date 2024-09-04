@@ -1,3 +1,4 @@
+/* 店舗詳細 */
 .detail {
     display: flex;
     justify-content: space-between;
@@ -61,6 +62,7 @@
     font-size: 0.88rem;
 }
 
+/* 予約フォーム */
 .reserve-form {
     width: 48%;
     margin: 0 auto 2rem;
@@ -209,6 +211,44 @@
     right: 2.5rem;
 }
 
+/* レビュー */
+    .review-form {
+        width: 100%;
+        margin: 0 auto 2rem;
+        padding: 1.75rem;
+        border-radius: 0.38rem;
+        box-shadow: 0.25rem 0.25rem 0.25rem rgba(0, 0, 0, 0.4);
+        background-color: #3460f6;
+        position: relative;
+    }
+
+    .review-form__button{
+        padding: 0.5rem 1rem;
+        margin: 1rem 0;
+        background-color: #003ff5;
+        color: #fff;
+        border: none;
+        border-radius: 0.38rem;
+        font-size: 0.75rem;
+        cursor: pointer;
+    
+        &:hover {
+            background-color: #fff;
+            color: #003ff5;
+        }
+    }
+
+.review-form__group{
+    color: #fff;
+
+}
+
+.review-form__error-message {
+    /* white-space: nowrap; */
+    font-size: 0.75rem;
+    color: #fff;
+    margin: 0.25rem;
+}
 /* @media (max-width: 900px) { */
 
 

@@ -32,7 +32,6 @@ class GenerateQrCode implements ShouldQueue
     public function handle(): void
     {
 
-        logger()->info("QR Code Generation started for reservation ID: {$this->reservation->id}");
 
         $reservation = $this->reservation;
 
@@ -62,7 +61,6 @@ class GenerateQrCode implements ShouldQueue
         $reservation->qr_code_path = $path;
 
         $reservation->save();
-        logger()->info("QR Code generated and saved for reservation ID: {$reservation->id}");
     
     }
 

@@ -10,6 +10,8 @@ use Endroid\QrCode\Writer\PngWriter;
 use Illuminate\Support\Facades\Storage;
 use Livewire\Component;
 use Illuminate\Support\Facades\Validator;
+use Stripe\Stripe;
+use Stripe\Refund;
 
 
 class ReservationList extends Component
@@ -130,26 +132,40 @@ public function rules(): array
             // Reservation を取得
             $reservation = Reservation::findOrFail($reservationId);
 
-            logger()->info('Found reservation ID: ' . $reservationId);
+            // StripeのAPIキーを設定
+            Stripe::setApiKey(config('services.stripe.secret'));
+
+            // デポジットの返金処理
+            if ($reservation->payment_intent_id) {
+                try {
+                    // 返金処理
+                    Refund::create([
+                        'payment_intent' => $reservation->payment_intent_id,
+                        'amount' => $reservation->deposit_amount, // デポジットの金額
+                    ]);
+                } catch (\Exception $e) {
+                    // 返金処理失敗時のエラーハンドリング
+                    \DB::rollBack();
+                    return back()->withErrors(['error' => 'デポジットの返金に失敗しました。']);
+                }
+            }
 
             // Reservation を削除
             $reservation->delete();
-            logger()->info('Reservation deleted successfully.');
 
             // QRコードファイルの削除（存在する場合のみ）
             if ($reservation->qr_code_path && Storage::disk('public')->exists($reservation->qr_code_path)) {
                 try {
-                Storage::disk('public')->delete($reservation->qr_code_path);
-            } catch (\Exception $e) {
-                    logger()->error('Failed to delete QR code file: ' . $e->getMessage());
+                    Storage::disk('public')->delete($reservation->qr_code_path);
+                } catch (\Exception $e) {
+                    // QRコードファイルの削除失敗時のエラーハンドリング
+                    \DB::rollBack();
+                    return back()->withErrors(['error' => 'QRコードファイルの削除に失敗しました。']);
                 }
             }
 
             // トランザクションをコミット
             \DB::commit();
-
-            logger()->info('Transaction committed.');
-
 
             // 予約リストを更新
             $this->reservations = auth()->user()->reservations()->with('shop')->get();
@@ -162,8 +178,8 @@ public function rules(): array
             // エラーハンドリング、例: ログ記録やエラーメッセージの表示
             return back()->withErrors(['error' => '予約削除に失敗しました。']);
         }
-
     }
+
 
 
     public function render()
