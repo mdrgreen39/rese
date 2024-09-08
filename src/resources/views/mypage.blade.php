@@ -5,7 +5,7 @@
 @endsection
 
 @section('nav')
-@auth
+
 <input class="hamburger-input" type="checkbox" id="check">
 <label class="hamburger-label" for="check">
     <span></span>
@@ -23,7 +23,6 @@
     </ul>
 </nav>
 
-@endauth
 
 @endsection
 

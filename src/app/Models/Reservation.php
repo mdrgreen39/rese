@@ -20,7 +20,7 @@ class Reservation extends Model
     protected static function boot()
     {
         parent::boot();
-
+// 使っているのでログのコード消す
         static::deleting(function ($reservation) {
             logger()->info('Deleting reservation ID: ' . $reservation->id);
 

@@ -23,6 +23,7 @@ class DatabaseSeeder extends Seeder
         $this->call([
             PrefectureTableSeeder::class,
             GenresTableSeeder::class,
+            RolesAndPermissionsSeeder::class,
         ]);
 
         if (App::environment('local')) {
@@ -30,6 +31,7 @@ class DatabaseSeeder extends Seeder
                 PrefectureTableSeeder::class,
                 GenresTableSeeder::class,
                 ShopsTableSeeder::class,
+                RolesAndPermissionsSeeder::class,
             ]);
         }
     }

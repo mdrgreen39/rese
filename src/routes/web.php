@@ -3,6 +3,7 @@
 use App\Http\Controllers\MyPageController;
 use App\Http\Controllers\ShopController;
 use App\Http\Controllers\ReservationController;
+use App\Http\Controllers\AdminController;
 use App\Http\Controllers\StoreController;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Mail;
@@ -20,6 +21,7 @@ use Livewire\Livewire;
 | be assigned to the "web" middleware group. Make something great!
 |
 */
+
 
 Route::middleware(['set-register-message'])->group(function () {
     Fortify::registerView(fn () => view('auth.register'));
@@ -52,8 +54,16 @@ Route::middleware('auth')->group(function ()
 
 });
 
+// 予約時のログイン確認
 Route::post('/shops/{shop}/reservations', [ReservationController::class, 'store'])->middleware('custom_auth')->name('reservations.store');
 
+
+
+// 管理者
+Route::middleware(['auth', 'role:admin'])->group(function () {
+    Route::get('/admin/admin-register', [AdminController::class, 'showRegisterForm'])->name('admin.register');
+    Route::post('/admin/register', [AdminController::class, 'store'])->name('admin.adminUser');
+});
 
 //お店のmiddlewareを付与する
 Route::get('/store/verify/{id}', [StoreController::class, 'verify'])->name('reservation.verify');
@@ -63,10 +73,12 @@ Route::get('/store/checkin', [StoreController::class, 'showCheckinPage'])->name(
 
 
 
+
 // テスト用表示ページ
 Route::get('/test', function () {
     return view('welcome');
 });
+
 
 //メールテスト用
 Route::get('/test-email', function () {

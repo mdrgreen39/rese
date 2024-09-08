@@ -11,6 +11,7 @@ use Laravel\Fortify\Http\Requests\LoginRequest as FortifyLoginRequest;
 use App\Http\Requests\LoginRequest;
 use Laravel\Fortify\Contracts\RegisterResponse as RegisterResponseContract;
 use App\Actions\Fortify\RegisterResponse;
+use App\Http\Responses\LoginResponse;
 use App\Http\Requests\RegisterRequest;
 use Illuminate\Auth\Events\Registered;
 use Illuminate\Cache\RateLimiting\Limit;
@@ -18,7 +19,9 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\RateLimiter;
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Support\Str;
+use Illuminate\Support\Facades\Auth;
 use Laravel\Fortify\Fortify;
+
 use Laravel\Fortify\Http\Controllers\RegisteredUserController;
 
 class FortifyServiceProvider extends ServiceProvider
@@ -43,6 +46,9 @@ class FortifyServiceProvider extends ServiceProvider
 
             return Limit::perMinute(10)->by($email . $request->ip());
         });
+
+        
+
 
     }
 

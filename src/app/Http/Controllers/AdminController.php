@@ -2,69 +2,45 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\AdminRegisterRequest;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Storage;
 use App\Http\Requests\ShopRequest;
+use App\Models\User;
 use App\Models\Shop;
 use App\Models\Prefecture;
 use App\Models\Genre;
+use Spatie\Permission\Models\Role;
 
 class AdminController extends Controller
 {
 
-    public function create()
+    /* 管理者・店舗代表登録画面ページ表示 */
+    public function showRegisterForm()
     {
-        $prefectures = Prefecture::all();
-        $genres = Genre::all();
+        $roles = Role::all(); // 例: 全てのロールを取得する場合
 
-        return view('admin.shop_register', compact('prefectures', 'genres'));
+        return view('admin.admin-register', [
+            'roles' => $roles,
+        ]);
     }
 
-    /* 店舗情報追加処理 */
-    public function store(ShopRequest $request)
+    // 管理者・店舗代表者登録処理
+    public function store(AdminRegisterRequest $request)
     {
-        $shop = new Shop();
-        $shop->name = $request->name;
-        $prefecture = Prefecture::find($request->prefecture_id);
-        $genre = Genre::find($request->genre_id);
-        $shop->description = $request->description;
+        // ユーザーを作成
+        $user = User::create([
+            'name' => $request->name,
+            'email' => $request->email,
+            'password' => Hash::make($request->password),
+        ]);
 
-        if ($request->hasFile('image')) {
-            $shop->image = $request->file('image')->store('shops', 'public');
-        }
+        // ロールを付与
+        $user->assignRole($request->role);
 
-
-        $shop->save();
-
-        return redirect()->back()->with('success', '店舗情報が追加されました');
-    }
-
-    public function end($id)
-    {
-        $shop = Shop::findOrFail($id);
-
-        return view('shops.edit', compact('shop'));
-    }
-
-    public function update(ShopRequest $request, $id)
-    {
-        $shop = Shop::findOrFail($id);
-        $prefecture = Prefecture::find($request->prefecture_id);
-        $genre = Genre::find($request->genre_id);
-        $shop->description = $request->description;
-
-
-        if ($request->hasFile('image')) {
-            if ($shop->image) {
-                Storage::disk('public')->delete($shop->image);
-            }
-
-            $shop->image = $request->file('image')->store('shops', 'public');
-        }
-
-        $shop->save();
-
-        return redirect()->route('shops.index')->with('success', '店舗情報が更新されました');
+        // リダイレクトと成功メッセージ
+        return redirect()->back()->with('message', 'ユーザーが正常に登録されました');
 
     }
 }
