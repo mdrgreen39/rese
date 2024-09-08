@@ -21,7 +21,8 @@ yarn-error.log
 /.vscode
 docker/mysql/data/
 docker/mysql/data/binlog.*
-docker/mysql/data/#ib_16384_0.dblwr
+docker/mysql/data/#ib_*
 docker/mysql/data/#innodb_redo/
 docker/mysql/data/ibdata1
+
 
