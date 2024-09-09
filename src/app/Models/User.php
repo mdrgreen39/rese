@@ -45,6 +45,11 @@ class User extends Authenticatable
         'password' => 'hashed',
     ];
 
+    public function shops()
+    {
+        return $this->hasMany(Shop::class, 'user_id');
+    }
+
     public function favorites(): BelongsToMany
     {
         return $this->belongsToMany(Shop::class, 'favorites')

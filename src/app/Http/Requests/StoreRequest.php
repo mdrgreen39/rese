@@ -4,7 +4,7 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class ShopRequest extends FormRequest
+class StoreRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -26,7 +26,14 @@ class ShopRequest extends FormRequest
             'prefecture_id' => ['required'],
             'genre_id' => ['required'],
             'description' => ['required', 'string', 'max:500'],
-            'image' => ['required', 'image', 'mines:jpeg,png,jpd,gif', 'max2048'],
+            'image' => ['nullable', 'image', 'mimes:jpeg,png,jpg,gif', 'max:2048'],
+            'image_url' => ['nullable', 'url'],
+            'image_or_image_url' => [function ($attribute, $value, $fail) {
+                $request = request();
+                if (!$request->hasFile('image') && !$request->filled('image_url')) {
+                    $fail('画像ファイルまたは画像URLのいずれかを提供する必要があります');
+                }
+            }],
         ];
     }
 
@@ -41,10 +48,11 @@ class ShopRequest extends FormRequest
             'description.required' => '概要を入力してください',
             'description.string' => '概要を文字列で入力してください',
             'description.max' => '概要を500文字以内で入力してください',
-            'image.required' => '写真を添付してください',
-            'image.image' => '写真は画像ファイルである必要があります',
-            'image.mines' => '写真はjpeg,png,jpg,gifのいずれかの形式である必要があります',
-            'image.max' => '写真のサイズは2MB以下である必要があります',
+            'image.image' => '添付するファイルは画像ファイルである必要があります',
+            'image.mimes' => '画像はjpeg,png,jpg,gifのいずれかの形式である必要があります',
+            'image.max' => '画像のサイズは2MB以下である必要があります',
+            'image_url.url' => '画像URLの形式が正しくありません',
+            'image_or_image_url.required_without' => '画像ファイルまたは画像URLのいずれかを提供する必要があります',
         ];
     }
 }

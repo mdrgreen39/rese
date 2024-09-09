@@ -1,19 +1,5 @@
-.admin-register-form__session-message {
-    margin: 12rem auto 0 auto;
-    text-align: center;
-    color: #000;
-}
 
-.admin-register-form__session-message a {
-    cursor: pointer;
-
-    &:hover {
-        background-color: #3460f6;
-        color: #fff;
-    }
-}
-
-.admin-register-form {
+.reservation{
     width: 90%;
     max-width: 25rem;
     margin: 12rem auto;
@@ -26,7 +12,7 @@
     /* overflow: hidden; */
 }
 
-.admin-register-form__heading {
+.reservation__heading {
     background-color: #3460f6;
     color: #fff;
     padding: 1rem;
@@ -44,7 +30,7 @@
 /* align-items: center; */
 /* } */
 
-.admin-register-form__form {
+.register-form__form {
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -55,58 +41,53 @@
 
 
 
-.admin-register-form__group {
+.register-form__group {
     width: 100%;
     /* margin-bottom: 0.5rem; */
 }
 
-.admin-register-form__input-container {
+.register-form__input-container {
     position: relative;
     display: flex;
     align-items: center;
 }
 
-.admin-register-form__input,
-.admin-register-form__select {
+.register-form__input {
     flex: 1;
+    /* width: 100%; */
     padding: 1rem 0.5rem 0 0.06rem;
     border-bottom: 0.06rem solid #000;
     outline: none;
-    font-size: 1rem;
-    line-height: 1.5;
-    -webkit-appearance: none;
-    -moz-appearance: none;
-    appearance: none;
-    background-color: transparent;
+
 }
 
-.admin-register-form__select:invalid {
-    color: #757575;
-}
-
-.admin-register-form__select option {
-    color: #000;
-}
-
-.admin-register-form__input:focus,
-.admin-register-form__select:focus {
+.register-form__input:focus {
     border-bottom: 0.13rem solid #757575;
 }
 
-.admin-register-form__error-message {
+.register-form__error-message {
+    /* white-space: nowrap; */
+    /* display: flex; */
+    /* flex-direction: column; */
     font-size: 1rem;
     color: #cf2222;
     margin-left: 2.5rem;
+    /* position: absolute; */
+    /* left: 2.5rem; */
+    /* top: 2rem; */
+    /* min-height: 1.5rem; */
+    /* visibility: hidden; */
+    /* display: none; */
 }
 
-.admin-register-form__button-container {
+.register-form__button-container {
     width: 100%;
     display: flex;
     justify-content: flex-end;
     margin-top: 1.5rem;
 }
 
-.admin-register-form__button {
+.register-form__button {
     padding: 0.5rem 1rem;
     background-color: #3460f6;
     color: #fff;
@@ -133,21 +114,6 @@
     margin: 1rem 0.5rem 0 0;
 }
 
-.fa-tag {
-    margin: 1rem 0.5rem 0 0;
-}
-
-/* セレクトフォームアイコン */
-.fa-caret-down {
-    color: #1d2f4e;
-    opacity: 0.2;
-    pointer-events: none;
-    position: absolute;
-    top: 50%;
-    /* 上下中央揃え */
-    right: 1rem;
-    transform: translateY(-50%);
-}
 
 @media (max-width: 768px) {
 
@@ -159,12 +125,12 @@
         padding-bottom: 0;
     }
 
-    .admin-register-form {
+    .register-form {
         /* width: 100%; */
         margin: 10rem auto;
     }
 
-    .admin-register-form__error-message {
+    .login-form__error-message {
         font-size: 0.75rem;
     }
 

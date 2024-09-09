@@ -1,0 +1,124 @@
+
+.store-detail__session-message {
+    margin: 12rem auto 0 auto;
+    text-align: center;
+    color: #000;
+}
+
+/* 店舗詳細 */
+.store-detail {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 5rem;
+    padding: 2.5rem 1rem;
+}
+
+.store-detail-container {
+    max-width: 40%;
+}
+
+.store-detail-container {
+    margin: 5rem auto;
+    padding: 0 1rem;
+}
+
+.store-detail-heading {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+    justify-content: flex-start;
+    align-items: center;
+    padding-bottom: 1rem;
+}
+
+.store-detail-heading__button-before {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 1.5rem;
+    height: 1.5rem;
+    color: #000;
+    border: none;
+    border-radius: 0.19rem;
+    box-shadow: 0.25rem 0.25rem 0.25rem rgba(0, 0, 0, 0.4);
+    background-color: #fff;
+    cursor: pointer;
+    /* padding: 0; */
+    font-size: 1rem;
+}
+
+.store-detail-heading__name {
+    font-size: 1.75rem;
+
+}
+
+.store-detail-container__item {
+    display: flex;
+    justify-content: flex-start;
+}
+
+.store-detail-container__item-tag {
+    white-space: nowrap;
+    font-size: 0.88rem;
+    padding-right: 0.5rem;
+    margin: 1rem 0;
+}
+
+.store-detail-container__description {
+    font-size: 0.88rem;
+}
+
+.store-detail-container__wrap {
+    display: flex;
+    justify-content: flex-start;
+    margin: 1rem 0;
+
+}
+
+.store-detail-container__button {
+    white-space: nowrap;
+    padding: 0.5rem 1rem;
+    background-color: #3460f6;
+    color: #fff;
+    border: none;
+    border-radius: 0.38rem;
+    font-size: 0.75rem;
+    cursor: pointer;
+
+        &:hover {
+            opacity: 0.7;
+        }
+}
+
+.store-detail-container__button:not(:last-child) {
+    margin-right: 0.5rem;
+}
+
+
+@media (max-width: 768px) {
+
+    .header {
+        height: 8.35rem;
+    }
+
+    .header__container {
+        padding-bottom: 0;
+    }
+
+    .hamburger-label {
+        top: 4rem;
+    }
+
+
+    .store-detail {
+        flex-direction: column;
+        align-items: center;
+        padding: 0 1rem;
+    }
+
+    .store-detail-container{
+        max-width: 90%;
+        width: 100%;
+    }
+
+}
