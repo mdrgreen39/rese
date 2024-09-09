@@ -32,7 +32,7 @@ class ReservationController extends Controller
         // StripeのAPIキーを設定
         Stripe::setApiKey(config('services.stripe.secret'));
 
-        // Stripe Checkoutセッションの作成
+        // Stripe Checkoutセッションの作成s
         $session = StripeSession::create([
             'payment_method_types' => ['card'],
             'line_items' => [[

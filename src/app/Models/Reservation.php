@@ -44,6 +44,13 @@ class Reservation extends Model
 
     public function user()
     {
-        return $this->belongsTo(User::class);
+        return $this->belongsTo(User::class, 'user_id');
     }
+
+    // 来店済みかどうかを確認するアクセサ
+    public function isCheckedIn()
+    {
+        return $this->can_review == 1;
+    }
+
 }

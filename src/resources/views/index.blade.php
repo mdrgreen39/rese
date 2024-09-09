@@ -39,7 +39,9 @@
                 <button class="header-nav__link--button" type="submit">Logout</button>
             </form>
         </li>
-        <li class="header-nav__item"><a class="header-nav__link" href="{{ route('store.checkin') }}">来店確認</a></li>
+        <li class="header-nav__item"><a class="header-nav__link" href="{{ route('store.mypage') }}">Store Page</a></li>
+        <li class="header-nav__item"><a class="header-nav__link" href="{{ route('store.register') }}">Store Registration</a></li>
+        <li class="header-nav__item"><a class="header-nav__link" href="{{ route('reservation.checkin') }}">来店確認</a></li>
     </ul>
 </nav>
 @else

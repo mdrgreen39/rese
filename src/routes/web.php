@@ -65,10 +65,28 @@ Route::middleware(['auth', 'role:admin'])->group(function () {
     Route::post('/admin/register', [AdminController::class, 'store'])->name('admin.adminUser');
 });
 
-//お店のmiddlewareを付与する
-Route::get('/store/verify/{id}', [StoreController::class, 'verify'])->name('reservation.verify');
-Route::get('/store/checkin', [StoreController::class, 'showCheckinPage'])->name('reservation.checkin');
+// 店舗代表者
+Route::middleware(['auth', 'role:store_manager'])->group(function () {
+    Route::get('/store/mypage', [StoreController::class, 'myPage'])->name('store.mypage');
 
+    Route::get('store/store-detail/{id}', [StoreController::class, 'show'])
+    ->name('store.detail');
+
+    // 店舗登録画面
+    Route::get('/store/register', [StoreController::class, 'register'])->name('store.register');
+    Route::post('/store/register', [StoreController::class, 'store'])->name('store.store');
+
+    // 店舗編集画面
+    Route::get('/store/edit/{id}', [StoreController::class, 'edit'])->name('store.edit');
+    Route::put('/store/edit/{id}', [StoreController::class, 'update'])->name('store.update');
+
+    // 予約リスト
+    Route::get('/store/{shop}/reservations', [StoreController::class, 'showReservations'])->name('store.reservation');
+
+    // 来店確認
+    Route::get('/store/verify/{id}', [StoreController::class, 'verify'])->name('reservation.verify');
+    Route::get('/store/checkin', [StoreController::class, 'showCheckinPage'])->name('reservation.checkin');
+});
 
 
 

@@ -1,19 +1,10 @@
-.admin-register-form__session-message {
+.store-register-form__session-message {
     margin: 12rem auto 0 auto;
     text-align: center;
     color: #000;
 }
 
-.admin-register-form__session-message a {
-    cursor: pointer;
-
-    &:hover {
-        background-color: #3460f6;
-        color: #fff;
-    }
-}
-
-.admin-register-form {
+.store-register-form {
     width: 90%;
     max-width: 25rem;
     margin: 12rem auto;
@@ -26,7 +17,7 @@
     /* overflow: hidden; */
 }
 
-.admin-register-form__heading {
+.store-register-form__heading {
     background-color: #3460f6;
     color: #fff;
     padding: 1rem;
@@ -44,7 +35,7 @@
 /* align-items: center; */
 /* } */
 
-.admin-register-form__form {
+.store-register-form__form {
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -55,19 +46,19 @@
 
 
 
-.admin-register-form__group {
+.store-register-form__group {
     width: 100%;
     /* margin-bottom: 0.5rem; */
 }
 
-.admin-register-form__input-container {
+.store-register-form__input-container {
     position: relative;
     display: flex;
     align-items: center;
 }
 
-.admin-register-form__input,
-.admin-register-form__select {
+.store-register-form__input,
+.store-register-form__select {
     flex: 1;
     padding: 1rem 0.5rem 0 0.06rem;
     border-bottom: 0.06rem solid #000;
@@ -80,33 +71,69 @@
     background-color: transparent;
 }
 
-.admin-register-form__select:invalid {
+.store-register-form__select:invalid {
     color: #757575;
 }
 
-.admin-register-form__select option {
+.store-register-form__select option {
     color: #000;
 }
 
-.admin-register-form__input:focus,
-.admin-register-form__select:focus {
+.store-register-form__input:focus,
+.store-register-form__select:focus {
     border-bottom: 0.13rem solid #757575;
 }
 
-.admin-register-form__error-message {
+.store-register-form__textarea {
+    flex: 1;
+    padding: 1rem 0.5rem 0 0.06rem;
+    border-bottom: 0.06rem solid #000;
+    outline: none;
+    height: 10rem;
+    font-size: 1rem;
+    line-height: 1.5;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    background-color: transparent;
+}
+
+.store-register-form__image {
+    flex: 1;
+    padding: 1rem 0.5rem 0 0.06rem;
+    outline: none;
+    font-size: 1rem;
+    line-height: 1.5;
+}
+
+.store-register-form__image-url {
+    flex: 1;
+    padding: 1rem 0.5rem 0 0.06rem;
+    margin-left: 2rem;
+    border-bottom: 0.06rem solid #000;
+    outline: none;
+    font-size: 1rem;
+    line-height: 1.5;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    background-color: transparent;
+}
+
+.store-register-form__error-message {
     font-size: 1rem;
     color: #cf2222;
     margin-left: 2.5rem;
 }
 
-.admin-register-form__button-container {
+.store-register-form__button-container {
     width: 100%;
     display: flex;
     justify-content: flex-end;
     margin-top: 1.5rem;
 }
 
-.admin-register-form__button {
+.store-register-form__button {
     padding: 0.5rem 1rem;
     background-color: #3460f6;
     color: #fff;
@@ -121,19 +148,23 @@
 }
 
 /* 登録フォームアイコン */
-.fa-user {
+.fa-house {
     margin: 1rem 0.5rem 0 0;
 }
 
-.fa-envelope {
-    margin: 1rem 0.5rem 0 0;
-}
-
-.fa-lock {
+.fa-location-dot {
     margin: 1rem 0.5rem 0 0;
 }
 
 .fa-tag {
+    margin: 1rem 0.5rem 0 0;
+}
+
+.fa-pen {
+    margin: 1rem 0.5rem 0 0;
+}
+
+.fa-image {
     margin: 1rem 0.5rem 0 0;
 }
 
@@ -159,12 +190,12 @@
         padding-bottom: 0;
     }
 
-    .admin-register-form {
+    .store-register-form {
         /* width: 100%; */
         margin: 10rem auto;
     }
 
-    .admin-register-form__error-message {
+    .store-register-form__error-message {
         font-size: 0.75rem;
     }
 

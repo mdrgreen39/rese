@@ -15,6 +15,11 @@ class Shop extends Model
         'id'
     ];
 
+    public function user()
+    {
+        return $this->belongsTo(User::class, 'user_id');
+    }
+
     public function genre()
     {
         return $this->belongsTo(Genre::class);
