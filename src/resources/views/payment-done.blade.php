@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('css')
-<link rel="stylesheet" href="{{ asset('css/done.css') }}">
+<link rel="stylesheet" href="{{ asset('css/payment-done.css') }}">
 @endsection
 
 @section('nav')
@@ -27,17 +27,10 @@
 
 @section('content')
 
-<div class="done-form">
-    <h2 class="done-form__heading">ご予約ありがとうございます</h2>
-    <p class="done-form__text">デポジットを支払うことができます</p>
-    <div class="done-form__button-container">
-        <form class="done-form__button-form" action="{{ route('reservation.payDeposit', ['reservation_id' => $reservation->id]) }}" method="post">
-            @csrf
-            <button class="done-form__button" type="submit">支払う</button>
-        </form>
-
-        <a class="done-form__button" href="{{ route('shops.index') }}">戻る</a>
-
+<div class="payment-done-form">
+    <h2 class="payment-done-form__heading">支払いが完了しました</h2>
+    <div class="payment-done-form__button-container">
+        <a class="payment-done-form__button" href="{{ route('shops.index') }}">戻る</a>
     </div>
 </div>
 
