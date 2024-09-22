@@ -22,6 +22,13 @@ class StoreController extends Controller
         $this->middleware('role:store_manager');
     }
 
+    // 店舗代表者様ダッシュボード表示
+    public function index()
+    {
+        return view('store.store-dashboard');
+    }
+
+
     /* 登録店舗一覧TOPページ表示*/
     public function mypage(Request $request)
     {
@@ -94,9 +101,11 @@ class StoreController extends Controller
     }
 
 
-    /* 店舗情報追加処理 */
+    /* 店舗情報登録処理 */
     public function store(StoreRequest $request)
     {
+        
+
         $shop = new Shop();
         $shop->name = $request->name;
         $shop->description = $request->description;

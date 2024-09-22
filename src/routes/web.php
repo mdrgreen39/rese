@@ -5,6 +5,9 @@ use App\Http\Controllers\ShopController;
 use App\Http\Controllers\ReservationController;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\StoreController;
+use App\Http\Controllers\CustomLoginController;
+use App\Http\Controllers\EmailVerificationController;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\App;
@@ -23,10 +26,24 @@ use Livewire\Livewire;
 */
 
 
+
+Route::get('/email/verify', [EmailVerificationController::class, 'show'])->middleware(['auth', 'throttle:6,1'])->name('verification.notice');
+
+Route::post('/email/verification-notification', [EmailVerificationController::class, 'resend'])
+    ->middleware(['auth', 'throttle:6,1'])
+    ->name('verification.send');
+
+Route::get('/email/resend-done', [EmailVerificationController::class, 'showResendDone'])
+    ->middleware(['auth'])
+    ->name('verification.resend.done');
+
+
+
 Route::middleware(['set-register-message'])->group(function () {
     Fortify::registerView(fn () => view('auth.register'));
 });
 
+Route::post('/login', [CustomLoginController::class, 'login']);
 
 // Route::get('/auth/login', [ShopController::class,'showLoginForm'])->name('login');
 
@@ -40,7 +57,7 @@ Route::get('/', [ShopController::class, 'index'])->name('shops.index');
 
 Route::get('/detail/{shop_id}', [ShopController::class, 'show'])->name('shop.detail');
 
-Route::middleware('auth')->group(function ()
+Route::middleware('auth', 'verified')->group(function ()
 {
     Route::get('/mypage', [MyPageController::class, 'index'])->name('user.mypage');
     Route::get('/done/{reservationId}', [ReservationController::class, 'done'])->name('reservation.done');
@@ -68,12 +85,18 @@ Route::post('/shops/{shop}/reservations', [ReservationController::class, 'store'
 
 // 管理者
 Route::middleware(['auth', 'role:admin'])->group(function () {
+    Route::get('/admin/dashboard', [AdminController::class, 'index'])->name('admin.dashboard');
     Route::get('/admin/admin-register', [AdminController::class, 'showRegisterForm'])->name('admin.register');
     Route::post('/admin/register', [AdminController::class, 'store'])->name('admin.adminUser');
+    Route::get('/admin/email-notification', [AdminController::class, 'showNotificationForm'])->name('admin.emailNotification');
+    Route::post('/admin/send-notification', [AdminController::class, 'sendNotification'])->name('admin.sendNotification');
+
 });
 
 // 店舗代表者
-Route::middleware(['auth', 'role:store_manager'])->group(function () {
+Route::middleware(['auth', 'verified', 'role:store_manager'])->group(function () {
+
+    Route::get('/store/dashboard', [StoreController::class, 'index'])->name('store.dashboard');
     Route::get('/store/mypage', [StoreController::class, 'myPage'])->name('store.mypage');
 
     Route::get('store/store-detail/{id}', [StoreController::class, 'show'])

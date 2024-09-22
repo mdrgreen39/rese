@@ -18,7 +18,7 @@
                 <button class="header-nav__link--button" type="submit">Logout</button>
             </form>
         </li>
-        <li class="header-nav__item"><a class="header-nav__link" href="{{ route('user.mypage') }}">Mypage</a></li>
+        <li class="header-nav__item"><a class="header-nav__link" href="{{ route('store.dashboard') }}">店舗用管理画面</a></li>
     </ul>
 </nav>
 

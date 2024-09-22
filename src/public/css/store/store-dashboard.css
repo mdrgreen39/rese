@@ -1,0 +1,46 @@
+.store-dashboard-menu {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    margin: 12rem auto;
+}
+
+.store-dashboard-menu ul {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+}
+
+.store-dashboard-menu li {
+    margin-bottom: 0.63rem;
+}
+
+.store-dashboard-link {
+    text-decoration: none;
+    color: #333;
+    font-size: 1.5rem;
+    font-weight: bold;
+    padding: 0.63rem;
+    display: inline-block;
+
+    &:hover {
+        color: #3460f6;
+    }
+}
+
+@media (max-width: 768px) {
+
+    .header {
+        height: 8.35rem;
+    }
+
+    .header__container {
+        padding-bottom: 0;
+    }
+
+    .store-dashboard-menu {
+        margin: 10rem auto;
+    }
+
+}

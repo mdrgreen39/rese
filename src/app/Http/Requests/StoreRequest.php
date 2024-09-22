@@ -21,6 +21,7 @@ class StoreRequest extends FormRequest
      */
     public function rules(): array
     {
+
         return [
             'name' => ['required', 'string', 'max:191'],
             'prefecture_id' => ['required'],
@@ -30,6 +31,7 @@ class StoreRequest extends FormRequest
             'image_url' => ['nullable', 'url'],
             'image_or_image_url' => [function ($attribute, $value, $fail) {
                 $request = request();
+                // 画像ファイルも画像URLも入力されていない場合
                 if (!$request->hasFile('image') && !$request->filled('image_url')) {
                     $fail('画像ファイルまたは画像URLのいずれかを提供する必要があります');
                 }
@@ -52,7 +54,8 @@ class StoreRequest extends FormRequest
             'image.mimes' => '画像はjpeg,png,jpg,gifのいずれかの形式である必要があります',
             'image.max' => '画像のサイズは2MB以下である必要があります',
             'image_url.url' => '画像URLの形式が正しくありません',
-            'image_or_image_url.required_without' => '画像ファイルまたは画像URLのいずれかを提供する必要があります',
         ];
     }
+
+    
 }
