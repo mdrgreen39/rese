@@ -13,6 +13,7 @@ body {
     width: 100%;
     height: 100%;
     background-color: #eeeeee;
+    font-family: "Noto Sans JP", sans-serif;
 }
 
 img {
@@ -250,6 +251,50 @@ input::placeholder {
 .heart-toggle:checked + .heart-icon::before,
 .heart-toggle:checked + .heart-icon::after {
     background: #ec3323;
+}
+
+/* ページネーション */
+.pagination {
+    display: flex;
+    justify-content: center;
+    list-style: none;
+}
+
+.pagination li:not(.active) {
+    background-color: #fff;
+    color: #2284cf;
+    border: 1px solid #d7dbde;
+    padding: 0.5rem 1rem;
+}
+
+.pagination li:not(:last-child) {
+    border-right: none;
+}
+
+.pagination a {
+    color: #2284cf;
+    text-decoration: none;
+
+    &:hover {
+        color: #2284cf;
+        opacity: 0.5;
+    }
+}
+
+.pagination__link {
+    text-decoration: none;
+
+    &:hover {
+        background-color: #2284cf;
+        opacity: 0.5;
+    }
+}
+
+.active {
+    padding: 0.5rem 1rem;
+    border: 0.06rem solid #2284cf;
+    background-color: #2284cf;
+    color: #FFF;
 }
 
 

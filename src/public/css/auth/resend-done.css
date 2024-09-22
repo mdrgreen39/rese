@@ -1,0 +1,43 @@
+.resend-done {
+    width: 90%;
+    max-width: 30rem;
+    margin: 12rem auto;
+    padding: 6rem;
+    border-radius: 0.38rem;
+    box-shadow: 0.25rem 0.25rem 0.25rem rgba(0, 0, 0, 0.4);
+    background-color: #fff;
+    position: relative;
+    overflow: hidden;
+}
+
+.resend-done__heading {
+    background-color: #fff;
+    color: #000;
+    padding: 1rem;
+    margin: -1rem -1rem 1rem -1rem;
+    text-align: center;
+    font-size: 1.25rem;
+    font-weight: 500;
+}
+
+
+@media (max-width: 768px) {
+
+
+    .header {
+        height: 8.35rem;
+    }
+
+    .header__container {
+        padding-bottom: 0;
+    }
+
+    .resend-done {
+        width: 90%;
+        margin: 10rem auto;
+    }
+
+    .resend-done__heading {
+        font-size: 1.2rem;
+    }
+}

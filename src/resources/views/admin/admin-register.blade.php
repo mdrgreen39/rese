@@ -19,7 +19,7 @@
                 <button class="header-nav__link--button" type="submit">Logout</button>
             </form>
         </li>
-        <li class="header-nav__item"><a class="header-nav__link" href="{{ route('admin.register') }}">Admin Register</a></li>
+        <li class="header-nav__item"><a class="header-nav__link" href="{{ route('admin.dashboard') }}">管理画面</a></li>
     </ul>
 </nav>
 
@@ -77,22 +77,7 @@
             <div class="admin-register-form__input-container">
                 <i class="fa-solid fa-tag fa-xl"></i>
                 <select class="admin-register-form__select" name="role" id="role" required>
-                    <option value="" selected disabled>Roleを選択してください</option>
-                    @foreach($roles as $role)
-                    <option value="{{ $role->name }}">
-                        @switch($role->name)
-                        @case('admin')
-                        管理者
-                        @break
-                        @case('store_manager')
-                        店舗代表者
-                        @break
-                        @case('user')
-                        一般ユーザー
-                        @break
-                        @endswitch
-                    </option>
-                    @endforeach
+                    <option value="store_manager" selected>店舗代表者</option>
                 </select>
                 <i class="fa-solid fa-caret-down fa-xl"></i>
             </div>

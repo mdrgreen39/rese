@@ -19,9 +19,7 @@
                 <button class="header-nav__link--button" type="submit">Logout</button>
             </form>
         </li>
-        <li class="header-nav__item"><a class="header-nav__link" href="{{ route('store.mypage') }}">Store Page</a></li>
-        <li class="header-nav__item"><a class="header-nav__link" href="{{ route('store.register') }}">Store Registration</a></li>
-        <li class="header-nav__item"><a class="header-nav__link" href="{{ route('reservation.checkin') }}">来店確認</a></li>
+        <li class="header-nav__item"><a class="header-nav__link" href="{{ route('store.dashboard') }}">店舗用管理画面</a></li>
     </ul>
 </nav>
 
@@ -30,6 +28,11 @@
 
 
 @section('content')
+
+if ($errors->any()) {
+dd($errors);
+}
+
 
 @if (session('message'))
 <div class="store-register-form__session-message">
