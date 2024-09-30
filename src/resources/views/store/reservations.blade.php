@@ -30,7 +30,8 @@
 @section('content')
 <div class="reservation">
     <div class="reservation-heading">
-        <h2 class="reservation-heading__text">{{ $shop->name }}の予約リスト</h2>
+        <a class="reservation-heading__button-before" href="{{ route('store.detail', ['id' => $shop->id]) }}">&lt;</a>
+        <h2 class="reservation-heading__title">{{ $shop->name }}の予約リスト</h2>
     </div>
     <div class="reservation-list">
         @if ($reservations->isEmpty())

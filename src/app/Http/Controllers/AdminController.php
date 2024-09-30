@@ -12,6 +12,7 @@ use App\Models\Shop;
 use App\Models\Prefecture;
 use App\Models\Genre;
 use App\Mail\NotificationEmail;
+use App\Jobs\SendNotificationEmail;
 use App\Http\Requests\AdminRegisterRequest;
 use App\Http\Requests\SendNotificationRequest;
 use Spatie\Permission\Models\Role;
@@ -78,20 +79,43 @@ class AdminController extends Controller
             $users = User::whereIn('id', $validated['users'])->get();
         }
 
+        // 個別の利用者が選択されている場合は取得
+        if (!empty($validated['users'])) {
+            $users = User::whereIn('id', $validated['users'])->get();
+        }
+
         // 選択されたロールを持つ利用者がいる場合は取得してマージ
         if (!empty($validated['roles'])) {
-            $roleUsers = User::whereHas('roles', function ($query) use ($validated) {
-                $query->whereIn('name', $validated['roles']);
-            })->get();
+            // 取得したロールを確認
+            $role = Role::where('id', $validated['roles'])->first();
 
+            if ($role) {
+                $roleUsers = User::whereHas('roles', function ($query) use ($role) {
+                    $query->where('id', $role->id);
+                })->get();
+
+                // ロールを持つユーザーの情報を確認
+                logger()->info('Role Users:', $roleUsers->toArray()); // ここでログに記録する
+            } else {
+                logger()->warning('Role not found for ID:', ['role_id' => $validated['roles']]); // 警告をログに記録
+            }
+
+            // $usersにロールを持つユーザーをマージ
             $users = $users->merge($roleUsers)->unique('id');
         }
 
         // メール送信処理
         foreach ($users as $user) {
-            Mail::to($user->email)->send(new NotificationEmail($validated['subject'], $validated['message']));
+            if ($user->email) {
+                // ジョブをキューに追加
+                SendNotificationEmail::dispatch($user->email, $validated['subject'], $validated['message']);
+                logger()->info('Email dispatched for:', ['email' => $user->email]);
+            } else {
+                logger()->warning('No email found for user:', ['user_id' => $user->id]);
+            }
         }
 
         return back()->with('message', 'お知らせメールを送信しました');
     }
+
 }

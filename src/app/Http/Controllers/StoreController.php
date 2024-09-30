@@ -196,8 +196,15 @@ class StoreController extends Controller
 
         $shop->save();
 
-        return redirect()->route('store.dettail', ['id' => $id])->with('message', '店舗情報が更新されました');
+        return redirect()->route('store.editDone');
     }
+
+    // 店舗情報更新完了ページ表示
+    public function showEditDone()
+    {
+        return view('store.edit-done');
+    }
+
 
     // 店舗の予約リスト表示
     public function showReservations($shopId, Request $request)

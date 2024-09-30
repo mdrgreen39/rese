@@ -39,6 +39,11 @@
 
         <div class="mypage-favorite">
             <h3 class="mypage-favorite__heading">お気に入り店舗</h3>
+
+            @if($favoriteShops->isEmpty())
+            <p>お気に入りの店舗が登録されていません</p>
+            <p>HOMEより店舗のハートを押すと「お気に入り」に登録できます</p>
+            @else
             <div class="mypage-favorite-container">
                 <div class="mypage-favorite-wrap">
                     @foreach($favoriteShops as $shop)
@@ -62,6 +67,7 @@
                     @endforeach
                 </div>
             </div>
+            @endif
         </div>
     </div>
 </div>

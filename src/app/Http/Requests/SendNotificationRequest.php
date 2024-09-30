@@ -22,8 +22,8 @@ class SendNotificationRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'users' => ['nullable', 'array', 'required_without:roles' ],
-            'roles' => ['nullable', 'array', 'required_without:users'],
+            'users' => ['required_without:roles', 'nullable', 'array' ],
+            'roles' => ['prohibits:users', 'nullable', 'exists:roles,id'],
             'subject' => ['required', 'string', 'max:191'],
             'message' => ['required', 'string'],
         ];
@@ -33,12 +33,12 @@ class SendNotificationRequest extends FormRequest
     {
         return [
             'users.array' => '利用者の選択は配列形式である必要があります',
-            'roles.array' => 'ロールの選択は配列形式である必要があります',
+            'roles.exists' => '選択されたロールは存在しません',
             'subject.required' => '件名は必須項目です',
             'subject.string' => '件名は文字列である必要があります',
             'subject.max' => '件名は191文字以内で入力してください',
             'users.required_without' => '個別の利用者を選択するか、ロールを選択してください',
-            'roles.required_without' => 'ロールを選択するか、個別の利用者を選択してください',
+            'roles.prohibits' => '個別の利用者かロール、どちらかだけを選択してください',
             'message.required' => 'メッセージ本文は必須項目です',
             'message.string' => 'メッセージ本文は文字列である必要があります',
         ];

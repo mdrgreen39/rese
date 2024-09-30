@@ -19,7 +19,7 @@ class ReservationReminderMail extends Mailable
     /**
      * Create a new message instance.
      */
-    public function __construct(Reservation $reservation)
+    public function __construct($reservation)
     {
         $this->reservation = $reservation;
     }
