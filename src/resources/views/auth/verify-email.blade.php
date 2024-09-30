@@ -22,18 +22,6 @@
 
 @section('content')
 
-@if (session('message'))
-<div class="register-form__session-message">
-
-    {!! session('message') !!}
-
-</div>
-@if (session('message'))
-<div class="verification-form__session-success">
-    {!! session('message') !!}
-</div>
-@endif
-
 <div class="verification-form">
     <h2 class="verification-form__heading">
         メールアドレスの確認について

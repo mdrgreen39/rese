@@ -15,7 +15,7 @@ class SendReservationReminder extends Command
      *
      * @var string
      */
-    protected $signature = 'send:reservation-reminders';
+    protected $signature = 'reminder:send';
 
     /**
      * The console command description.
@@ -35,8 +35,8 @@ class SendReservationReminder extends Command
     public function handle()
     {
         // 今日の予約を取得
-        $today = Carbon::today();
-        $reservations = Reservation::whereDate('date', $today)->get();
+        $reservations = Reservation::whereDate('date', now()->toDateString())->get();
+
 
         foreach ($reservations as $reservation) {
             Mail::to($reservation->user->email)->send(new ReservationReminderMail($reservation));

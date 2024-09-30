@@ -83,7 +83,7 @@ class ReservationController extends Controller
 
         if ($session->payment_status === 'paid') {
             $reservation = Reservation::findOrFail($reservation_id);
-            $reservation->deposit_paid = true;
+            $reservation->deposit_amount = 1000;
             $reservation->save();
             // 支払い完了画面にリダイレクト
             return redirect()->route('reservation.paymentDone');

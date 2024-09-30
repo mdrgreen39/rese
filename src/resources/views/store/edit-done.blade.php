@@ -1,11 +1,10 @@
 @extends('layouts.app')
 
 @section('css')
-<link rel="stylesheet" href="{{ asset('css/store/store-register.css') }}">
+<link rel="stylesheet" href="{{ asset('css/store/edit-done.css') }}">
 @endsection
 
 @section('nav')
-
 <input class="hamburger-input" type="checkbox" id="check">
 <label class="hamburger-label" for="check">
     <span></span>
@@ -26,29 +25,13 @@
 
 @endsection
 
-
 @section('content')
 
-@if (session('message'))
-<div class="store-register-form__session-message">
-
-    {!! session('message') !!}
-
-</div>
-@endif
-
-<div class="store-register-form">
-    <h2 class="store-register-form__heading">店舗情報編集</h2>
-    <form class="store-register-form__form" action="{{ route('store.update', $shop->id) }}" method="post" enctype="multipart/form-data" novalidate>
-        @csrf
-
-        @method('PUT')
-        @include('store.-store-form')
-
-        <div class="store-register-form__button-container">
-            <button class="store-register-form__button" type="submit">更新</button>
-        </div>
-    </form>
+<div class="edit-done">
+    <h2 class="edit-done__heading">店舗情報が更新されました</h2>
+    <div class="edit-done__button-container">
+        <a class="edit-done__button" href="{{ route('store.mypage') }}">戻る</a>
+    </div>
 </div>
 
 

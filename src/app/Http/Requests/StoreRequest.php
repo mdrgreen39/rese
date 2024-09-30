@@ -27,15 +27,15 @@ class StoreRequest extends FormRequest
             'prefecture_id' => ['required'],
             'genre_id' => ['required'],
             'description' => ['required', 'string', 'max:500'],
-            'image' => ['nullable', 'image', 'mimes:jpeg,png,jpg,gif', 'max:2048'],
-            'image_url' => ['nullable', 'url'],
-            'image_or_image_url' => [function ($attribute, $value, $fail) {
-                $request = request();
+            'image' => ['required_without:image_url', 'nullable', 'image', 'mimes:jpeg,png,jpg,gif', 'max:2048'],
+            'image_url' => ['prohibits:image', 'nullable', 'url'],
+            // 'image_or_image_url' => [function ($attribute, $value, $fail) {
+                // $request = request();
                 // 画像ファイルも画像URLも入力されていない場合
-                if (!$request->hasFile('image') && !$request->filled('image_url')) {
-                    $fail('画像ファイルまたは画像URLのいずれかを提供する必要があります');
-                }
-            }],
+                // if (!$request->hasFile('image') && !$request->filled('image_url')) {
+                    // $fail('画像ファイルまたは画像URLのいずれかを提供する必要があります');
+                // }
+            // }],
         ];
     }
 
@@ -54,6 +54,8 @@ class StoreRequest extends FormRequest
             'image.mimes' => '画像はjpeg,png,jpg,gifのいずれかの形式である必要があります',
             'image.max' => '画像のサイズは2MB以下である必要があります',
             'image_url.url' => '画像URLの形式が正しくありません',
+            'image.required_without' => '画像ファイルか画像URLどちらかは必須です',
+            'image_url.prohibits' => '画像ファイルか画像URLどちらかだけを入力してください',
         ];
     }
 

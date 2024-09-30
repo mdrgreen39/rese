@@ -98,8 +98,8 @@
         </div>
 
         <div class="email-form__button-container">
-            <button class="email-form__button" type="button" onclick="location.reload();">リロード</button>
             <button class="email-form__button" type="submit">送信</button>
+            <button class="email-form__button" type="button" onclick="location.reload();">リロード</button>
         </div>
     </form>
 </div>

@@ -97,18 +97,20 @@ Route::middleware(['auth', 'role:admin'])->group(function () {
 Route::middleware(['auth', 'verified', 'role:store_manager'])->group(function () {
 
     Route::get('/store/dashboard', [StoreController::class, 'index'])->name('store.dashboard');
+
     Route::get('/store/mypage', [StoreController::class, 'myPage'])->name('store.mypage');
 
     Route::get('store/store-detail/{id}', [StoreController::class, 'show'])
     ->name('store.detail');
 
-    // 店舗登録画面
+    // 店舗登録
     Route::get('/store/register', [StoreController::class, 'register'])->name('store.register');
     Route::post('/store/register', [StoreController::class, 'store'])->name('store.store');
 
-    // 店舗編集画面
+    // 店舗編集
     Route::get('/store/edit/{id}', [StoreController::class, 'edit'])->name('store.edit');
     Route::put('/store/edit/{id}', [StoreController::class, 'update'])->name('store.update');
+    Route::get('/store/edit-done', [StoreController::class, 'showEditDone'])->name('store.editDone');
 
     // 予約リスト
     Route::get('/store/{shop}/reservations', [StoreController::class, 'showReservations'])->name('store.reservation');
