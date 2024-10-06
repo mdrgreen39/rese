@@ -60,16 +60,26 @@ Route::get('/detail/{shop_id}', [ShopController::class, 'show'])->name('shop.det
 Route::middleware('auth', 'verified')->group(function ()
 {
     Route::get('/mypage', [MyPageController::class, 'index'])->name('user.mypage');
-    Route::get('/done/{reservationId}', [ReservationController::class, 'done'])->name('reservation.done');
-    Route::get('/cancel', [ReservationController::class, 'cancel'])->name('reservation.cancel');
+    Route::get('/done', [ReservationController::class, 'done'])->name('reservation.done');
+    // Route::get('/cancel', [ReservationController::class, 'cancel'])->name('reservation.cancel');
     Route::get('/deleted', [ReservationController::class, 'deleted'])->name('reservation.deleted');
     Route::get('/updated', [ReservationController::class, 'updated'])->name('reservation.updated');
-    Route::post('/reservation/pay-deposit/{reservation_id}', [ReservationController::class, 'payDeposit'])->name('reservation.payDeposit');
 
-    Route::get('/reservation/success', [ReservationController::class, 'successDeposit'])->name('reservation.successDeposit');
+    Route::get('/payment', [ReservationController::class,'showPayment'])->name('payment.show');
+
+    Route::get('/payment/process', [ReservationController::class, 'processPayment'])->name('payment.action');
+
+    // 支払い成功・キャンセルのルート
+    Route::get('/payment/success', [ReservationController::class, 'paymentSuccess'])->name('payment.success');
+
+    Route::get('/payment/cancel', [ReservationController::class, 'paymentCancel'])->name('payment.cancel');
+
+    // Route::post('/reservation/pay-deposit/{reservation_id}', [ReservationController::class, 'payDeposit'])->name('reservation.payDeposit');
+
+    // Route::get('/reservation/success', [ReservationController::class, 'successDeposit'])->name('reservation.successDeposit');
 
 
-    Route::get('/reservation/payment-done', [ReservationController::class, 'paymentDone'])->name('reservation.paymentDone');
+    // Route::get('/reservation/payment-done', [ReservationController::class, 'paymentDone'])->name('reservation.paymentDone');
 
     // Route::post('/shops/{shop}/review', [ShopController::class, 'store'])->name('review.store');
     Route::get('/shops/{shop}/review-success', [ShopController::class, 'showReviewSuccess'])->name('review.success');

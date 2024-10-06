@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('css')
-<link rel="stylesheet" href="{{ asset('css/done.css') }}">
+<link rel="stylesheet" href="{{ asset('css/payment-cancel.css') }}">
 @endsection
 
 @section('nav')
@@ -27,10 +27,10 @@
 
 @section('content')
 
-<div class="done">
-    <h2 class="done__heading">ご予約ありがとうございます</h2>
-    <div class="done__button-container">
-        <a class="done__button" href="{{ route('shops.index') }}">戻る</a>
+<div class="payment-cancel">
+    <h2 class="payment-cancel__heading">支払いはキャンセルされました</h2>
+    <div class="payment-cancel__button-container">
+        <a class="payment-cancel__button" href="{{ route('user.mypage') }}">戻る</a>
     </div>
 </div>
 

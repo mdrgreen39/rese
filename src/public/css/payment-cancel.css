@@ -1,4 +1,4 @@
-.done {
+.payment-cancel {
     width: 90%;
     max-width: 30rem;
     margin: 12rem auto;
@@ -10,7 +10,9 @@
     overflow: hidden;
 }
 
-.done__heading {
+.payment-cancel__heading {
+    background-color: #fff;
+    color: #000;
     padding: 1rem;
     margin: -1rem -1rem 1rem -1rem;
     text-align: center;
@@ -18,23 +20,14 @@
     font-weight: 500;
 }
 
-.done__text {
-    padding: 1rem;
-    margin: -1rem -1rem 1rem -1rem;
-    text-align: center;
-    font-size: 0.75rem;
-}
-
-.done__button-container {
+.payment-cancel__button-container {
     display: flex;
-    flex-direction: column;
-    align-items: center;
+    justify-content: center;
 }
 
-.done__button {
+.payment-cancel__button {
     display: inline-block;
     padding: 0.5rem 1rem;
-    margin-bottom: 1rem;
     background-color: #3460f6;
     color: #fff;
     text-decoration: none;
@@ -50,22 +43,22 @@
 }
 
 @media (max-width: 768px) {
-    
+
     .header {
-            height: 8.35rem;
-        }
-    
+        height: 8.35rem;
+    }
+
     .header__container {
-            padding-bottom: 0;
+        padding-bottom: 0;
     }
 
 
-    .done {
+    .cancel-form {
         width: 90%;
         margin: 10rem auto;
     }
 
-    .done__heading {
+    .cancel-form__heading {
         font-size: 1.2rem;
     }
 }
