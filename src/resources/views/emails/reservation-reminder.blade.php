@@ -4,7 +4,7 @@
 
 予約のリマインダーです。
 
-- **日時**: {{ $reservation->date }} {{ $reservation->time }}
+- **日時**: {{ $reservation->date }} {{ substr($reservation->time, 0, 5) }}
 - **場所**: {{ $reservation->shop->name }}
 - **人数**: {{ $reservation->people }}
 

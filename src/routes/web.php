@@ -121,8 +121,10 @@ Route::middleware(['auth', 'verified', 'role:store_manager'])->group(function ()
 });
 
 
-
-
+Route::post('/webhook-endpoint', function (Request $request) {
+    logger()->info('Webhook received:', $request->all());
+    return response()->json(['status' => 'success']);
+});
 
 // テスト用表示ページ
 Route::get('/test', function () {
