@@ -41,6 +41,26 @@
     font-size: 1.5rem;
 }
 
+.mypage-reserve__button-payment {
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    width: auto;
+    padding: 0.5rem 1rem;
+    margin-left: 2rem;
+    background-color: #003ff5;
+    color: #fff;
+    border: none;
+    border-radius: 0.38rem;
+    font-size: 0.75rem;
+    cursor: pointer;
+
+        &:hover {
+            background-color: #fff;
+            color: #003ff5;
+        }
+}
+
 .mypage-reserve__status {
     /* margin: 12rem auto 0 auto; */
     text-align: center;

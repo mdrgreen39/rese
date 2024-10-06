@@ -22,7 +22,11 @@ class MyPageController extends Controller
         $favoriteShops = $user->favorites()->with('prefecture', 'genre')->get();
         $prefectures = Prefecture::all();
         $genres = Genre::all();
-        $reservations = $user->reservations()->with('shop')->get();
+        $reservations = $user->reservations()
+        ->with('shop')
+        ->orderBy('date', 'asc')
+        ->orderBy('time', 'asc')
+        ->get();
 
         return view('mypage', compact('favoriteShops', 'prefectures', 'genres', 'reservations'));
     }

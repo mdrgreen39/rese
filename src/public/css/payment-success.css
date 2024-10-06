@@ -1,4 +1,4 @@
-.cancel-form {
+.payment-success {
     width: 90%;
     max-width: 30rem;
     margin: 12rem auto;
@@ -10,7 +10,7 @@
     overflow: hidden;
 }
 
-.cancel-form__heading {
+.payment-success__heading {
     background-color: #fff;
     color: #000;
     padding: 1rem;
@@ -20,12 +20,12 @@
     font-weight: 500;
 }
 
-.cancel-form__button-container {
+.payment-success__button-container {
     display: flex;
     justify-content: center;
 }
 
-.cancel-form__button {
+.payment-success__button {
     display: inline-block;
     padding: 0.5rem 1rem;
     background-color: #3460f6;
@@ -53,12 +53,12 @@
     }
 
 
-    .cancel-form {
+    .payment-success {
         width: 90%;
         margin: 10rem auto;
     }
 
-    .cancel-form__heading {
+    .payment-success__heading {
         font-size: 1.2rem;
     }
 }

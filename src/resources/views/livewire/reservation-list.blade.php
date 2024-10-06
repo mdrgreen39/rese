@@ -5,6 +5,9 @@
 
 
     @if(!empty($reservations) && $reservations->count() > 0)
+
+    <a class="mypage-reserve__button-payment" href="{{ route('payment.show') }}">支払う</a>
+
     @foreach ($reservations as $reservation)
     <div class="mypage-reserve__confirm">
         <div class="mypage-reserve__confirm-top">
