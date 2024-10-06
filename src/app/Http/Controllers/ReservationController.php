@@ -26,7 +26,6 @@ class ReservationController extends Controller
         $reservation->people = (int) $request->input('people');
         $reservation->shop_id = $shop->id;
         $reservation->user_id = Auth::id();
-        $reservation->deposit_paid = false;
         $reservation->save();
 
         // QRコード生成のジョブをディスパッチ

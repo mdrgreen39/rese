@@ -5,10 +5,10 @@ namespace App\Console\Commands;
 use Illuminate\Console\Command;
 use App\Models\Reservation;
 use App\Mail\ReservationReminderMail;
-use Carbon\Carbon;
 use Illuminate\Support\Facades\Mail;
+use Carbon\Carbon;
 
-class SendReservationReminder extends Command
+class SendReminderEmails extends Command
 {
     /**
      * The name and signature of the console command.
@@ -42,7 +42,6 @@ class SendReservationReminder extends Command
             Mail::to($reservation->user->email)->send(new ReservationReminderMail($reservation));
         }
 
-        $this->info('予約リマインダーが送信されました。');
-    
+        $this->info('予約リマインダーが送信されました');
     }
 }
