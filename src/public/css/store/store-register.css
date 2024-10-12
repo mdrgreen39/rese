@@ -98,6 +98,13 @@
     background-color: transparent;
 }
 
+.store-register-form__image-preview {
+    padding: 1rem 0.5rem 0 0.06rem;
+    margin-left: 2rem;
+    max-width: 6.3rem;
+
+}
+
 .store-register-form__image {
     flex: 1;
     padding: 1rem 0.5rem 0 0.06rem;

@@ -30,7 +30,7 @@
 
 <div class="admin-dashboard-menu">
     <ul>
-        <li><a class="admin-dashboard-link" href="{{ route('admin.register') }}">店舗代表者登録</a></li>
+        <li><a class="admin-dashboard-link" href="{{ route('admin.ownerRegister') }}">店舗代表者登録</a></li>
         <li><a class="admin-dashboard-link" href="{{ route('admin.emailNotification') }}">メール送信</a></li>
     </ul>
 </div>

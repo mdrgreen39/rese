@@ -8,6 +8,8 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
 use App\Models\Prefecture;
 use App\Models\Genre;
+use App\Models\User;
+
 
 
 class ShopsTableSeeder extends Seeder
@@ -17,6 +19,8 @@ class ShopsTableSeeder extends Seeder
      */
     public function run(): void
     {
+        $storeManagers = User::where('role', 'store_manager')->get();
+
         $shops = [
             [
                 'name' => '仙人',
@@ -65,7 +69,7 @@ class ShopsTableSeeder extends Seeder
                 'prefecture_id' => '27',
                 'genre_id' => '3',
                 'description' => 'イタリア製ピザ窯芳ばしく焼き上げた極薄のミラノピッツァや厳選されたワインをお楽しみいただけます。女子会や男子会、記念日やお誕生日会にもオススメです。',
-                'image_url' => 'https://coachtech-matter.s3-ap-northeast-1.amazonaws.com/image/ramen.jpg',
+                'image_url' => 'https://coachtech-matter.s3-ap-northeast-1.amazonaws.com/image/italian.jpg',
             ],
             [
                 'name' => 'らーめん極み',
@@ -114,7 +118,7 @@ class ShopsTableSeeder extends Seeder
                 'prefecture_id' => '27',
                 'genre_id' => '12',
                 'description' => 'ミシュラン掲載店で磨いた、寿司職人の旨さへのこだわりはもちろん、 食事をゆっくりと楽しんでいただける空間作りも意識し続けております。 接待や大切なお食事にはぜひご利用ください。',
-                'image_url' => 'https://coachtech-matter.s3-ap-northeast-1.amazonaws.com/image/ramen.jpg',
+                'image_url' => 'https://coachtech-matter.s3-ap-northeast-1.amazonaws.com/image/sushi.jpg',
             ],
             [
                 'name' => 'ラー北',
@@ -158,17 +162,16 @@ class ShopsTableSeeder extends Seeder
                 'description' => '毎日店主自ら市場等に出向き、厳選した魚介類が、お鮨をはじめとした繊細な料理に仕立てられます。また、選りすぐりの種類豊富なドリンクもご用意しております。',
                 'image_url' => 'https://coachtech-matter.s3-ap-northeast-1.amazonaws.com/image/sushi.jpg',
             ],
-
-            // 追加の店舗データをここに追加
         ];
 
         foreach ($shops as $shopData) {
-            // 画像をダウンロードしてストレージに保存
             $imagePath = $this->storeImage($shopData['image_url'], basename($shopData['image_url']));
 
-            // 店舗データを作成
+            $randomStoreManager = $storeManagers->random();
+
             $shop = [
                 'name' => $shopData['name'],
+                'user_id' => $randomStoreManager->id,
                 'prefecture_id' => $shopData['prefecture_id'],
                 'genre_id' => $shopData['genre_id'],
                 'description' => $shopData['description'],

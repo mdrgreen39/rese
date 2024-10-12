@@ -18,18 +18,28 @@ class CustomLoginController extends Controller
         if (Auth::attempt($credentials)) {
             $user = Auth::user();
 
+            
+    
             if (!$user->hasVerifiedEmail()) {
-                // メール未確認のユーザーには適切なリダイレクトを行う
                 return redirect()->route('verification.notice');
             }
 
-            // メール確認済みのユーザーには通常のリダイレクトを行う
+            // ロールの取得
+            $roles = $user->roles()->pluck('name'); // 'name' はロールの名前のカラム名
+
+            if ($roles->contains('admin')) {
+                return redirect()->route('admin.dashboard'); // 管理者用ダッシュボードにリダイレクト
+            } elseif ($roles->contains('store_manager')) {
+                return redirect()->route('store.dashboard'); // 店舗代表者用ダッシュボードにリダイレクト
+            }
+
             return redirect()->intended('/');
-        }
+            }
 
         return redirect()->back()->withErrors([
-            'email' => '認証に失敗しました。',
+            'email' => '認証に失敗しました',
         ]);
+
     }
 
 }

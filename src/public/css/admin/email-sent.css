@@ -1,4 +1,4 @@
-.review-success {
+.email-sent {
     width: 90%;
     max-width: 30rem;
     margin: 12rem auto;
@@ -10,7 +10,7 @@
     overflow: hidden;
 }
 
-.review-success__heading {
+.email-sent__heading {
     background-color: #fff;
     color: #000;
     padding: 1rem;
@@ -20,12 +20,12 @@
     font-weight: 500;
 }
 
-.review-success__button-container {
+.email-sent__button-container {
     display: flex;
     justify-content: center;
 }
 
-.review-success__button {
+.email-sent__button {
     display: inline-block;
     padding: 0.5rem 1rem;
     background-color: #3460f6;
@@ -44,6 +44,7 @@
 
 @media (max-width: 768px) {
 
+
     .header {
         height: 8.35rem;
     }
@@ -52,13 +53,12 @@
         padding-bottom: 0;
     }
 
-
-    .review-success {
+    .email-sent {
         width: 90%;
         margin: 10rem auto;
     }
 
-    .review-success__heading {
+    .email-sent__heading {
         font-size: 1.2rem;
     }
 }

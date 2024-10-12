@@ -25,7 +25,7 @@ class AdminRegisterRequest extends FormRequest
             'name' => ['required', 'string', 'max:191'],
             'email' => ['required', 'unique:users,email', 'string', 'email', 'max:191'],
             'password' => ['required', 'min:8', 'max:191'],
-            'role' => ['required', 'in:admin,store_manager,user'],
+            'role' => ['required', 'in:store_manager'],
             ];
     }
 

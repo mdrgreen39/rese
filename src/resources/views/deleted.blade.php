@@ -27,10 +27,10 @@
 
 @section('content')
 
-<div class="delete-form">
-    <h2 class="delete-form__heading">予約が削除されました</h2>
-    <div class="delete-form__button-container">
-        <a class="delete-form__button" href="{{ route('user.mypage') }}">戻る</a>
+<div class="delete">
+    <h2 class="delete__heading">予約が削除されました</h2>
+    <div class="delete__button-container">
+        <a class="delete__button" href="{{ route('user.mypage') }}">戻る</a>
     </div>
 </div>
 

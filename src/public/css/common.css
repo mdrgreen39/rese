@@ -262,8 +262,8 @@ input::placeholder {
 
 .pagination li:not(.active) {
     background-color: #fff;
-    color: #2284cf;
-    border: 1px solid #d7dbde;
+    color: #3460f6;
+    border: 0.06rem solid #757575;
     padding: 0.5rem 1rem;
 }
 
@@ -272,11 +272,11 @@ input::placeholder {
 }
 
 .pagination a {
-    color: #2284cf;
+    color: #3460f6;
     text-decoration: none;
 
     &:hover {
-        color: #2284cf;
+        color: #3460f6;
         opacity: 0.5;
     }
 }
@@ -285,32 +285,17 @@ input::placeholder {
     text-decoration: none;
 
     &:hover {
-        background-color: #2284cf;
+        background-color: #3460f6;
         opacity: 0.5;
     }
 }
 
 .active {
     padding: 0.5rem 1rem;
-    border: 0.06rem solid #2284cf;
-    background-color: #2284cf;
+    border: 0.06rem solid #3460f6;
+    background-color: #3460f6;
     color: #FFF;
 }
-
-
-
-/* 後で消す */
-.debug-content {
-    position: fixed;
-    top: 0;
-    left: 0;
-    right: 0;
-    background: #fff;
-    padding: 20px;
-    z-index: 9999;
-    /* 高いz-indexで最前面に表示 */
-}
-
 
 @media (max-width: 900px) {
 
@@ -336,16 +321,12 @@ input::placeholder {
     }
 }
 
-
-
-
-
 @media (max-width: 768px) {
 
     html {
         font-size: 14px;
     }
-        
+
     .header {
         flex-direction: column;
         padding: 2rem;
@@ -361,11 +342,6 @@ input::placeholder {
     .hamburger-label {
             top: 4rem;
     }
-
-
-    /* .header__container { */
-        /* margin-left: 0; */
-    /* } */
 
     .header-nav {
         width: 100vw;

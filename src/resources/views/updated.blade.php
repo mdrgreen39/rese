@@ -27,10 +27,10 @@
 
 @section('content')
 
-<div class="update-form">
-    <h2 class="update-form__heading">予約が更新されました</h2>
-    <div class="update-form__button-container">
-        <a class="update-form__button" href="{{ route('user.mypage') }}">戻る</a>
+<div class="update">
+    <h2 class="update__heading">予約が更新されました</h2>
+    <div class="update__button-container">
+        <a class="update__button" href="{{ route('user.mypage') }}">戻る</a>
     </div>
 </div>
 

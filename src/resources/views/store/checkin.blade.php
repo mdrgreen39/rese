@@ -27,19 +27,19 @@
 
 @section('content')
 
-<div class="checkin-form">
+<div class="checkin">
     @if (session('success'))
-    <h2 class="checkin-form__heading">{{ session('success') }}</h2>
+    <h2 class="checkin__heading">{{ session('success') }}</h2>
     @elseif (session('error'))
-    <h2 class="checkin-form__heading">{{ session('error') }}</h2>
+    <h2 class="checkin__heading">{{ session('error') }}</h2>
     @elseif (session('info'))
-    <h2 class="checkin-form__heading">{{ session('info') }}</h2>
+    <h2 class="checkin__heading">{{ session('info') }}</h2>
     @else
-    <h2 class="checkin-form__heading">メッセージがありません</h2>
+    <h2 class="checkin__heading">メッセージがありません</h2>
     @endif
 
-    <div class="checkin-form__button-container">
-        <a class="checkin-form__button" href="{{ route('shops.index') }}">戻る</a>
+    <div class="checkin__button-container">
+        <a class="checkin__button" href="{{ route('store.dashboard') }}">戻る</a>
     </div>
 </div>
 

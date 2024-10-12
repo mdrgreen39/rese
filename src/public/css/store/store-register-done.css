@@ -1,4 +1,4 @@
-.review-success {
+.store-register-done {
     width: 90%;
     max-width: 30rem;
     margin: 12rem auto;
@@ -10,9 +10,7 @@
     overflow: hidden;
 }
 
-.review-success__heading {
-    background-color: #fff;
-    color: #000;
+.store-register-done__heading {
     padding: 1rem;
     margin: -1rem -1rem 1rem -1rem;
     text-align: center;
@@ -20,14 +18,23 @@
     font-weight: 500;
 }
 
-.review-success__button-container {
-    display: flex;
-    justify-content: center;
+.store-register-done__text {
+    padding: 1rem;
+    margin: -1rem -1rem 1rem -1rem;
+    text-align: center;
+    font-size: 0.75rem;
 }
 
-.review-success__button {
+.store-register-done__button-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.store-register-done__button {
     display: inline-block;
     padding: 0.5rem 1rem;
+    margin-bottom: 1rem;
     background-color: #3460f6;
     color: #fff;
     text-decoration: none;
@@ -53,12 +60,12 @@
     }
 
 
-    .review-success {
+    .store-register-done {
         width: 90%;
         margin: 10rem auto;
     }
 
-    .review-success__heading {
+    .store-register-done__heading {
         font-size: 1.2rem;
     }
 }
