@@ -1,10 +1,11 @@
 @extends('layouts.app')
 
 @section('css')
-<link rel="stylesheet" href="{{ asset('css/review-success.css') }}">
+<link rel="stylesheet" href="{{ asset('css/admin/owner-register-done.css') }}">
 @endsection
 
 @section('nav')
+
 <input class="hamburger-input" type="checkbox" id="check">
 <label class="hamburger-label" for="check">
     <span></span>
@@ -18,7 +19,7 @@
                 <button class="header-nav__link--button" type="submit">Logout</button>
             </form>
         </li>
-        <li class="header-nav__item"><a class="header-nav__link" href="{{ route('user.mypage') }}">Mypage</a></li>
+        <li class="header-nav__item"><a class="header-nav__link" href="{{ route('admin.dashboard') }}">管理画面</a></li>
     </ul>
 </nav>
 
@@ -26,12 +27,10 @@
 @endsection
 
 @section('content')
-
-<div class="review-success">
-    <h2 class="review-success__heading">{{ $shop->name }}へのレビューを投稿完了しました</h2>
-    <p class="review-success__text">ご意見をお寄せいただきありがとうございます</p>
-    <div class="review-success__button-container">
-        <a class="review-success__button" href="{{ route('user.mypage') }}">戻る</a>
+<div class="owner-register-done">
+    <h2 class="owner-register-done__heading">店舗代表者を登録しました</h2>
+    <div class="owner-register-done__button-container">
+        <a class="owner-register-done__button" href="{{ route('admin.dashboard') }}">戻る</a>
     </div>
 </div>
 

@@ -28,13 +28,6 @@
 
 @section('content')
 
-@if (session('message'))
-<div class="email-form__session-message">
-
-    {!! session('message') !!}
-
-</div>
-@endif
 
 <div class="email-form">
     <h2 class="email-form__heading">メール送信フォーム</h2>

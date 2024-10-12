@@ -58,9 +58,16 @@
         @enderror
     </p>
 </div>
+
 <div class="store-register-form__group">
     <div class="store-register-form__input-container">
+        @if (isset($shop) && $shop->image)
+        <img class="store-register-form__image-preview" src="{{ asset('storage/' . $shop->image) }}" alt="現在の画像">
+        @endif
+    </div>
+    <div class="store-register-form__input-container">
         <i class="fa-regular fa-image fa-xl"></i>
+
         <input class="store-register-form__image" type="file" name="image" id="image">
     </div>
     <p class="store-register-form__error-message">
@@ -69,7 +76,7 @@
         @enderror
     </p>
     <div class="store-register-form__input-container">
-        <input class="store-register-form__image-url" type="text" name="image_url" id="image_url" placeholder="または画像URLを入力してください" value="{{ old('image', $shop->image ?? '') }}">
+        <input class="store-register-form__image-url" type="text" name="image_url" id="image_url" placeholder="または画像URLを入力してください" value="{{ $shop->image ? '' : old('image_url', $shop->image_url ?? '')  }}">
     </div>
     <p class="store-register-form__error-message">
         @error('image_url')

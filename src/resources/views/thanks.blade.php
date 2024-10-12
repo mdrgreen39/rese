@@ -21,10 +21,10 @@
 @endsection
 
 @section('content')
-<div class="thanks-form">
-    <h2 class="thanks-form__heading">会員登録ありがとうございます</h2>
-    <div class="thanks-form__button-container">
-        <a class="thanks-form__button" href="/login">ログインする</a>
+<div class="thanks">
+    <h2 class="thanks__heading">会員登録ありがとうございます</h2>
+    <div class="thanks__button-container">
+        <a class="thanks__button" href="/login">ログインする</a>
     </div>
 </div>
 

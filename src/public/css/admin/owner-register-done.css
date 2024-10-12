@@ -1,4 +1,4 @@
-.review-success {
+.owner-register-done {
     width: 90%;
     max-width: 30rem;
     margin: 12rem auto;
@@ -10,7 +10,7 @@
     overflow: hidden;
 }
 
-.review-success__heading {
+.owner-register-done__heading {
     background-color: #fff;
     color: #000;
     padding: 1rem;
@@ -20,12 +20,12 @@
     font-weight: 500;
 }
 
-.review-success__button-container {
+.owner-register-done__button-container {
     display: flex;
     justify-content: center;
 }
 
-.review-success__button {
+.owner-register-done__button {
     display: inline-block;
     padding: 0.5rem 1rem;
     background-color: #3460f6;
@@ -44,6 +44,7 @@
 
 @media (max-width: 768px) {
 
+
     .header {
         height: 8.35rem;
     }
@@ -52,13 +53,12 @@
         padding-bottom: 0;
     }
 
-
-    .review-success {
+    .owner-register-done {
         width: 90%;
         margin: 10rem auto;
     }
 
-    .review-success__heading {
+    .owner-register-done__heading {
         font-size: 1.2rem;
     }
 }

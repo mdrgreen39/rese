@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 use App\Http\Requests\StoreRequest;
+use App\Http\Requests\StoreEditRequest;
 use App\Models\Shop;
 use App\Models\Prefecture;
 use App\Models\Genre;
@@ -27,7 +28,6 @@ class StoreController extends Controller
     {
         return view('store.store-dashboard');
     }
-
 
     /* 登録店舗一覧TOPページ表示*/
     public function mypage(Request $request)
@@ -89,39 +89,28 @@ class StoreController extends Controller
         return view('store.checkin');
     }
 
-    
-
     // 店舗情報登録ページ表示
     public function register()
     {
         $prefectures = Prefecture::all();
         $genres = Genre::all();
 
-        return view('store.store-register', compact('prefectures', 'genres'));
+        // 新しい店舗インスタンスを作成
+        $shop = new Shop();
+
+        return view('store.store-register', compact('prefectures', 'genres', 'shop'));
     }
 
 
     /* 店舗情報登録処理 */
     public function store(StoreRequest $request)
     {
-        
-
         $shop = new Shop();
         $shop->name = $request->name;
         $shop->description = $request->description;
-
-        $prefecture = Prefecture::find($request->prefecture_id);
-        $genre = Genre::find($request->genre_id);
-
-        if (!$prefecture || !$genre) {
-            return redirect()->back()->withErrors('選択された都道府県またはジャンルが無効です。');
-        }
-
         $shop->prefecture_id = $request->prefecture_id;
         $shop->genre_id = $request->genre_id;
-
         $shop->user_id = auth()->id();
-
 
         if ($request->hasFile('image')) {
             $shop->image = $request->file('image')->store('shops', 'public');
@@ -137,7 +126,13 @@ class StoreController extends Controller
 
         $shop->save();
 
-        return redirect()->back()->with('message', '店舗情報が追加されました');
+        return redirect()->route('store.register.done');
+    }
+
+    // 店舗登録完了へージ表示
+    public function registerDone()
+    {
+        return view('store.store-register-done');
     }
 
     // 店舗編集ページ表示
@@ -151,23 +146,26 @@ class StoreController extends Controller
     }
 
     // 店舗情報更新処理
-    public function update(StoreRequest $request, $id)
+    public function update(StoreEditRequest $request, $id)
     {
         $shop = Shop::findOrFail($id);
-        $shop->name = $request->name;
-        $shop->description = $request->description;
 
-        // Prefecture と Genre の取得
-        $prefecture = Prefecture::find($request->prefecture_id);
-        $genre = Genre::find($request->genre_id);
-
-        // エラーチェック
-        if (!$prefecture || !$genre) {
-            return redirect()->back()->withErrors('選択された都道府県またはジャンルが無効です。');
+        // 店名が空でなければ更新する
+        if ($request->filled('name')) {
+            $shop->name = $request->input('name');
         }
 
-        $shop->prefecture_id = $request->prefecture_id;
-        $shop->genre_id = $request->genre_id;
+        // descriptionが空でなければ更新する
+        if ($request->filled('description')) {
+            $shop->description = $request->input('description');
+        }
+        $shop->prefecture_id = $request->input('prefecture_id', $shop->prefecture_id);
+        $shop->genre_id = $request->input('genre_id', $shop->genre_id);
+
+        // 既存の画像がない場合、imageまたはimage_urlのいずれかが必須
+        if (!$shop->image && !$request->hasFile('image') && !$request->filled('image_url')) {
+            return redirect()->back()->withErrors('画像ファイルまたは画像URLを指定してください');
+        }
 
         // 画像ファイルがアップロードされている場合
         if ($request->hasFile('image')) {
@@ -200,7 +198,7 @@ class StoreController extends Controller
     }
 
     // 店舗情報更新完了ページ表示
-    public function showEditDone()
+    public function editDone()
     {
         return view('store.edit-done');
     }
@@ -217,9 +215,5 @@ class StoreController extends Controller
             ->paginate(10);
 
         return view('store.reservations', compact('shop', 'reservations'));
-    
     }
-
-
-
 }

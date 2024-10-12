@@ -33,10 +33,10 @@ class RolesAndPermissionsSeeder extends Seeder
 
         // 管理者を設定
         $adminUser = User::firstOrCreate(
-            ['email' => 'test39@example.com'],  // 一意なメールアドレス
+            ['email' => 'admin1@example.com'],  // 一意なメールアドレス
             [
-                'name' => 'test39',       // 管理者の名前
-                'password' => bcrypt('39393939'),  // 英数字8文字以上のパスワード
+                'name' => 'Admin Test User',       // 管理者の名前
+                'password' => bcrypt('adminpassword123'),  // 英数字8文字以上のパスワード
             ]
         );
 
@@ -45,6 +45,5 @@ class RolesAndPermissionsSeeder extends Seeder
             $adminUser->assignRole($adminRole); // 管理者ロールを割り当て
             $adminUser->givePermissionTo('system_management'); // システム管理パーミッションを付与
         }
-    
     }
 }

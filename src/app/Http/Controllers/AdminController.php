@@ -19,20 +19,24 @@ use Spatie\Permission\Models\Role;
 
 class AdminController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth');
+        $this->middleware('role:admin');
+    }
 
-    // 管理者ダッシュボードを表示するアクション
+    // 管理者画面ページ表示
     public function index()
     {
         return view('admin.admin-dashboard');
     }
 
-    /* 管理者・店舗代表登録画面ページ表示 */
+    /* 店舗代表登録画面ページ表示 */
     public function showRegisterForm()
     {
         $roles = Role::where('name', 'store_manager')->get();
 
-
-        return view('admin.admin-register', [
+        return view('admin.owner-register', [
             'roles' => $roles,
         ]);
     }
@@ -54,11 +58,17 @@ class AdminController extends Controller
         $user->sendEmailVerificationNotification();
 
         // リダイレクトと成功メッセージ
-        return redirect()->back()->with('message', 'ユーザーが正常に登録されました');
+        return redirect()->route('admin.ownerRegisterDone');
 
     }
 
-    // メール送信画面表示
+    // 店舗代表者登録完了ページ表示
+    public function registerDone()
+    {
+        return view('admin.owner-register-done');
+    }
+
+    // お知らせメール送信画面表示
     public function showNotificationForm()
     {
         $users = User::all();
@@ -67,6 +77,7 @@ class AdminController extends Controller
         return view('admin.email-notification', compact('users', 'roles'));
     }
 
+    // お知らせメール送信処理
     public function sendNotification(SendNotificationRequest $request)
     {
         // フォームリクエストで既にバリデーション済み
@@ -84,23 +95,14 @@ class AdminController extends Controller
             $users = User::whereIn('id', $validated['users'])->get();
         }
 
+
         // 選択されたロールを持つ利用者がいる場合は取得してマージ
         if (!empty($validated['roles'])) {
-            // 取得したロールを確認
-            $role = Role::where('id', $validated['roles'])->first();
+            $roleUsers = User::whereHas('roles', function ($query) use ($validated) {
+                $query->where('id', $validated['roles']);
+            })->get();
 
-            if ($role) {
-                $roleUsers = User::whereHas('roles', function ($query) use ($role) {
-                    $query->where('id', $role->id);
-                })->get();
-
-                // ロールを持つユーザーの情報を確認
-                logger()->info('Role Users:', $roleUsers->toArray()); // ここでログに記録する
-            } else {
-                logger()->warning('Role not found for ID:', ['role_id' => $validated['roles']]); // 警告をログに記録
-            }
-
-            // $usersにロールを持つユーザーをマージ
+            // $usersにロールを持つユーザーをマージし、重複を排除
             $users = $users->merge($roleUsers)->unique('id');
         }
 
@@ -109,13 +111,16 @@ class AdminController extends Controller
             if ($user->email) {
                 // ジョブをキューに追加
                 SendNotificationEmail::dispatch($user->email, $validated['subject'], $validated['message']);
-                logger()->info('Email dispatched for:', ['email' => $user->email]);
-            } else {
-                logger()->warning('No email found for user:', ['user_id' => $user->id]);
             }
         }
 
-        return back()->with('message', 'お知らせメールを送信しました');
+        return redirect()->route('admin.emailNotificationSent');
+    }
+
+    // おせらせメール送信完了ページ表示
+    public function emailSent()
+    {
+        return view('admin.email-sent');
     }
 
 }

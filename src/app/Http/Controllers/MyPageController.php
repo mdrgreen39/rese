@@ -30,4 +30,10 @@ class MyPageController extends Controller
 
         return view('mypage', compact('favoriteShops', 'prefectures', 'genres', 'reservations'));
     }
+
+    /* レビュー投稿完了ページ表示 */
+    public function showReviewSuccess(Shop $shop)
+    {
+        return view('review-success', compact('shop'));
+    }
 }

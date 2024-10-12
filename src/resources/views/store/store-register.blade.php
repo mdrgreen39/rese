@@ -29,19 +29,6 @@
 
 @section('content')
 
-if ($errors->any()) {
-dd($errors);
-}
-
-
-@if (session('message'))
-<div class="store-register-form__session-message">
-
-    {!! session('message') !!}
-
-</div>
-@endif
-
 <div class="store-register-form">
     <h2 class="store-register-form__heading">Store Registration</h2>
     <form class="store-register-form__form" action="{{ route('store.store') }}" method="post" enctype="multipart/form-data" novalidate>

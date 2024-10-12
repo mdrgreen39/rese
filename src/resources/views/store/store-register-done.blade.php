@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('css')
-<link rel="stylesheet" href="{{ asset('css/review-success.css') }}">
+<link rel="stylesheet" href="{{ asset('css/store/store-register-done.css') }}">
 @endsection
 
 @section('nav')
@@ -18,7 +18,7 @@
                 <button class="header-nav__link--button" type="submit">Logout</button>
             </form>
         </li>
-        <li class="header-nav__item"><a class="header-nav__link" href="{{ route('user.mypage') }}">Mypage</a></li>
+        <li class="header-nav__item"><a class="header-nav__link" href="{{ route('store.dashboard') }}">店舗用管理画面</a></li>
     </ul>
 </nav>
 
@@ -27,11 +27,10 @@
 
 @section('content')
 
-<div class="review-success">
-    <h2 class="review-success__heading">{{ $shop->name }}へのレビューを投稿完了しました</h2>
-    <p class="review-success__text">ご意見をお寄せいただきありがとうございます</p>
-    <div class="review-success__button-container">
-        <a class="review-success__button" href="{{ route('user.mypage') }}">戻る</a>
+<div class="store-register-done">
+    <h2 class="store-register-done__heading">店舗情報を登録しました</h2>
+    <div class="store-register-done__button-container">
+        <a class="store-register-done__button" href="{{ route('store.mypage') }}">戻る</a>
     </div>
 </div>
 

@@ -66,10 +66,12 @@
             </tbody>
         </table>
 
-        {{ $reservations->appends(request()->query())->links('vendor.pagination.custom') }}
-
         @endif
     </div>
+    {{ $reservations->appends(request()->query())->links('vendor.pagination.custom') }}
+
+</div>
 
 
-    @endsection
+
+@endsection

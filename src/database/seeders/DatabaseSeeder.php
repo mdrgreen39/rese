@@ -30,8 +30,10 @@ class DatabaseSeeder extends Seeder
             $this->call([
                 PrefectureTableSeeder::class,
                 GenresTableSeeder::class,
-                ShopsTableSeeder::class,
                 RolesAndPermissionsSeeder::class,
+                UserSeeder::class,ShopsTableSeeder::class,
+                ReservationSeeder::class,
+
             ]);
         }
     }
