@@ -23,11 +23,9 @@
     </ul>
 </nav>
 
-
 @endsection
 
 @section('content')
-
 
 <div class="email-form">
     <h2 class="email-form__heading">メール送信フォーム</h2>
@@ -89,13 +87,11 @@
                 @enderror
             </p>
         </div>
-
         <div class="email-form__button-container">
             <button class="email-form__button" type="submit">送信</button>
             <button class="email-form__button" type="button" onclick="location.reload();">リロード</button>
         </div>
     </form>
 </div>
-
 
 @endsection

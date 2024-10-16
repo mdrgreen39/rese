@@ -17,7 +17,6 @@
     </ul>
 </nav>
 
-
 @endsection
 
 @section('content')
@@ -28,9 +27,7 @@
 </div>
 @endif
 
-
 <div class="login-form">
-
     <h2 class="login-form__heading">Login</h2>
     <form class="login-form__form" action="/login" method="post" novalidate>
         @csrf
@@ -48,7 +45,7 @@
         <div class="login-form__group">
             <div class="login-form__input-container">
                 <i class="fa-solid fa-lock fa-xl"></i>
-                <input class="login-form__input" type="password" name="password" id="password" placeholder="Password" value="{{ old('password') }}">
+                <input class="login-form__input" type="password" name="password" id="password" placeholder="Password">
             </div>
             <p class="login-form__error-message">
                 @error('password')
@@ -61,6 +58,5 @@
         </div>
     </form>
 </div>
-
 
 @endsection

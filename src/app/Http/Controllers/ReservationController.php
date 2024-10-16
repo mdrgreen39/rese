@@ -8,10 +8,7 @@ use App\Models\Reservation;
 use App\Jobs\GenerateQrCode;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Storage;
-use SimpleSoftwareIO\QrCode\Facades\QrCode;
 use Stripe\Stripe;
-use Stripe\Checkout\Session as StripeSession;
 use Stripe\Checkout\Session;
 
 
@@ -28,24 +25,23 @@ class ReservationController extends Controller
         $reservation->user_id = Auth::id();
         $reservation->save();
 
-        // QRコード生成のジョブをディスパッチ
         GenerateQrCode::dispatch($reservation)->onQueue('default');
 
         return redirect()->route('reservation.done');
     }
 
+    // Stripe支払い確認ページ表紙
     public function showPayment()
     {
-        return view('payment'); // payment.blade.phpを表示
+        return view('payment');
     }
 
 
+    // Stripe支払い処理
     public function processPayment(Request $request)
     {
-        // Stripe APIの初期化
         Stripe::setApiKey(env('STRIPE_SECRET'));
 
-        // チェックアウトセッションを作成
         $session = Session::create([
             'payment_method_types' => ['card'],
             'line_items' => [[
@@ -54,7 +50,7 @@ class ReservationController extends Controller
                     'product_data' => [
                         'name' => 'Reservation Payment',
                     ],
-                    'unit_amount' => 1000, // 支払い金額
+                    'unit_amount' => 1000,
                 ],
                 'quantity' => 1,
             ]],
@@ -66,19 +62,19 @@ class ReservationController extends Controller
         return redirect($session->url);
     }
 
-    /* 予約完了ページ表示 */
+    //  予約完了ページ表示
     public function done()
     {
         return view('done');
     }
 
-    /* 予約削除完了ページ表示 */
+    //  予約削除完了ページ表示
     public function deleted()
     {
         return view('deleted');
     }
 
-    /* 予約更新完了ページ表示 */
+    // 予約更新完了ページ表示
     public function updated()
     {
         return view('updated');

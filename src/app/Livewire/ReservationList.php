@@ -2,14 +2,10 @@
 
 namespace App\Livewire;
 
-use App\Http\Requests\ReservationRequest;
 use App\Models\Reservation;
 use App\Jobs\GenerateQrCode;
-use Endroid\QrCode\QrCode;
-use Endroid\QrCode\Writer\PngWriter;
 use Illuminate\Support\Facades\Storage;
 use Livewire\Component;
-use Illuminate\Support\Facades\Validator;
 use Stripe\Stripe;
 use Stripe\Refund;
 
@@ -18,6 +14,7 @@ class ReservationList extends Component
 {
     public $reservations = [];
     public $editingReservationId = null;
+    public $filteredReservations = [];
     public $times = [];
     public $numberOfPeople = [];
     public $date;
@@ -27,7 +24,13 @@ class ReservationList extends Component
     public function mount()
     {
         $this->reservations = auth()->user()->reservations()->with('shop')->get()->keyBy('id');
-        $this->generateTimeOptions('11:00', '21:00', 30);// 時間のオプションを設定
+        $this->filteredReservations = $this->reservations->filter(function ($reservation) {
+            return $reservation->date > now()->toDateString() ||
+                ($reservation->date === now()->toDateString() && $reservation->time >= now()->toTimeString());
+        })->sortBy(function ($reservation) {
+            return [$reservation->date, $reservation->time];
+        })->values();
+        $this->generateTimeOptions('11:00', '21:00', 30);
         $this->numberOfPeople = range(1, 10);
     }
 
@@ -96,96 +99,67 @@ public function rules(): array
 
     public function updateReservation($reservationId)
     {
-        // バリデーションの適用
         $this->validate();
 
-        // レコードの更新処理
         $reservation = Reservation::findOrFail($reservationId);
         $reservation->date = $this->date;
         $reservation->time = $this->time;
         $reservation->people = $this->people;
 
-        // 古いQRコードの削除
         if ($reservation->qr_code_path) {
             Storage::disk('public')->delete($reservation->qr_code_path);
         }
 
         $reservation->save();
 
-        // QRコード生成のジョブをディスパッチ
         GenerateQrCode::dispatch($reservation);
 
-
-        // 編集モードを終了
         $this->editingReservationId = null;
+
+        // 更新後にフィルタリングされた予約を再取得
+        $this->filteredReservations = auth()->user()->reservations()->with('shop')->get()->filter(function ($reservation) {
+            return $reservation->date > now();
+        })->values();
 
         return redirect()->route('reservation.updated');
     }
 
-
     public function deleteReservation($reservationId)
     {
-        // トランザクション開始
         \DB::beginTransaction();
 
         try {
-            // Reservation を取得
             $reservation = Reservation::findOrFail($reservationId);
 
-            // StripeのAPIキーを設定
-            Stripe::setApiKey(config('services.stripe.secret'));
-
-            // デポジットの返金処理
-            if ($reservation->payment_intent_id) {
-                try {
-                    // 返金処理
-                    Refund::create([
-                        'payment_intent' => $reservation->payment_intent_id,
-                        'amount' => $reservation->deposit_amount, // デポジットの金額
-                    ]);
-                } catch (\Exception $e) {
-                    // 返金処理失敗時のエラーハンドリング
-                    \DB::rollBack();
-                    return back()->withErrors(['error' => 'デポジットの返金に失敗しました。']);
-                }
-            }
-
-            // Reservation を削除
             $reservation->delete();
 
-            // QRコードファイルの削除（存在する場合のみ）
             if ($reservation->qr_code_path && Storage::disk('public')->exists($reservation->qr_code_path)) {
                 try {
                     Storage::disk('public')->delete($reservation->qr_code_path);
                 } catch (\Exception $e) {
-                    // QRコードファイルの削除失敗時のエラーハンドリング
                     \DB::rollBack();
                     return back()->withErrors(['error' => 'QRコードファイルの削除に失敗しました。']);
                 }
             }
 
-            // トランザクションをコミット
             \DB::commit();
 
-            // 予約リストを更新
-            $this->reservations = auth()->user()->reservations()->with('shop')->get();
+            // 削除後にフィルタリングされた予約を再取得
+            $this->filteredReservations = auth()->user()->reservations()->with('shop')->get()->filter(function ($reservation) {
+                return $reservation->date > now();
+            })->values();
 
-            // リダイレクトして deleted.blade.php を表示
             return redirect()->route('reservation.deleted');
         } catch (\Exception $e) {
-            // エラーが発生した場合はトランザクションをロールバック
             \DB::rollBack();
-            // エラーハンドリング、例: ログ記録やエラーメッセージの表示
             return back()->withErrors(['error' => '予約削除に失敗しました。']);
         }
     }
 
-
-
     public function render()
     {
         return view('livewire.reservation-list', [
-            'reservations' => $this->reservations,
+            'reservations' => $this->filteredReservations, 
             'times' => $this->times,
             'numberOfPeople' => $this->numberOfPeople,
         ]);

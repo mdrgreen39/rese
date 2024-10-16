@@ -18,7 +18,7 @@ class ReviewForm extends Component
     {
         return [
         'rating' => ['required', 'integer', 'min:1', 'max:5'],
-        'comment' => ['nullable', 'string', 'max:500'],
+        'comment' => ['required', 'string', 'max:500'],
         ];
     }
 
@@ -28,11 +28,11 @@ class ReviewForm extends Component
             'rating.required' => '評価は必須項目です',
             'rating.integer' => '評価は整数でなければなりません',
             'rating.max' => '評価は最大5までです',
+            'comment.required' => 'コメントを入力してください',
             'comment.string' => 'コメントは文字列でなければなりません',
             'comment.max' => 'コメントは最大500文字までです',
         ];
     }
-
 
     public function mount($shop)
     {
@@ -46,10 +46,8 @@ class ReviewForm extends Component
 
     public function submit()
     {
-        // バリデーションを試みる
         $this->validate();
 
-        // 予約データを取得し、レビューが可能か確認
         $reservations = Auth::user()->reservations()
             ->where('shop_id', $this->shop->id)
             ->get();
@@ -64,10 +62,8 @@ class ReviewForm extends Component
         }
 
         try {
-            // トランザクション開始
             DB::beginTransaction();
 
-            // レビューを作成
             Review::create([
                 'user_id' => Auth::id(),
                 'shop_id' => $this->shop->id,
@@ -75,7 +71,6 @@ class ReviewForm extends Component
                 'comment' => $this->comment,
             ]);
 
-            // 予約の can_review を false にする
             $reservations->each(function ($reservation) {
                 if ($reservation->can_review) {
                     $reservation->can_review = false;
@@ -83,23 +78,17 @@ class ReviewForm extends Component
                 }
             });
 
-            // トランザクションをコミット
             DB::commit();
 
-            // フォームのリセット
             $this->reset(['rating', 'comment', 'showForm']);
 
-            // リダイレクト
             return redirect()->route('review.success', ['shop' => $this->shop->id]);
         } catch (\Throwable $e) {
-            // エラー発生時の処理
-            DB::rollBack(); // トランザクションのロールバック
+            DB::rollBack();
             session()->flash('error', '予期しないエラーが発生しました。');
             return;
         }
     }
-
-
 
     public function render()
     {

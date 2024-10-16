@@ -37,9 +37,9 @@
     text-align: center;
     cursor: pointer;
 
-    &:hover {
-        opacity: 0.7;
-    }
+        &:hover {
+            opacity: 0.7;
+        }
 }
 
 @media (max-width: 768px) {
@@ -51,7 +51,6 @@
     .header__container {
         padding-bottom: 0;
     }
-
 
     .cancel-form {
         width: 90%;

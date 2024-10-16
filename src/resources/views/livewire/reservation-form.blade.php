@@ -3,7 +3,6 @@
     <form class="reserve-form__form" action="{{ route('reservations.store', ['shop' => $shop->id] )}}" method="post" novalidate>
         @csrf
         <div class="reserve-form__group">
-
             <input class="reserve-form__select-date" type="date" wire:model.live="date" name="date" id="date" min="{{ date('Y-m-d') }}" max="9999-12-31" value="" required novalidate>
             <p class="reserve-form__error-message">
                 @error('date')
@@ -20,7 +19,6 @@
                 </select>
                 <i class="fa-solid fa-caret-down fa-xl"></i>
             </div>
-
             <p class="reserve-form__error-message">
                 @error('time')
                 {{ $message }}
@@ -40,9 +38,7 @@
                 {{ $message }}
                 @enderror
             </p>
-
         </div>
-
         <div class="reserve-form__confirm">
             <table class="reserve-form__confirm-table">
                 <tr>
@@ -66,11 +62,9 @@
                     </td>
                 </tr>
             </table>
-
         </div>
         <div class="reserve-form__button-container">
             <button class="reserve-form__button" type="submit">予約する</button>
         </div>
-
     </form>
 </div>

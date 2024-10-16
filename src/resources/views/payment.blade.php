@@ -22,7 +22,6 @@
     </ul>
 </nav>
 
-
 @endsection
 
 @section('content')
@@ -35,6 +34,5 @@
 
     </div>
 </div>
-
 
 @endsection

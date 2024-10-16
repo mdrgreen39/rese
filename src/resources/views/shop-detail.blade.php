@@ -22,7 +22,9 @@
         <li class="header-nav__item"><a class="header-nav__link" href="{{ route('user.mypage') }}">Mypage</a></li>
     </ul>
 </nav>
+
 @else
+
 <input class="hamburger-input" type="checkbox" id="check">
 <label class="hamburger-label" for="check">
     <span></span>
@@ -35,8 +37,6 @@
     </ul>
 </nav>
 @endauth
-
-
 
 @endsection
 
@@ -63,10 +63,8 @@
         @endif
     </div>
 
-
     @livewire('reservation-form', ['shop' => $shop, 'times' => $times, 'numberOfPeople' => $numberOfPeople])
 
 </div>
-
 
 @endsection

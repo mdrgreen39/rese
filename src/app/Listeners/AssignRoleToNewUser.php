@@ -21,7 +21,7 @@ class AssignRoleToNewUser
      */
     public function handle(Registered $event): void
     {
-        $event->user->assignRole('user');  // 'user'ロールを付与
-        $event->user->givePermissionTo('user'); // 'user'パーミッションを付与
+        $event->user->assignRole('user');
+        $event->user->givePermissionTo('user');
     }
 }

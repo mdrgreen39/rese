@@ -6,32 +6,52 @@ use Illuminate\Http\Request;
 use App\Models\Shop;
 use App\Models\Prefecture;
 use App\Models\Genre;
-use App\Models\Reservation;
 
 class MyPageController extends Controller
 {
     public function __construct()
     {
         $this->middleware('auth');
+        $this->middleware('role:user');
     }
 
-
+    // マイページ表示
     public function index(Request $request)
     {
         $user = auth()->user();
         $favoriteShops = $user->favorites()->with('prefecture', 'genre')->get();
         $prefectures = Prefecture::all();
         $genres = Genre::all();
+
+        // 現在の日付と時間を取得
+        $now = now();
+        $todayDate = $now->toDateString();
+        $currentTime = $now->toTimeString();
+
+        // 予約を取得
         $reservations = $user->reservations()
         ->with('shop')
+        ->get(); // すべての予約を取得
+
+        // フィルタリング
+        $filteredReservations = $user->reservations()
+        ->with('shop')
+        ->where(function ($query) use ($now) {
+            $query->where('date', '>', $now->toDateString())
+            ->orWhere(function ($query) use ($now) {
+                $query->where('date', '=', $now->toDateString())
+                ->where('time', '>=', $now->toTimeString());
+            });
+        })
         ->orderBy('date', 'asc')
         ->orderBy('time', 'asc')
         ->get();
 
-        return view('mypage', compact('favoriteShops', 'prefectures', 'genres', 'reservations'));
+
+        return view('mypage', compact('favoriteShops', 'prefectures', 'genres', 'filteredReservations'));
     }
 
-    /* レビュー投稿完了ページ表示 */
+    // レビュー投稿完了ページ表示
     public function showReviewSuccess(Shop $shop)
     {
         return view('review-success', compact('shop'));

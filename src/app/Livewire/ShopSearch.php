@@ -3,13 +3,11 @@
 namespace App\Livewire;
 
 use Livewire\Component;
-use App\Models\Shop;
 use App\Models\Prefecture;
 use App\Models\Genre;
 
 class ShopSearch extends Component
 {
-
     public $prefectureId = '';
     public $genreId = '';
     public $searchTerm = '';
@@ -23,6 +21,7 @@ class ShopSearch extends Component
     public function resetFilters()
     {
         $this->reset(['prefectureId', 'genreId', 'searchTerm']);
+
         $this->dispatch('searchUpdated', [
             'searchTerm' => '',
             'prefectureId' => '',
@@ -30,18 +29,10 @@ class ShopSearch extends Component
         ]);
     }
 
-
-
     public function updated($propertyName)
     {
         $this->validateOnly($propertyName);
 
-
-        logger()->info('Updated property', [
-            'property' => $propertyName,
-            'value' => $this->{$propertyName},
-        ]);
-        
         $this->dispatch('searchUpdated', [
             'searchTerm' => $this->searchTerm,
             'prefectureId' => $this->prefectureId,
@@ -49,13 +40,10 @@ class ShopSearch extends Component
         ]);
     }
 
-    
-
     public function render()
     {
         $prefectures = Prefecture::all();
         $genres = Genre::all();
-
 
         return view('livewire.shop-search', [
             'prefectures' => $prefectures,

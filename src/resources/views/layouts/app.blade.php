@@ -13,30 +13,32 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@100..900&display=swap" rel="stylesheet">
 
-
     @yield('css')
 
     @livewireStyles
+
 </head>
 
 <body>
     <header class="header">
         <div class="header__container">
-
             <h1 class="header__logo">Rese</h1>
-
         </div>
+
         @yield('search')
 
-
-
     </header>
+
     @yield('nav')
 
     <div class="content">
+
         @yield('content')
+
     </div>
+
     @livewireScripts
+
 </body>
 
 </html>

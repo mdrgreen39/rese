@@ -16,23 +16,13 @@ class Reservation extends Model
         'id'
     ];
 
-    // QRコード削除
     protected static function boot()
     {
         parent::boot();
-// 使っているのでログのコード消す
+
         static::deleting(function ($reservation) {
-            logger()->info('Deleting reservation ID: ' . $reservation->id);
-
             if ($reservation->qr_code_path) {
-                logger()->info('Attempting to delete QR code file: ' . $reservation->qr_code_path);
-
-                try {
-                    Storage::disk('public')->delete($reservation->qr_code_path);
-                    logger()->info('QR code file deleted successfully.');
-                } catch (\Exception $e) {
-                    logger()->error('Failed to delete QR code file: ' . $e->getMessage());
-                }
+                Storage::disk('public')->delete($reservation->qr_code_path);
             }
         });
     }
@@ -47,7 +37,6 @@ class Reservation extends Model
         return $this->belongsTo(User::class, 'user_id');
     }
 
-    // 来店済みかどうかを確認するアクセサ
     public function isCheckedIn()
     {
         return $this->can_review == 1;

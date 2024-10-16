@@ -25,14 +25,11 @@ class GenerateQrCode implements ShouldQueue
         $this->reservation = $reservation;
     }
 
-
     /**
      * Execute the job.
      */
     public function handle(): void
     {
-
-
         $reservation = $this->reservation;
 
         $options = new QROptions([
@@ -48,16 +45,12 @@ class GenerateQrCode implements ShouldQueue
 
         $qrCodeData = "予約ID: {$reservation->id} | Shop: {$reservation->shop->name}";
 
-        // QRコードを生成
         $qrcode = (new QRCode($options))->render($qrCodeData);
 
-        // 保存先のパスを設定
         $path = 'qr_codes/' . $reservation->id . '.png';
 
-        // QRコードをストレージに保存
         Storage::disk('public')->put($path, $qrcode);
 
-        // モデルのqr_code属性とqr_code_path属性を更新
         $reservation->qr_code_path = $path;
 
         $reservation->save();

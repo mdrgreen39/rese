@@ -22,7 +22,6 @@
     </ul>
 </nav>
 
-
 @endsection
 
 @section('content')
@@ -33,6 +32,5 @@
         <a class="done__button" href="{{ route('shops.index') }}">戻る</a>
     </div>
 </div>
-
 
 @endsection

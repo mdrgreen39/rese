@@ -23,6 +23,7 @@
         <li class="header-nav__item"><a class="header-nav__link" href="{{ route('admin.dashboard') }}">管理画面</a></li>
     </ul>
 </nav>
+
 @else
 
 @role('store_manager')
@@ -42,6 +43,7 @@
         <li class="header-nav__item"><a class="header-nav__link" href="{{ route('store.dashboard') }}">店舗用管理画面</a></li>
     </ul>
 </nav>
+
 @else
 
 <input class="hamburger-input" type="checkbox" id="check">
@@ -78,8 +80,8 @@
 @endauth
 
 @endsection
-@section('search')
 
+@section('search')
 
 @livewire('shop-search')
 
@@ -87,11 +89,6 @@
 
 @section('content')
 
-<div class="ebug-content">
-
-
-
-</div>
 
 @php
 // デフォルト値を設定
@@ -102,17 +99,11 @@ $genreId = $genreId ?? '';
 
 @endphp
 
-
 <!-- 検索条件がある場合 -->
 @livewire('shop-search-results', [
 'prefectureId' => $prefectureId,
 'genreId' => $genreId,
 'searchTerm' => $searchTerm,
 ])
-
-
-
-
-
 
 @endsection

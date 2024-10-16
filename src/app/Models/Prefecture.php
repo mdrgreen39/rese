@@ -12,6 +12,4 @@ class Prefecture extends Model
     protected $guarded = [
         'id',
     ];
-
-    
 }

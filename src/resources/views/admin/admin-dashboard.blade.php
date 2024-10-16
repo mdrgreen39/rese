@@ -22,11 +22,9 @@
     </ul>
 </nav>
 
-
 @endsection
 
 @section('content')
-
 
 <div class="admin-dashboard-menu">
     <ul>
@@ -34,7 +32,5 @@
         <li><a class="admin-dashboard-link" href="{{ route('admin.emailNotification') }}">メール送信</a></li>
     </ul>
 </div>
-
-
 
 @endsection

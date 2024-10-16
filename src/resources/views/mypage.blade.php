@@ -23,13 +23,11 @@
     </ul>
 </nav>
 
-
 @endsection
 
 @section('content')
 
 <div class="mypage">
-
     <div class="mypage-heading">
         <h2 class="mypage-heading__name">{{ Auth::user()->name }}さん</h2>
     </div>
@@ -41,8 +39,8 @@
             <h3 class="mypage-favorite__heading">お気に入り店舗</h3>
 
             @if($favoriteShops->isEmpty())
-            <p>お気に入りの店舗が登録されていません</p>
-            <p>HOMEより店舗のハートを押すと「お気に入り」に登録できます</p>
+            <p class="no-results__text">お気に入りの店舗が登録されていません</p>
+            <p class="no-results__text">HOMEより店舗のハートを押すと「お気に入り」に登録できます</p>
             @else
             <div class="mypage-favorite-container">
                 <div class="mypage-favorite-wrap">

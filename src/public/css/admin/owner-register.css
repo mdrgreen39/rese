@@ -17,13 +17,11 @@
     width: 90%;
     max-width: 25rem;
     margin: 12rem auto;
-    /* margin: 0 auto; */
     padding: 1.75rem;
     border-radius: 0.38rem;
     box-shadow: 0.25rem 0.25rem 0.25rem rgba(0, 0, 0, 0.4);
     background-color: #fff;
     position: relative;
-    /* overflow: hidden; */
 }
 
 .owner-register-form__heading {
@@ -38,12 +36,6 @@
     border-top-right-radius: 0.38rem;
 }
 
-/* .register-form__inner { */
-/* display: flex; */
-/* flex-direction: column; */
-/* align-items: center; */
-/* } */
-
 .owner-register-form__form {
     display: flex;
     flex-direction: column;
@@ -53,11 +45,8 @@
     position: relative;
 }
 
-
-
 .owner-register-form__group {
     width: 100%;
-    /* margin-bottom: 0.5rem; */
 }
 
 .owner-register-form__input-container {
@@ -144,7 +133,6 @@
     pointer-events: none;
     position: absolute;
     top: 50%;
-    /* 上下中央揃え */
     right: 1rem;
     transform: translateY(-50%);
 }
@@ -160,12 +148,10 @@
     }
 
     .owner-register-form {
-        /* width: 100%; */
         margin: 10rem auto;
     }
 
     .owner-register-form__error-message {
         font-size: 0.75rem;
     }
-
 }

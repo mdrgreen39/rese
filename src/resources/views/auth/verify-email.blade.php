@@ -17,7 +17,6 @@
     </ul>
 </nav>
 
-
 @endsection
 
 @section('content')
@@ -44,7 +43,5 @@
         <button class="verification-form__resend-button" type="submit">メールを再送信</button>
     </form>
 </div>
-
-
 
 @endsection

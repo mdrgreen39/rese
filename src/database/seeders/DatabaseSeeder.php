@@ -2,7 +2,6 @@
 
 namespace Database\Seeders;
 
-// use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Support\Facades\App;
 use Illuminate\Database\Seeder;
 
@@ -13,13 +12,6 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
-        // \App\Models\User::factory(10)->create();
-
-        // \App\Models\User::factory()->create([
-        //     'name' => 'Test User',
-        //     'email' => 'test@example.com',
-        // ]);
-
         $this->call([
             PrefectureTableSeeder::class,
             GenresTableSeeder::class,
@@ -28,12 +20,10 @@ class DatabaseSeeder extends Seeder
 
         if (App::environment('local')) {
             $this->call([
-                PrefectureTableSeeder::class,
-                GenresTableSeeder::class,
-                RolesAndPermissionsSeeder::class,
-                UserSeeder::class,ShopsTableSeeder::class,
+                UserSeeder::class,
+                ShopsTableSeeder::class,
                 ReservationSeeder::class,
-
+                FavoritesSeeder::class,
             ]);
         }
     }

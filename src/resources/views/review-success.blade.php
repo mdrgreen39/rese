@@ -22,7 +22,6 @@
     </ul>
 </nav>
 
-
 @endsection
 
 @section('content')
@@ -34,6 +33,5 @@
         <a class="review-success__button" href="{{ route('user.mypage') }}">戻る</a>
     </div>
 </div>
-
 
 @endsection

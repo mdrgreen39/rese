@@ -17,7 +17,6 @@
     </ul>
 </nav>
 
-
 @endsection
 
 @section('content')
@@ -27,6 +26,5 @@
         <a class="thanks__button" href="/login">ログインする</a>
     </div>
 </div>
-
 
 @endsection

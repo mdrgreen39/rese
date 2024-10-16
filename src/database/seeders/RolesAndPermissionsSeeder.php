@@ -2,7 +2,6 @@
 
 namespace Database\Seeders;
 
-use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 use Spatie\Permission\Models\Role;
 use Spatie\Permission\Models\Permission;
@@ -15,19 +14,17 @@ class RolesAndPermissionsSeeder extends Seeder
      */
     public function run(): void
     {
-        // パーミッションを作成
-        Permission::create(['name' => 'system_management']);
-        Permission::create(['name' => 'store_management']);
-        Permission::create(['name' => 'user']);
+        Permission::firstOrCreate(['name' => 'system_management']);
+        Permission::firstOrCreate(['name' => 'store_management']);
+        Permission::firstOrCreate(['name' => 'user']);
 
-        // ロールを作成してパーミッションを割り当て
-        $adminRole = Role::create(['name' => 'admin']);
+        $adminRole = Role::firstOrCreate(['name' => 'admin']);
         $adminRole->givePermissionTo('system_management');
 
-        $storeManagerRole = Role::create(['name' => 'store_manager']);
+        $storeManagerRole = Role::firstOrCreate(['name' => 'store_manager']);
         $storeManagerRole->givePermissionTo('store_management');
 
-        $userRole = Role::create(['name' => 'user']);
+        $userRole = Role::firstOrCreate(['name' => 'user']);
         $userRole->givePermissionTo('user');
 
 
@@ -40,10 +37,11 @@ class RolesAndPermissionsSeeder extends Seeder
             ]
         );
 
-        // 管理者ロールとパーミッションを割り当て
+        $adminUser->update(['email_verified_at' => now()]);
+
         if ($adminUser) {
-            $adminUser->assignRole($adminRole); // 管理者ロールを割り当て
-            $adminUser->givePermissionTo('system_management'); // システム管理パーミッションを付与
+            $adminUser->assignRole($adminRole->name);
+            $adminUser->givePermissionTo('system_management');
         }
     }
 }

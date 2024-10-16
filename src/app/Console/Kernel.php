@@ -4,8 +4,6 @@ namespace App\Console;
 
 use Illuminate\Console\Scheduling\Schedule;
 use Illuminate\Foundation\Console\Kernel as ConsoleKernel;
-use App\Models\Reservation;
-use App\Jobs\SendReservationReminder;
 
 class Kernel extends ConsoleKernel
 {
@@ -14,11 +12,8 @@ class Kernel extends ConsoleKernel
      */
     protected function schedule(Schedule $schedule): void
     {
-        // $schedule->command('reminder:send')->dailyAt('19:47');
+        $schedule->command('reminder:send')->dailyAt('8:00');
     }
-
-
-
 
     /**
      * Register the commands for the application.

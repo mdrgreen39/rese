@@ -23,16 +23,15 @@
     </ul>
 </nav>
 
-
 @endsection
 
 @section('content')
+
 <div class="owner-register-done">
     <h2 class="owner-register-done__heading">お知らせメールを送信しました</h2>
     <div class="owner-register-done__button-container">
         <a class="owner-register-done__button" href="{{ route('admin.dashboard') }}">戻る</a>
     </div>
 </div>
-
 
 @endsection

@@ -3,7 +3,6 @@
 namespace App\Mail;
 
 use Illuminate\Bus\Queueable;
-use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Mail\Mailable;
 use Illuminate\Mail\Mailables\Content;
 use Illuminate\Mail\Mailables\Envelope;
@@ -41,8 +40,8 @@ class NotificationEmail extends Mailable
     public function content(): Content
     {
         return new Content(
-            markdown: 'emails.notification', // メールテンプレートビュー
-            with: ['messageContent' => $this->messageText], // テンプレートに渡すデータ
+            markdown: 'emails.notification',
+            with: ['messageContent' => $this->messageText],
         );
     }
 
