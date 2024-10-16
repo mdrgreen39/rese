@@ -23,19 +23,9 @@
     </ul>
 </nav>
 
-
 @endsection
 
-
 @section('content')
-
-@if (session('message'))
-<div class="store-register-form__session-message">
-
-    {!! session('message') !!}
-
-</div>
-@endif
 
 <div class="store-register-form">
     <h2 class="store-register-form__heading">店舗情報編集</h2>
@@ -47,9 +37,9 @@
 
         <div class="store-register-form__button-container">
             <button class="store-register-form__button" type="submit">更新</button>
+            <a class="store-register-form__button" href="{{ route('store.mypage') }}">戻る</a>
         </div>
     </form>
 </div>
-
 
 @endsection

@@ -2,7 +2,6 @@
 
 namespace Database\Seeders;
 
-use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 use App\Models\Shop;
 
@@ -13,6 +12,6 @@ class ShopsUserAddSeeder extends Seeder
      */
     public function run(): void
     {
-        Shop::query()->update(['user_id' => 30]); 
+        Shop::query()->update(['user_id' => 30]);
     }
 }

@@ -30,7 +30,6 @@ class ReservationReminderMail extends Mailable
     public function envelope(): Envelope
     {
         return new Envelope(
-            
             subject: '予約リマインダー',
         );
     }
@@ -42,7 +41,7 @@ class ReservationReminderMail extends Mailable
     {
         return new Content(
             markdown: 'emails.reservation-reminder',
-            // with: ['reservation' => $this->reservation]
+            with: ['reservation' => $this->reservation]
         );
     }
 

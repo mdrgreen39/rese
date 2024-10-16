@@ -23,19 +23,9 @@
     </ul>
 </nav>
 
-
 @endsection
 
-
 @section('content')
-
-@if (session('message'))
-<div class="store-detail__session-message">
-
-    {!! session('message') !!}
-
-</div>
-@endif
 
 <div class="store-detail">
     <div class="store-detail-container">
@@ -55,10 +45,5 @@
             <a class="store-detail-container__button" href="{{ route('store.reservation', $shop->id) }}">予約確認</a>
             <a class="store-detail-container__button" href="{{ route('store.edit', $shop->id) }}">編集</a>
         </div>
-
     </div>
-
-
-
-
 </div>

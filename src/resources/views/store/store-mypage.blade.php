@@ -23,7 +23,6 @@
     </ul>
 </nav>
 
-
 @endsection
 
 @section('content')
@@ -47,27 +46,19 @@
                             <li class="store-mypage-wrap__item-tag">#{{ $shop->prefecture->name }}</li>
                             <li class="store-mypage-wrap__item-tag">#{{ $shop->genre->name }}</li>
                         </ul>
-
                         <div class="store-mypage-wrap__item-container">
                             <a class="store-mypage-wrap__item-button" href="{{ route('store.detail', $shop->id) }}">詳細</a>
-
                             <a class="store-mypage-wrap__item-button" href="{{ route('store.reservation', $shop->id) }}">予約確認</a>
-
                             <a class="store-mypage-wrap__item-button" href="{{ route('store.edit', $shop->id) }}">編集</a>
-
                         </div>
-
                     </div>
                 </div>
                 @endforeach
-
             </div>
             @else
             <p class="no-results__text">該当する店舗が見つかりませんでした</p>
         </div>
         @endif
-
-
     </div>
 </div>
 

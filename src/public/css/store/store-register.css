@@ -8,13 +8,11 @@
     width: 90%;
     max-width: 25rem;
     margin: 12rem auto;
-    /* margin: 0 auto; */
     padding: 1.75rem;
     border-radius: 0.38rem;
     box-shadow: 0.25rem 0.25rem 0.25rem rgba(0, 0, 0, 0.4);
     background-color: #fff;
     position: relative;
-    /* overflow: hidden; */
 }
 
 .store-register-form__heading {
@@ -29,12 +27,6 @@
     border-top-right-radius: 0.38rem;
 }
 
-/* .register-form__inner { */
-/* display: flex; */
-/* flex-direction: column; */
-/* align-items: center; */
-/* } */
-
 .store-register-form__form {
     display: flex;
     flex-direction: column;
@@ -44,11 +36,8 @@
     position: relative;
 }
 
-
-
 .store-register-form__group {
     width: 100%;
-    /* margin-bottom: 0.5rem; */
 }
 
 .store-register-form__input-container {
@@ -154,6 +143,10 @@
     }
 }
 
+.store-register-form__button:not(:last-child) {
+    margin-right: 0.5rem;
+}
+
 /* 登録フォームアイコン */
 .fa-house {
     margin: 1rem 0.5rem 0 0;
@@ -198,12 +191,10 @@
     }
 
     .store-register-form {
-        /* width: 100%; */
         margin: 10rem auto;
     }
 
     .store-register-form__error-message {
         font-size: 0.75rem;
     }
-
 }

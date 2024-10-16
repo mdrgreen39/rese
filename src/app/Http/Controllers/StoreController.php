@@ -10,9 +10,6 @@ use App\Models\Shop;
 use App\Models\Prefecture;
 use App\Models\Genre;
 use App\Models\Reservation;
-use Stripe\Stripe;
-use Stripe\Checkout\Session;
-use App\Jobs\PaymentQRCode;
 
 class StoreController extends Controller
 {
@@ -23,13 +20,13 @@ class StoreController extends Controller
         $this->middleware('role:store_manager');
     }
 
-    // 店舗代表者様ダッシュボード表示
+    // 店舗代表者管理画面表示
     public function index()
     {
         return view('store.store-dashboard');
     }
 
-    /* 登録店舗一覧TOPページ表示*/
+    // 登録店舗一覧TOPページ表示
     public function mypage(Request $request)
     {
         $userId = auth()->id();
@@ -43,18 +40,15 @@ class StoreController extends Controller
     // 登録店舗詳細ページ表示
     public function show($id)
     {
-        // 現在ログイン中の代表者の店舗のみを表示できるようにするための認証チェック
         $shop = Shop::where('id', $id)
-            ->where('user_id', auth()->id()) // ログイン中のユーザーIDと一致する店舗のみ
-            ->firstOrFail(); // 店舗が見つからない場合は404エラー
+            ->where('user_id', auth()->id())
+            ->firstOrFail();
 
-        // 都道府県とジャンルのリストを取得
         $prefectures = Prefecture::all();
         $genres = Genre::all();
 
         return view('store.managed-store-detail', compact('shop', 'prefectures', 'genres'));
     }
-
 
     /* QRコードでの予約確認 */
     public function verify($id)
@@ -71,10 +65,8 @@ class StoreController extends Controller
                 ->with('info', '来店確認は既に完了しています');
         }
 
-        // 来店確認処理
         $reservation->visited_at = now();
 
-        // レビュー書き込み可能のフラグを立てる
         $reservation->can_review = true;
         $reservation
             ->save();
@@ -83,7 +75,7 @@ class StoreController extends Controller
             ->with('success', '来店確認が完了しました');
     }
 
-    /* 来店確認ページ表示 */
+    // 来店確認ページ表示
     public function showCheckinPage()
     {
         return view('store.checkin');
@@ -95,14 +87,13 @@ class StoreController extends Controller
         $prefectures = Prefecture::all();
         $genres = Genre::all();
 
-        // 新しい店舗インスタンスを作成
         $shop = new Shop();
 
         return view('store.store-register', compact('prefectures', 'genres', 'shop'));
     }
 
 
-    /* 店舗情報登録処理 */
+    //  店舗情報登録処理
     public function store(StoreRequest $request)
     {
         $shop = new Shop();
@@ -115,7 +106,6 @@ class StoreController extends Controller
         if ($request->hasFile('image')) {
             $shop->image = $request->file('image')->store('shops', 'public');
         }
-        // 画像URLが指定されている場合
         elseif ($request->filled('image_url')) {
             $url = $request->input('image_url');
             $fileName = basename($url);
@@ -150,37 +140,29 @@ class StoreController extends Controller
     {
         $shop = Shop::findOrFail($id);
 
-        // 店名が空でなければ更新する
         if ($request->filled('name')) {
             $shop->name = $request->input('name');
         }
 
-        // descriptionが空でなければ更新する
         if ($request->filled('description')) {
             $shop->description = $request->input('description');
         }
         $shop->prefecture_id = $request->input('prefecture_id', $shop->prefecture_id);
         $shop->genre_id = $request->input('genre_id', $shop->genre_id);
 
-        // 既存の画像がない場合、imageまたはimage_urlのいずれかが必須
         if (!$shop->image && !$request->hasFile('image') && !$request->filled('image_url')) {
             return redirect()->back()->withErrors('画像ファイルまたは画像URLを指定してください');
         }
 
-        // 画像ファイルがアップロードされている場合
         if ($request->hasFile('image')) {
-            // 以前の画像ファイルが存在する場合は削除
             if ($shop->image && Storage::disk('public')->exists($shop->image)) {
                 Storage::disk('public')->delete($shop->image);
             }
 
-            // 新しい画像をストレージに保存し、パスを取得
             $shop->image = $request->file('image')->store('shops', 'public');
         }
 
-        // 画像URLが指定されている場合
         elseif ($request->filled('image_url')) {
-            // 以前の画像ファイルが存在する場合は削除
             if ($shop->image && Storage::disk('public')->exists($shop->image)) {
                 Storage::disk('public')->delete($shop->image);
             }
@@ -202,7 +184,6 @@ class StoreController extends Controller
     {
         return view('store.edit-done');
     }
-
 
     // 店舗の予約リスト表示
     public function showReservations($shopId, Request $request)

@@ -5,6 +5,7 @@
 @endsection
 
 @section('nav')
+
 <input class="hamburger-input" type="checkbox" id="check">
 <label class="hamburger-label" for="check">
     <span></span>
@@ -22,7 +23,6 @@
     </ul>
 </nav>
 
-
 @endsection
 
 @section('content')
@@ -33,6 +33,5 @@
         <a class="store-register-done__button" href="{{ route('store.mypage') }}">戻る</a>
     </div>
 </div>
-
 
 @endsection

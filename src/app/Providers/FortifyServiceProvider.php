@@ -42,8 +42,8 @@ class FortifyServiceProvider extends ServiceProvider
 
                 if ($user && Hash::check($request->password, $user->password)) {
                     if (!$user->hasVerifiedEmail()) {
-                        // メール確認がされていない場合のカスタム処理
-                        return null; // 認証を失敗させる
+
+                        return null;
                     }
 
                     return $user;
@@ -59,16 +59,11 @@ class FortifyServiceProvider extends ServiceProvider
             return view('auth.login');
         });
 
-
         RateLimiter::for('login', function (Request $request) {
             $email = (string) $request->email;
 
             return Limit::perMinute(10)->by($email . $request->ip());
         });
-
-        
-
-
     }
 
     /**
@@ -90,7 +85,5 @@ class FortifyServiceProvider extends ServiceProvider
             RegisterResponseContract::class,
             RegisterResponse::class
         );
-
     }
-
 }

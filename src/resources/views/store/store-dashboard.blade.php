@@ -22,11 +22,9 @@
     </ul>
 </nav>
 
-
 @endsection
 
 @section('content')
-
 
 <div class="store-dashboard-menu">
     <ul>
@@ -34,7 +32,5 @@
         <li><a class="store-dashboard-link" href="{{ route('store.register') }}">店舗登録</a></li>
     </ul>
 </div>
-
-
 
 @endsection

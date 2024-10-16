@@ -23,26 +23,15 @@ class ShopSearchResults extends Component
 
     public function updateSearchResults($params)
     {
-        logger()->info('Update search results called', $params);
-
-
         $this->prefectureId = $params['prefectureId'] ?? '';
         $this->genreId = $params['genreId'] ?? '';
         $this->searchTerm = $params['searchTerm'] ?? '';
 
-        logger()->info('After update:', [
-            'prefectureId' => $this->prefectureId,
-            'genreId' => $this->genreId,
-            'searchTerm' => $this->searchTerm,
-        ]);
-        
-        
         $this->search();
     }
 
     public function search()
     {
-
         $this->shops = Shop::query()
             ->when($this->prefectureId, function ($query) {
                 return $query->where('prefecture_id', $this->prefectureId);
@@ -57,25 +46,12 @@ class ShopSearchResults extends Component
                 });
             })
             ->get();
-
-        
-
     }
-
 
     public function render()
     {
-        // logger()->info('Rendering with:', [
-            // 'shops' => $this->shops,
-            // 'prefectureId' => $this->prefectureId,
-            // 'genreId' => $this->genreId,
-            // 'searchTerm' => $this->searchTerm,
-        // ]);
-
-
         $prefectures = Prefecture::all();
         $genres = Genre::all();
-
 
         return view('livewire.shop-search-results', [
             'shops' => $this->shops,

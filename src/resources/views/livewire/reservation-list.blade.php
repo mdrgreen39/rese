@@ -1,32 +1,22 @@
 <div class="mypage-reserve">
     <h3 class="mypage-reserve__heading">予約状況</h3>
 
-
-
-
-    @if(!empty($reservations) && $reservations->count() > 0)
+    @if(!empty($filteredReservations) && $filteredReservations->count() > 0)
 
     <a class="mypage-reserve__button-payment" href="{{ route('payment.show') }}">支払う</a>
 
-    @foreach ($reservations as $reservation)
+    @foreach ($filteredReservations as $reservation)
     <div class="mypage-reserve__confirm">
         <div class="mypage-reserve__confirm-top">
-
             <i class="fa-solid fa-clock"></i>
-
             <p class="mypage-reserve__confirm-title">予約{{ $loop->iteration }}</p>
-
             <button class="mypage-reserve__confirm-button--edit" wire:click="toggleEdit({{ $reservation->id }})">編集</button>
-
             <input type="checkbox" id="toggle-check-{{ $reservation->id }}" wire:click="deleteReservation({{ $reservation->id }})">
             <label for="toggle-check-{{ $reservation->id }}" class="toggle-label">
                 <span class="toggle-checkmark"></span>
             </label>
-
-
         </div>
 
-        <!-- 編集フォーム、デフォルトでは非表示 -->
         @if ($editingReservationId === $reservation->id)
         <div class="mypage-reserve-form__group">
             <input class="mypage-reserve-form__select-date" type="date" wire:model.live="date" name="date" id="date-{{ $reservation->id }}" min="{{ date('Y-m-d') }}" max="9999-12-31" required novalidate>
@@ -47,10 +37,7 @@
                     @endforeach
                 </select>
                 </select>
-
                 <i class="fa-solid fa-caret-down fa-xl"></i>
-
-
             </div>
             <p class="mypage-reserve-form__error-message">
                 @error('time')
@@ -68,10 +55,7 @@
                     </option>
                     @endforeach
                 </select>
-
-
                 <i class="fa-solid fa-caret-down fa-xl"></i>
-
             </div>
             <p class="mypage-reserve-form__error-message">
                 @error('people')
@@ -119,6 +103,4 @@
     @else
     <p class="mypage-reserve__status">予約がありません</p>
     @endif
-
-
 </div>

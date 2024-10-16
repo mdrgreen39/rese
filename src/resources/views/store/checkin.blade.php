@@ -22,7 +22,6 @@
     </ul>
 </nav>
 
-
 @endsection
 
 @section('content')
@@ -42,8 +41,5 @@
         <a class="checkin__button" href="{{ route('store.dashboard') }}">戻る</a>
     </div>
 </div>
-
-
-
 
 @endsection

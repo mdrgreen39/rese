@@ -6,7 +6,6 @@ use Illuminate\Console\Command;
 use App\Models\Reservation;
 use App\Mail\ReservationReminderMail;
 use Illuminate\Support\Facades\Mail;
-use Carbon\Carbon;
 
 class SendReminderEmails extends Command
 {

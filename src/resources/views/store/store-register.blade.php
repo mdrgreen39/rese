@@ -23,9 +23,7 @@
     </ul>
 </nav>
 
-
 @endsection
-
 
 @section('content')
 
@@ -38,9 +36,9 @@
 
         <div class="store-register-form__button-container">
             <button class="store-register-form__button" type="submit">登録</button>
+            <a class="store-register-form__button" href="{{ route('store.mypage') }}">戻る</a>
         </div>
     </form>
 </div>
-
 
 @endsection

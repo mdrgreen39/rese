@@ -3,7 +3,6 @@
 namespace App\Actions\Fortify;
 
 use Laravel\Fortify\Contracts\RegisterResponse as RegisterResponseContract;
-use Illuminate\Http\JsonResponse;
 use Illuminate\Http\RedirectResponse;
 
 class RegisterResponse implements RegisterResponseContract

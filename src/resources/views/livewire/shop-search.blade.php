@@ -20,11 +20,9 @@
                 <i class="fa-solid fa-caret-down fa-xl"></i>
             </div>
         </div>
-
         <div class="header-search__input-group">
             <i class="fa-solid fa-magnifying-glass"></i>
             <input class="header-search__input" wire:model.live.debounce.300ms="searchTerm" type="text" name="search" placeholder="Search ...">
         </div>
-
     </div>
 </div>

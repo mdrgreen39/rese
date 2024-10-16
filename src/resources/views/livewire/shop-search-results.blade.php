@@ -13,12 +13,11 @@
                         <li class="shop-wrap__item-tag">#{{ $shop->prefecture->name }}</li>
                         <li class="shop-wrap__item-tag">#{{ $shop->genre->name }}</li>
                     </ul>
-
                     <div class="shop-wrap__item-container">
                         <a class="shop-wrap__item-button" href="{{ route('shop.detail', ['shop_id' => $shop->id]) }}">詳しく見る</a>
 
                         @if(auth()->check())
-                        @livewire('favorite-toggle', ['shop' => $shop], key('favorite-toggle-' . $shop->id))
+                        @livewire('favorite-toggle', ['shop' => $shop], key('favorite-toggle-' . $shop->id . '-' . $loop->index))
 
                         @else
 
@@ -29,18 +28,12 @@
                                 <span class="heart-icon"></span>
                             </button>
                         </form>
-
-                        <!-- <a class="heart-toggle-wrapper" href="/register"> -->
-                        <!-- <label class="heart-icon"></label></a> -->
                         @endif
                     </div>
-
                 </div>
             </div>
             @endforeach
-
         </div>
-
     </div>
     @endif
 </div>

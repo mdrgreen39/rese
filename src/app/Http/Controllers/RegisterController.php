@@ -66,6 +66,7 @@ class RegisterController extends Controller
 
     }
 
+    // 登録完了ページ表示
     public function showThanks()
     {
         return view('thanks');

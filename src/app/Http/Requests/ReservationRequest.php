@@ -30,7 +30,6 @@ class ReservationRequest extends FormRequest
             'time' => ['required', 'string', 'date_format:H:i', function ($attribute, $value, $fail) use ($currentTime, $currentDate) {
                 $inputDate = request('date');
 
-                // 当日の予約の場合、現在の時刻を超えていないかチェック
                 if ($inputDate === $currentDate && $value < $currentTime) {
                     $fail('当日の予約時間は現在時刻を過ぎているため、予約できません。');
                 }

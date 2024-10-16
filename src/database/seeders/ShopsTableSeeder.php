@@ -2,12 +2,9 @@
 
 namespace Database\Seeders;
 
-use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
-use App\Models\Prefecture;
-use App\Models\Genre;
 use App\Models\User;
 
 
@@ -19,7 +16,7 @@ class ShopsTableSeeder extends Seeder
      */
     public function run(): void
     {
-        $storeManagers = User::where('role', 'store_manager')->get();
+        $storeManagers = User::role('store_manager')->get();
 
         $shops = [
             [

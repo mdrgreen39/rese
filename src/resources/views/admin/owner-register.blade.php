@@ -23,7 +23,6 @@
     </ul>
 </nav>
 
-
 @endsection
 
 @section('content')
@@ -85,6 +84,5 @@
         </div>
     </form>
 </div>
-
 
 @endsection

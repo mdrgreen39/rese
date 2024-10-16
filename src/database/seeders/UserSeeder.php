@@ -2,7 +2,6 @@
 
 namespace Database\Seeders;
 
-use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 use App\Models\User;
 
@@ -14,29 +13,33 @@ class UserSeeder extends Seeder
     public function run(): void
     {
         // 1人目の店舗代表者を指定して作成
-        User::create([
+        $storeManager = User::create([
             'name' => 'Store Manager One',
             'email' => 'storemanager1@example.com',
             'password' => bcrypt('storemanager123'),
-            'role' => 'store_manager', // もしくは対応するrole_id
         ]);
 
+        $storeManager->assignRole('store_manager');
+        $storeManager->update(['email_verified_at' => now()]);
+
         // 1人目の一般ユーザーを指定して作成
-        User::create([
+        $userOne = User::create([
             'name' => 'User One',
             'email' => 'user1@example.com',
             'password' => bcrypt('userpassword123'),
-            'role' => 'user', // もしくは対応するrole_id
         ]);
 
-        // 他の店舗代表者を10人ランダムに生成
-        User::factory(10)->create([
-            'role' => 'store_manager', // もしくは対応するrole_id
-        ]);
+        $userOne->assignRole('user');
+        $userOne->update(['email_verified_at' => now()]);
 
-        // 他の一般ユーザーを10人ランダムに生成
-        User::factory(10)->create([
-            'role' => 'user', // もしくは対応するrole_id
-        ]);
+        // 他の店舗代表者をランダムに生成
+        User::factory(13)->create()->each(function ($user) {
+            $user->assignRole('store_manager');
+        });
+
+        // 他の一般ユーザーをランダムに生成
+        User::factory(3)->create()->each(function ($user) {
+            $user->assignRole('user');
+        });
     }
 }

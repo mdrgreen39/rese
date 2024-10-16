@@ -23,11 +23,10 @@
     </ul>
 </nav>
 
-
 @endsection
 
-
 @section('content')
+
 <div class="reservation">
     <div class="reservation-heading">
         <a class="reservation-heading__button-before" href="{{ route('store.detail', ['id' => $shop->id]) }}">&lt;</a>
@@ -35,7 +34,7 @@
     </div>
     <div class="reservation-list">
         @if ($reservations->isEmpty())
-        <p>予約はありません</p>
+        <p class="no-results__text">予約はありません</p>
         @else
         <table class="reservation-table">
             <thead>
@@ -50,7 +49,6 @@
             <tbody>
                 @foreach ($reservations as $reservation)
                 <tr>
-
                     <td>{{ \Carbon\Carbon::parse($reservation->date)->format('Y/m/d') }}</td>
                     <td>{{ \Carbon\Carbon::parse($reservation->time)->format('H:i') }}</td>
                     <td>{{ $reservation->user->name }}</td>
@@ -65,13 +63,8 @@
                 @endforeach
             </tbody>
         </table>
-
         @endif
     </div>
     {{ $reservations->appends(request()->query())->links('vendor.pagination.custom') }}
-
 </div>
-
-
-
 @endsection

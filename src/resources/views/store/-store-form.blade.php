@@ -58,7 +58,6 @@
         @enderror
     </p>
 </div>
-
 <div class="store-register-form__group">
     <div class="store-register-form__input-container">
         @if (isset($shop) && $shop->image)
@@ -67,7 +66,6 @@
     </div>
     <div class="store-register-form__input-container">
         <i class="fa-regular fa-image fa-xl"></i>
-
         <input class="store-register-form__image" type="file" name="image" id="image">
     </div>
     <p class="store-register-form__error-message">

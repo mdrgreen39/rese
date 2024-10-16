@@ -4,9 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\LoginRequest;
 use App\Http\Controllers\Controller;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Redirect;
 
 
 class CustomLoginController extends Controller
@@ -18,19 +16,20 @@ class CustomLoginController extends Controller
         if (Auth::attempt($credentials)) {
             $user = Auth::user();
 
-            
-    
             if (!$user->hasVerifiedEmail()) {
                 return redirect()->route('verification.notice');
             }
 
             // ロールの取得
-            $roles = $user->roles()->pluck('name'); // 'name' はロールの名前のカラム名
+            $roles = $user->roles()->pluck('name');
 
             if ($roles->contains('admin')) {
-                return redirect()->route('admin.dashboard'); // 管理者用ダッシュボードにリダイレクト
+
+                return redirect()->route('admin.dashboard');
+
             } elseif ($roles->contains('store_manager')) {
-                return redirect()->route('store.dashboard'); // 店舗代表者用ダッシュボードにリダイレクト
+
+                return redirect()->route('store.dashboard');
             }
 
             return redirect()->intended('/');
@@ -39,7 +38,5 @@ class CustomLoginController extends Controller
         return redirect()->back()->withErrors([
             'email' => '認証に失敗しました',
         ]);
-
     }
-
 }
