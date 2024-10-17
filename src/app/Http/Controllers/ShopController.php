@@ -7,7 +7,6 @@ use App\Models\Shop;
 use App\Models\Prefecture;
 use App\Models\Genre;
 use App\Models\Reservation;
-use App\Models\Review;
 
 
 class ShopController extends Controller

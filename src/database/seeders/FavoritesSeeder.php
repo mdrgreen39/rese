@@ -13,7 +13,7 @@ class FavoritesSeeder extends Seeder
      */
     public function run(): void
     {
-        $users = User::all();
+        $users = User::role('user')->get();
         $shops = Shop::all();
 
         foreach ($users as $user) {

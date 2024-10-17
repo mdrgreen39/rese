@@ -23,17 +23,14 @@ class MyPageController extends Controller
         $prefectures = Prefecture::all();
         $genres = Genre::all();
 
-        // 現在の日付と時間を取得
         $now = now();
         $todayDate = $now->toDateString();
         $currentTime = $now->toTimeString();
 
-        // 予約を取得
         $reservations = $user->reservations()
         ->with('shop')
-        ->get(); // すべての予約を取得
+        ->get();
 
-        // フィルタリング
         $filteredReservations = $user->reservations()
         ->with('shop')
         ->where(function ($query) use ($now) {
@@ -46,7 +43,6 @@ class MyPageController extends Controller
         ->orderBy('date', 'asc')
         ->orderBy('time', 'asc')
         ->get();
-
 
         return view('mypage', compact('favoriteShops', 'prefectures', 'genres', 'filteredReservations'));
     }

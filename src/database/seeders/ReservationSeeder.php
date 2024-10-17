@@ -20,7 +20,6 @@ class ReservationSeeder extends Seeder
         $today = Carbon::today();
         $availableTimes = $this->generateTimeOptions('11:00', '21:00', 30);
 
-        // 一般ユーザーのIDを取得
         $userIds = User::whereHas('roles', function ($query) {
             $query->where('name', 'user');
         })->pluck('id');
@@ -28,7 +27,7 @@ class ReservationSeeder extends Seeder
         for ($i = 0; $i < 30; $i++) {
             $date = $today->copy()->addDays(rand(0, 30))->format('Y-m-d');
             $shopId = rand(1, 10);
-            $userId = $userIds->random(); // 一般ユーザーからランダムに選択
+            $userId = $userIds->random();
 
             $time = $availableTimes[array_rand($availableTimes)];
 

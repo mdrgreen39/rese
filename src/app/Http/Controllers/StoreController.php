@@ -62,7 +62,7 @@ class StoreController extends Controller
 
         if ($reservation->visited_at) {
             return redirect()->route('reservation.checkin')
-                ->with('info', '来店確認は既に完了しています');
+                ->with('info', '来店確認はすでに完了しています');
         }
 
         $reservation->visited_at = now();
@@ -91,7 +91,6 @@ class StoreController extends Controller
 
         return view('store.store-register', compact('prefectures', 'genres', 'shop'));
     }
-
 
     //  店舗情報登録処理
     public function store(StoreRequest $request)

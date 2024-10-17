@@ -88,7 +88,6 @@ class AdminController extends Controller
             $users = $users->merge($roleUsers)->unique('id');
         }
 
-        // メール送信処理
         foreach ($users as $user) {
             if ($user->email) {
                 SendNotificationEmail::dispatch($user->email, $validated['subject'], $validated['message']);
