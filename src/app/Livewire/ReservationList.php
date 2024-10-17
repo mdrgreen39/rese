@@ -6,8 +6,6 @@ use App\Models\Reservation;
 use App\Jobs\GenerateQrCode;
 use Illuminate\Support\Facades\Storage;
 use Livewire\Component;
-use Stripe\Stripe;
-use Stripe\Refund;
 
 
 class ReservationList extends Component
@@ -159,7 +157,7 @@ public function rules(): array
     public function render()
     {
         return view('livewire.reservation-list', [
-            'reservations' => $this->filteredReservations, 
+            'reservations' => $this->filteredReservations,
             'times' => $this->times,
             'numberOfPeople' => $this->numberOfPeople,
         ]);

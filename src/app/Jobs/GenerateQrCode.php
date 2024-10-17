@@ -54,7 +54,6 @@ class GenerateQrCode implements ShouldQueue
         $reservation->qr_code_path = $path;
 
         $reservation->save();
-    
     }
 
 }

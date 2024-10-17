@@ -30,7 +30,7 @@ class NotificationEmail extends Mailable
     public function envelope(): Envelope
     {
         return new Envelope(
-            subject: $this->subjectText, // ここで件名を設定
+            subject: $this->subjectText,
         );
     }
 

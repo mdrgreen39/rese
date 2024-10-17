@@ -1,6 +1,6 @@
 # Rese(リーズ)
-
 ## 概要説明
+![art](Rese_top.png)
 このアプリケーションは、飲食店の予約管理システムです。ユーザーは飲食店を検索し、予約を行い、評価やレビューを投稿できます。
 
 ## 作成した目的
@@ -106,7 +106,7 @@ class Kernel extends ConsoleKernel
 ### Dockerビルド
 #### 1. `git clone git@github.com:mdrgreen39/rese.git`
 #### 2. DockerDesktopアプリを立ち上げる
-#### 3. `docker-compose up -d --build`
+#### 3. `docker-compose -f docker-compose.local.yml up`
 
 > *MacのM1・M2チップのPCの場合、`no matching manifest for linux/arm64/v8 in the manifest list entries`のメッセージが表示されビルドができないことがあります。
 エラーが発生する場合は、docker-compose.ymlファイルの「mysql」内に「platform」の項目を追加で記載してください*
@@ -249,31 +249,31 @@ AWS_DEFAULT_REGION=your_region
 AWS_BUCKET=your_bucket_name
 AWS_URL=https://your_bucket.s3.amazonaws.com
 ```
-#### 管理者の設定
+#### 7. 管理者の設定
 1. `database/seeders/RolesAndPermissionsSeeder`ファイルを開いてください。
 2. ファイル内にある管理者の情報を設定してください。
 ```text
  // 管理者を設定
-        $adminUser = User::firstOrCreate(
-            ['email' => 'admin1@example.com'],  // 一意なメールアドレス
-            [
-                'name' => 'Admin Test User',       // 管理者の名前
-                'password' => bcrypt('adminpassword123'),  // 英数字8文字以上のパスワード
-            ]
-        );
+$adminUser = User::firstOrCreate(
+    ['email' => 'admin1@example.com'],  // 一意なメールアドレス
+    [
+        'name' => 'Admin Test User',       // 管理者の名前
+        'password' => bcrypt('admin123'),  // 英数字8文字以上のパスワード
+    ]
+  );
 ```
 
-5. アプリケーションキーの作成
+#### 8. アプリケーションキーの作成
 ``` bash
 php artisan key:generate
 ```
 
-6. マイグレーションの実行
+#### 9. マイグレーションの実行
 ``` bash
 php artisan migrate
 ```
 
-7. シーディングの実行
+#### 10. シーディングの実行
 ``` bash
 php artisan db:seed
 ```
@@ -281,23 +281,24 @@ php artisan db:seed
 ## URL
 - 開発環境：http://localhost/
 - phpMyAdmin:http://localhost:8080/
-- 開発環境でのメールテスト：http://localhost/test-email
+- テスト・開発環境でのメールテスト：http://localhost/test-email
 
 ## 他
 - テスト環境用に以下のユーザーが事前に設定されています。
+>**7. 管理者の設定**で設定した場合はそちらを使用してください。
   - **管理者**
     - 名前：Admin Test User
     - メールアドレス: admin1@example.com
-    - パスワード: adminpassword123
+    - パスワード: admin123
     - ロール: admin
   - **店舗代表者**
     - 名前: Store Manager One
-    - メールアドレス: storemanager1@example.com
-    - パスワード: storemanager123
+    - メールアドレス: store1@example.com
+    - パスワード: store123
     - ロール: store_manager
   - **ユーザー**
     - 名前: User One
     - メールアドレス: user1@example.com
-    - パスワード: userpassword123
+    - パスワード: user1234
     - ロール: user
 

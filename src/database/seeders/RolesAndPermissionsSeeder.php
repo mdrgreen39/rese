@@ -33,7 +33,7 @@ class RolesAndPermissionsSeeder extends Seeder
             ['email' => 'admin1@example.com'],  // 一意なメールアドレス
             [
                 'name' => 'Admin Test User',       // 管理者の名前
-                'password' => bcrypt('adminpassword123'),  // 英数字8文字以上のパスワード
+                'password' => bcrypt('admin123'),  // 英数字8文字以上のパスワード
             ]
         );
 
