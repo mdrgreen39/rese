@@ -16,15 +16,11 @@ class DatabaseSeeder extends Seeder
             PrefectureTableSeeder::class,
             GenresTableSeeder::class,
             RolesAndPermissionsSeeder::class,
+            UserSeeder::class,
+            ShopsTableSeeder::class,
+            ReservationSeeder::class,
+            FavoritesSeeder::class,
         ]);
 
-        if (App::environment('local')) {
-            $this->call([
-                UserSeeder::class,
-                ShopsTableSeeder::class,
-                ReservationSeeder::class,
-                FavoritesSeeder::class,
-            ]);
-        }
     }
 }
