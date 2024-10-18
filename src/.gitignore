@@ -26,5 +26,6 @@ docker/mysql/data/#innodb_redo/
 docker/mysql/data/ibdata1
 .DS_Store
 *.code-workspace
-
+docker-compose.prod.yml
+docker/nginx/production.conf
 

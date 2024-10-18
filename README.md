@@ -106,7 +106,7 @@ class Kernel extends ConsoleKernel
 ### Dockerビルド
 #### 1. `git clone git@github.com:mdrgreen39/rese.git`
 #### 2. DockerDesktopアプリを立ち上げる
-#### 3. `docker-compose -f docker-compose.local.yml up`
+#### 3. `docker-compose up -d --build`
 
 > *MacのM1・M2チップのPCの場合、`no matching manifest for linux/arm64/v8 in the manifest list entries`のメッセージが表示されビルドができないことがあります。
 エラーが発生する場合は、docker-compose.ymlファイルの「mysql」内に「platform」の項目を追加で記載してください*
@@ -120,12 +120,8 @@ mysql:
 ### Laravel環境構築
 #### 1. `docker-compose exec php bash`
 #### 2. `composer install`
-#### 3. `.env.local` `.env.production`に環境変数を追加
-- `env`ディレクトリを作成
-- `env`ディレクトリに`.env.local` `.env.production`2つのファイルを作成
-> `.env.example`ファイルを`.env.local` `.env.production`ファイルに命名変更。または、新しく`.env.local` `.env.production`ファイルを作成
-
-**`.env.local`**
+#### 3. 「.env.example」ファイルを 「.env」ファイルに命名を変更。または、新しく.envファイルを作成
+- .envに以下の環境変数を追加
 ``` text
 DB_CONNECTION=mysql
 DB_HOST=mysql
@@ -136,32 +132,16 @@ DB_PASSWORD=laravel_pass
 QUEUE_CONNECTION=database
 LIVEWIRE_DEBUG=true
 ```
-**`.env.production`**
-``` text
-APP_NAME=Rese
-APP_ENV=production
-APP_DEBUG=false
-APP_URL=
-DB_CONNECTION=mysql
-DB_HOST=
-DB_PORT=3306
-DB_DATABASE=
-DB_USERNAME=
-DB_PASSWORD=
-QUEUE_CONNECTION=database
-LIVEWIRE_DEBUG=false
-```
 
 #### 4. メール設定
-このプロジェクトでは、ローカル環境と本番環境で異なるメール設定を使用します
-- ローカル環境では、メール送信のテストに **Mailtrap** を使用します。以下の手順に従って設定してください。
+- メール送信のテストに **Mailtrap** を使用します。以下の手順に従って設定してください。
   - Mailtrapの設定手順
      1. [Mailtrap公式サイト](https://mailtrap.io/)にアクセスし、アカウントを作成します。
      2. SMTP設定情報を取得します。
       - SMTP Settings タブををクリック
       - Integrations セレクトボックスで、Laravel 9+ を選択
       - copy ボタンをクリックして、クリップボードに .env の情報を保存
-     3. mailtrap からコピーした情報を、プロジェクトの `.env.local` ファイルに貼り付ます。
+     3. mailtrap からコピーした情報を、プロジェクトの `.env` ファイルに貼り付ます。
 
 ```text
 MAIL_DRIVER=smtp
@@ -173,31 +153,10 @@ MAIL_ENCRYPTION=tls
 MAIL_FROM_ADDRESS=　　//送信元のメールアドレス
 MAIL_FROM_NAME="${APP_NAME}"   //メールの送信者に表示される名前
 ```
-- 本番環境では、メール送信のテストに **Gmail** を使用します。以下の手順に従って設定してください。
-  - gmailの設定で以下の設定を行う必要があります。<br>
-    - 2段階認証プロセスを「オン」にして「アプリパスワード」を作成、そのパスワードを指定します。<br>
-    - 設定方法詳細：[Googleアカウントヘルプ](https://support.google.com/accounts/answer/185833?hl=ja&authuser=1)
-
-``` text
-MAIL_MAILER=smtp
-MAIL_HOST=smtp.gmail.com
-MAIL_PORT=587
-MAIL_USERNAME=       //送信元のメールアドレス
-MAIL_PASSWORD=       //アプリパスワード
-MAIL_ENCRYPTION=tls
-MAIL_FROM_ADDRESS=   //送信元のメールアドレス
-MAIL_FROM_NAME="${APP_NAME}"  //メールの送信者に表示される名前
-```
-- 本番環境でのメール送信テスト
-  -「.env.production」に`MAIL_TEST_MODE=false`を追加
-  - テストを行う場合は「true」にし、テストが終了したら「false」に変更
-``` text
-MAIL_TEST_MODE=false
-```
 
 #### 5. Stripe設定
-このプロジェクトでは、決済機能としてStripeを使用します。ローカル環境（テスト環境）と本番環境で異なる設定を行う必要があります
-  - テスト環境のの設定手順
+このプロジェクトでは、決済機能としてStripeを使用します。
+  - ローカル環境の設定手順
     1. [Stripe公式サイト](https://stripe.com/jp)にアクセスし、アカウントを作成します。
     2. アカウントが作成できたら、ダッシュボードにログインします。
     3.「開発者」セクションに移動し、テスト用のAPIキーを取得します。
@@ -207,19 +166,8 @@ MAIL_TEST_MODE=false
 STRIPE_KEY=テスト用公開可能キー
 STRIPE_SECRET=テスト用シークレットキー
 ```
-  - テスト環境のの設定手順
-      1. [Stripe公式サイト](https://stripe.com/jp)にアクセスし、アカウントを作成します（もしまだ作成していない場合）。
-      2. アカウントが作成できたら、ダッシュボードにログインします。
-      3.「開発者」セクションに移動し、本番環境用のAPIキーを取得します。
-      - ここで公開可能キーとシークレットキーを確認できます（本番環境のキーを使用してください）。
-      4. 環境変数（`.env.production`ファイル）に以下のようにAPIキーを設定します。
-``` text
-STRIPE_KEY=本番用公開可能キー
-STRIPE_SECRET=本番用シークレットキー
-```
 
 #### 6. ストレージ設定
-- ローカル環境
 ``` bash
 php artisan storage:link
 ```
@@ -239,16 +187,6 @@ ls -la storage
 > 出力例:`drwxrwxr-x  2 user group 4096 Oct 11 12:00 app`
    3. 問題が解決されない場合: 必要に応じて、サーバーの設定を見直し、適切なパーミッションが設定されているか再確認してください。
 
-- 本番環境
-  - このプロジェクトでは、S3を使用します。S3を利用するために、`.env.production`ファイルに以下の設定を追加してください。
-``` text
-FILESYSTEM_DRIVER=s3
-AWS_ACCESS_KEY_ID=your_access_key
-AWS_SECRET_ACCESS_KEY=your_secret_key
-AWS_DEFAULT_REGION=your_region
-AWS_BUCKET=your_bucket_name
-AWS_URL=https://your_bucket.s3.amazonaws.com
-```
 #### 7. 管理者の設定
 1. `database/seeders/RolesAndPermissionsSeeder`ファイルを開いてください。
 2. ファイル内にある管理者の情報を設定してください。
@@ -281,7 +219,7 @@ php artisan db:seed
 ## URL
 - 開発環境：http://localhost/
 - phpMyAdmin:http://localhost:8080/
-- テスト・開発環境でのメールテスト：http://localhost/test-email
+- ローカル環境でのメールテスト：http://localhost/test-email
 
 ## 他
 - テスト環境用に以下のユーザーが事前に設定されています。

@@ -2,8 +2,9 @@ version: '3.8'
 
 services:
   php:
-    build: ./docker/php
-    dockerfile: Dockerfile.local
+    build:
+      context: ./docker/php
+      dockerfile: Dockerfile
     volumes:
       - ./src:/var/www/
     networks:
@@ -59,7 +60,7 @@ services:
   queue-worker:
     build:
       context: ./docker/php
-      dockerfile: Dockerfile
+      dockerfile: Dockerfile.local
     command: php /var/www/artisan queue:work --sleep=3 --tries=3
     volumes:
       - ./src:/var/www
