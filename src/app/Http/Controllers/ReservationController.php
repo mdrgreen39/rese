@@ -14,6 +14,12 @@ use Stripe\Checkout\Session;
 
 class ReservationController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth');
+        $this->middleware('role:user');
+    }
+
     /* 予約処理 */
     public function store(ReservationRequest $request, Shop $shop)
     {
@@ -35,7 +41,6 @@ class ReservationController extends Controller
     {
         return view('payment');
     }
-
 
     // Stripe支払い処理
     public function processPayment(Request $request)

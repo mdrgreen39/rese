@@ -47,7 +47,6 @@ class AdminController extends Controller
         $user->sendEmailVerificationNotification();
 
         return redirect()->route('admin.ownerRegisterDone');
-
     }
 
     // 店舗代表者登録完了ページ表示

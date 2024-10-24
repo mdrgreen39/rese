@@ -11,5 +11,4 @@ class RegisterResponse implements RegisterResponseContract
     {
         return new RedirectResponse(route('registration.thanks'));
     }
-
 }

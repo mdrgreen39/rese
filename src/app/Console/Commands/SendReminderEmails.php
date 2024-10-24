@@ -33,9 +33,7 @@ class SendReminderEmails extends Command
      */
     public function handle()
     {
-        // 今日の予約を取得
         $reservations = Reservation::whereDate('date', now()->toDateString())->get();
-
 
         foreach ($reservations as $reservation) {
             Mail::to($reservation->user->email)->send(new ReservationReminderMail($reservation));

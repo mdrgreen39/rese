@@ -8,7 +8,6 @@ use App\Models\Reservation;
 use App\Jobs\GenerateQrCode;
 use App\Models\User;
 use App\Models\Shop;
-use Spatie\Permission\Models\Role;
 
 class ReservationSeeder extends Seeder
 {
