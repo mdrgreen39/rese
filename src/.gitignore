@@ -20,8 +20,9 @@ yarn-error.log
 /.idea
 /.vscode
 .DS_Store
-src/.DS_Store
+/.DS_Store
 *.code-workspace
 docker-compose.prod.yml
 docker/nginx/production.conf
+docker/php/Dockerfile.prod
 
