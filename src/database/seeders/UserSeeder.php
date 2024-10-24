@@ -35,15 +35,15 @@ class UserSeeder extends Seeder
         $userOne->update(['email_verified_at' => now()]);
 
         // 他の店舗代表者をランダムに生成
-        User::factory(13)->create()->each(function ($user) {
-            $user->assignRole('store_manager');
-            $user->givePermissionTo('store_management');
-        });
+        // User::factory(13)->create()->each(function ($user) {
+            // $user->assignRole('store_manager');
+            // $user->givePermissionTo('store_management');
+        // });
 
         // 他の一般ユーザーをランダムに生成
-        User::factory(3)->create()->each(function ($user) {
-            $user->assignRole('user');
-            $user->givePermissionTo('user');
-        });
+        // User::factory(3)->create()->each(function ($user) {
+            // $user->assignRole('user');
+            // $user->givePermissionTo('user');
+        // });
     }
 }
