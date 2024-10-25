@@ -10,11 +10,13 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Storage::disk('public')->deleteDirectory('qr_codes');
-        Storage::disk('public')->deleteDirectory('shops');
+        if (app()->environment('local')) {
+            Storage::disk('public')->deleteDirectory('qr_codes');
+            Storage::disk('public')->deleteDirectory('shops');
 
-        Storage::disk('public')->makeDirectory('qr_codes');
-        Storage::disk('public')->makeDirectory('shops');
+            Storage::disk('public')->makeDirectory('qr_codes');
+            Storage::disk('public')->makeDirectory('shops');
+        }
     }
 
     /**

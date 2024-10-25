@@ -120,8 +120,8 @@ mysql:
 ### Laravel環境構築
 #### 1. `docker-compose exec php bash`
 #### 2. `composer install`
-#### 3. 「.env.example」ファイルを 「.env」ファイルに命名を変更。または、新しく.envファイルを作成
-- .envに以下の環境変数を追加
+#### 3. `.env.example`ファイルを `.env.local`ファイルに命名を変更。または、新しく`.env.local`ファイルを作成
+- .env.localに以下の環境変数を追加
 ``` text
 DB_CONNECTION=mysql
 DB_HOST=mysql
@@ -191,14 +191,14 @@ ls -la storage
 1. `database/seeders/RolesAndPermissionsSeeder`ファイルを開いてください。
 2. ファイル内にある管理者の情報を設定してください。
 ```text
- // 管理者を設定
+ // ローカル環境の管理者設定
 $adminUser = User::firstOrCreate(
     ['email' => 'admin1@example.com'],  // 一意なメールアドレス
     [
-        'name' => 'Admin Test User',       // 管理者の名前
-        'password' => bcrypt('admin123'),  // 英数字8文字以上のパスワード
+        'name' => 'Admin Test User',    // 管理者の名前
+        'password' => bcrypt('admin123'),     // 英数字8文字以上のパスワード
     ]
-  );
+);
 ```
 
 #### 8. アプリケーションキーの作成

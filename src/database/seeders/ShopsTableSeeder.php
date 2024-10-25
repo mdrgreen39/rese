@@ -16,11 +16,7 @@ class ShopsTableSeeder extends Seeder
      */
     public function run(): void
     {
-        // 店舗代表者を一人にする場合
-        $storeManager = User::role('store_manager')->first();
-
-        // 店舗代表者を複数人からランダムにする場合
-        // $storeManagers = User::role('store_manager')->get();
+        $isProduction = app()->environment('production');
 
         $shops = [
             [
@@ -166,17 +162,16 @@ class ShopsTableSeeder extends Seeder
         ];
 
         foreach ($shops as $shopData) {
+
+            $storeManager = $isProduction
+                ? User::role('store_manager')->first()
+                : User::role('store_manager')->inRandomOrder()->first();
+
             $imagePath = $this->storeImage($shopData['image_url'], basename($shopData['image_url']));
-
-            // 一人の店舗代表者をすべての店舗に割り当てる場合
-            $assignedManager = $storeManager;
-
-            // 複数の店舗代表者からランダムに選ぶ場合
-            // $assignedManager = $storeManagers->random();
 
             $shop = [
                 'name' => $shopData['name'],
-                'user_id' => $assignedManager->id,
+                'user_id' => $storeManager->id,
                 'prefecture_id' => $shopData['prefecture_id'],
                 'genre_id' => $shopData['genre_id'],
                 'description' => $shopData['description'],
