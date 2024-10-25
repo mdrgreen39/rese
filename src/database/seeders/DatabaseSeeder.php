@@ -18,9 +18,14 @@ class DatabaseSeeder extends Seeder
             RolesAndPermissionsSeeder::class,
             UserSeeder::class,
             ShopsTableSeeder::class,
-            ReservationSeeder::class,
-            FavoritesSeeder::class,
         ]);
+
+        if (App::environment('local')) {
+            $this->call([
+                ReservationSeeder::class,
+                FavoritesSeeder::class,
+            ]);
+        }
 
     }
 }

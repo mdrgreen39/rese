@@ -28,14 +28,26 @@ class RolesAndPermissionsSeeder extends Seeder
         $userRole->givePermissionTo('user');
 
 
-        // 管理者を設定
-        $adminUser = User::firstOrCreate(
-            ['email' => 'admin1@example.com'],  // 一意なメールアドレス
-            [
-                'name' => 'Admin Test User',       // 管理者の名前
-                'password' => bcrypt('admin123'),  // 英数字8文字以上のパスワード
-            ]
-        );
+        // 環境によって管理者の設定を変更
+        if (app()->environment('production')) {
+            // 本番環境の管理者設定
+            $adminUser = User::firstOrCreate(
+                ['email' => 'imakoko39+sub@gmail.com'],  // 一意なメールアドレス
+                [
+                    'name' => 'Admin Test User',       // 管理者の名前
+                    'password' => bcrypt('admin123'),  // 英数字8文字以上のパスワード
+                ]
+            );
+        } else {
+            // ローカル環境の管理者設定
+            $adminUser = User::firstOrCreate(
+                ['email' => 'admin1@example.com'],  // 一意なメールアドレス
+                [
+                    'name' => 'Admin Test User',    // 管理者の名前
+                    'password' => bcrypt('admin123'),     // 英数字8文字以上のパスワード
+                ]
+            );
+        }
 
         $adminUser->update(['email_verified_at' => now()]);
 
