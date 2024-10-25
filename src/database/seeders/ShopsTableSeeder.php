@@ -161,24 +161,46 @@ class ShopsTableSeeder extends Seeder
             ],
         ];
 
-        foreach ($shops as $shopData) {
+        $specifiedStoreManager = User::role('store_manager')->first();
 
-            $storeManager = $isProduction
-                ? User::role('store_manager')->first()
-                : User::role('store_manager')->inRandomOrder()->first();
+        if ($specifiedStoreManager) {
 
-            $imagePath = $this->storeImage($shopData['image_url'], basename($shopData['image_url']));
+            $firstShopData = $shops[0];
+
+            $imagePath = $this->storeImage($firstShopData['image_url'], basename($firstShopData['image_url']));
 
             $shop = [
-                'name' => $shopData['name'],
-                'user_id' => $storeManager->id,
-                'prefecture_id' => $shopData['prefecture_id'],
-                'genre_id' => $shopData['genre_id'],
-                'description' => $shopData['description'],
+                'name' => $firstShopData['name'],
+                'user_id' => $specifiedStoreManager->id,
+                'prefecture_id' => $firstShopData['prefecture_id'],
+                'genre_id' => $firstShopData['genre_id'],
+                'description' => $firstShopData['description'],
                 'image' => $imagePath,
             ];
 
             DB::table('shops')->insert($shop);
+
+            array_shift($shops);
+
+            foreach ($shops as $shopData) {
+
+                $storeManager = $isProduction
+                    ? User::role('store_manager')->first()
+                    : User::role('store_manager')->inRandomOrder()->first();
+
+                $imagePath = $this->storeImage($shopData['image_url'], basename($shopData['image_url']));
+
+                $shop = [
+                    'name' => $shopData['name'],
+                    'user_id' => $storeManager->id,
+                    'prefecture_id' => $shopData['prefecture_id'],
+                    'genre_id' => $shopData['genre_id'],
+                    'description' => $shopData['description'],
+                    'image' => $imagePath,
+                ];
+
+                DB::table('shops')->insert($shop);
+            }
         }
     }
 

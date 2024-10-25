@@ -34,7 +34,7 @@ class UserSeeder extends Seeder
             $userOne->update(['email_verified_at' => now()]);
 
             // 他の店舗代表者をランダムに生成
-            User::factory(13)->create()->each(function ($user) {
+            User::factory(4)->create()->each(function ($user) {
                 $user->assignRole('store_manager');
                 $user->givePermissionTo('store_management');
             });
