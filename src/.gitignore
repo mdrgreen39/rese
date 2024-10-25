@@ -19,10 +19,6 @@ yarn-error.log
 /.fleet
 /.idea
 /.vscode
-.DS_Store
-/.DS_Store
-*.code-workspace
-docker-compose.prod.yml
-docker/nginx/production.conf
-docker/php/Dockerfile.prod
+src/public/.DS_Store
+src/public/images/.DS_Store
 
