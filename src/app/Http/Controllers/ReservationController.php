@@ -88,7 +88,7 @@ class ReservationController extends Controller
     // 支払い完了ページ表示
     public function paymentSuccess()
     {
-        return view('payment-Success');
+        return view('payment-success');
     }
 
     // 支払いキャンセル完了ページ表示
