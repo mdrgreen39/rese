@@ -48,13 +48,22 @@ class UserSeeder extends Seeder
             // 1人目の店舗代表者を指定して作成
             $storeManager = User::create([
                 'name' => 'Store Manager One',
-                'email' => 'imakoko39@gmail.com',
+                'email' => 'imakoko39+sub2@gmail.com',
                 'password' => bcrypt('store123'),
             ]);
             $storeManager->assignRole('store_manager');
             $storeManager->givePermissionTo('store_management');
             $storeManager->update(['email_verified_at' => now()]);
+
+            // 1人目の一般ユーザーを指定して作成
+            $userOne = User::create([
+                'name' => 'User One',
+                'email' => 'imakoko39+sub3@gmail.com',
+                'password' => bcrypt('user1234'),
+            ]);
+            $userOne->assignRole('user');
+            $userOne->givePermissionTo('user');
+            $userOne->update(['email_verified_at' => now()]);
         }
     }
-
 }

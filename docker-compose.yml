@@ -60,7 +60,7 @@ services:
   queue-worker:
     build:
       context: ./docker/php
-      dockerfile: Dockerfile.local
+      dockerfile: Dockerfile
     command: php /var/www/artisan queue:work --sleep=3 --tries=3
     volumes:
       - ./src:/var/www
