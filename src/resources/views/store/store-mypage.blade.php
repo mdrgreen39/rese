@@ -39,7 +39,7 @@
             <div class="store-mypage-wrap">
                 @foreach($shops as $shop)
                 <div class="store-mypage-wrap__item">
-                    <img class="store-mypage-wrap__item-photo" src="{{ asset('storage/' . $shop->image) }}" alt="{{ $shop->name }}">
+                    <img class="store-mypage-wrap__item-photo" src="{{ $shop->image_url }}" alt="{{ $shop->name }}">
                     <div class="store-mypage-wrap__item-content">
                         <h2 class="shop-wrap__item-name">{{ $shop->name }}</h2>
                         <ul class="store-mypage-wrap__item-tag-container">

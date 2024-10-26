@@ -48,7 +48,7 @@
             <a class="detail-heading__button-before" href="{{ route('shops.index') }}">&lt;</a>
             <h2 class="detail-heading__name">{{ $shop->name }}</h2>
         </div>
-        <img class="detail-container__photo" src="{{ asset('storage/' . $shop->image) }}" alt="{{ $shop->name }}">
+        <img class="detail-container__photo" src="{{ $shop->image_url }}" alt="{{ $shop->name }}">
         <div class="detail-container__content">
             <ul class="detail-container__item">
                 <li class="detail-container__item-tag">#{{ $shop->prefecture->name }}</li>
