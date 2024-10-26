@@ -17,6 +17,12 @@ return new class extends Migration
             Storage::disk('public')->makeDirectory('qr_codes');
             Storage::disk('public')->makeDirectory('shops');
         }
+
+
+        if (app()->environment('production')) {
+
+            Storage::disk('s3')->deleteDirectory('shops');
+        }
     }
 
     /**
