@@ -5,6 +5,8 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
+use Illuminate\Support\Facades\Storage;
+
 
 
 class Shop extends Model
@@ -32,7 +34,11 @@ class Shop extends Model
 
     public function getImageUrlAttribute()
     {
-        return env('STORAGE_URL') . '/storage/' . $this->image;
+        if (app()->environment('production')) {
+            return Storage::disk('s3')->url($this->image);
+        } else {
+            return asset('storage/' . $this->image);
+        }
     }
 
     public function favoritedByUsers(): BelongsToMany
