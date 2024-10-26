@@ -23,7 +23,7 @@
 <div class="resend-done">
     <h2 class="resend-done__heading">メールを再送信しました</h2>
     <div class="resend-done__button-container">
-        <a class="resend-done_button" href="/login">ログインする</a>
+        <a class="resend-done__button" href="/login">ログインする</a>
     </div>
 </div>
 
