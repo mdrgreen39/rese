@@ -96,7 +96,7 @@
         </table>
         <div class="mypage-reserve__confirm-check">
             <p class="mypage-reserve__confirm-check-text">QRコードを来店時に店舗スタッフに見せてください</p>
-            <img class="mypage-reserve__confirm-check-qrcoad" src="{{ asset('storage/' . $reservation->qr_code_path) }}" alt="QRコード">
+            <img class="mypage-reserve__confirm-check-qrcoad" src="{{ $reservation->qr_code_url }}" alt="QRコード">
         </div>
     </div>
     @endforeach

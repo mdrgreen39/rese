@@ -44,4 +44,12 @@ class Reservation extends Model
         return $this->can_review == 1;
     }
 
+    public function getQrCodeUrlAttribute()
+    {
+        if (app()->environment('production')) {
+            return Storage::disk('s3')->url($this->qr_code_path);
+        } else {
+            return asset('storage/' . $this->qr_code_path);
+        }
+    }
 }
