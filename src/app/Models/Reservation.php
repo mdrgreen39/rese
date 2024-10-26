@@ -20,7 +20,11 @@ class Reservation extends Model
 
         static::deleting(function ($reservation) {
             if ($reservation->qr_code_path) {
-                Storage::disk('public')->delete($reservation->qr_code_path);
+                if (app()->environment('production')) {
+                    Storage::disk('s3')->delete($reservation->qr_code_path);
+                } else {
+                    Storage::disk('public')->delete($reservation->qr_code_path);
+                }
             }
         });
     }

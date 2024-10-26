@@ -46,7 +46,7 @@
                 <div class="mypage-favorite-wrap">
                     @foreach($favoriteShops as $shop)
                     <div class="mypage-favorite-wrap__item">
-                        <img class="mypage-favorite-wrap__item-photo" src="{{ asset('storage/' . $shop->image) }}" alt="{{ $shop->name }}">
+                        <img class="mypage-favorite-wrap__item-photo" src="{{ $shop->image_url }}" alt="{{ $shop->name }}">
                         <div class="mypage-favorite-wrap__item-content">
                             <h2 class="mypage-favorite-wrap__item-name">{{ $shop->name }}</h2>
                             <ul class="mypage-favorite-wrap__item-tag-container">

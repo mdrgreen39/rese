@@ -49,7 +49,11 @@ class GenerateQrCode implements ShouldQueue
 
         $path = 'qr_codes/' . $reservation->id . '.png';
 
-        Storage::disk('public')->put($path, $qrcode);
+        if (app()->environment('production')) {
+            Storage::disk('s3')->put($path, $qrcode);
+        } else {
+            Storage::disk('public')->put($path, $qrcode);
+        }
 
         $reservation->qr_code_path = $path;
 

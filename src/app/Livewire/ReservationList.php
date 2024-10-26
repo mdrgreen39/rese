@@ -105,7 +105,11 @@ public function rules(): array
         $reservation->people = $this->people;
 
         if ($reservation->qr_code_path) {
-            Storage::disk('public')->delete($reservation->qr_code_path);
+            if (app()->environment('production')) {
+                Storage::disk('s3')->delete($reservation->qr_code_path);
+            } else {
+                Storage::disk('public')->delete($reservation->qr_code_path);
+            }
         }
 
         $reservation->save();
@@ -131,18 +135,16 @@ public function rules(): array
 
             $reservation->delete();
 
-            if ($reservation->qr_code_path && Storage::disk('public')->exists($reservation->qr_code_path)) {
-                try {
+            if ($reservation->qr_code_path) {
+                if (app()->environment('production')) {
+                    Storage::disk('s3')->delete($reservation->qr_code_path);
+                } else {
                     Storage::disk('public')->delete($reservation->qr_code_path);
-                } catch (\Exception $e) {
-                    \DB::rollBack();
-                    return back()->withErrors(['error' => 'QRコードファイルの削除に失敗しました。']);
                 }
             }
 
             \DB::commit();
 
-            // 削除後にフィルタリングされた予約を再取得
             $this->filteredReservations = auth()->user()->reservations()->with('shop')->get()->filter(function ($reservation) {
                 return $reservation->date > now();
             })->values();

@@ -208,7 +208,13 @@ class ShopsTableSeeder extends Seeder
     {
         $imageContent = file_get_contents($url);
         $imagePath = 'shops/' . $fileName;
-        Storage::disk('public')->put($imagePath, $imageContent);
+
+        if (app()->environment('production')) {
+            Storage::disk('s3')->put($imagePath, $imageContent);
+        } else {
+            Storage::disk('public')->put($imagePath, $imageContent);
+        }
+
         return $imagePath;
     }
 

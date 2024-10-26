@@ -61,7 +61,7 @@
 <div class="store-register-form__group">
     <div class="store-register-form__input-container">
         @if (isset($shop) && $shop->image)
-        <img class="store-register-form__image-preview" src="{{ asset('storage/' . $shop->image) }}" alt="現在の画像">
+        <img class="store-register-form__image-preview" src="{{ $shop->image_url }}" alt="現在の画像">
         @endif
     </div>
     <div class="store-register-form__input-container">

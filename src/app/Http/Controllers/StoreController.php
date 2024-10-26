@@ -104,13 +104,17 @@ class StoreController extends Controller
 
         if ($request->hasFile('image')) {
             $shop->image = $request->file('image')->store('shops', 'public');
-        }
-        elseif ($request->filled('image_url')) {
+        } elseif ($request->filled('image_url')) {
             $url = $request->input('image_url');
             $fileName = basename($url);
             $fileContents = file_get_contents($url);
             $shop->image = 'shops/' . $fileName;
-            Storage::disk('public')->put($shop->image, $fileContents);
+
+            if (app()->environment('production')) {
+                Storage::disk('s3')->put($shop->image, $fileContents);
+            } else {
+                Storage::disk('public')->put($shop->image, $fileContents);
+            }
         }
 
         $shop->save();

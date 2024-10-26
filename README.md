@@ -131,6 +131,7 @@ DB_USERNAME=laravel_user
 DB_PASSWORD=laravel_pass
 QUEUE_CONNECTION=database
 LIVEWIRE_DEBUG=true
+STORAGE_URL=http://localhost
 ```
 
 #### 4. メール設定

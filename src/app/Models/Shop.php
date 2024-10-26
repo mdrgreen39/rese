@@ -30,6 +30,11 @@ class Shop extends Model
         return $this->belongsTo(Prefecture::class);
     }
 
+    public function getImageUrlAttribute()
+    {
+        return env('STORAGE_URL') . '/storage/' . $this->image;
+    }
+
     public function favoritedByUsers(): BelongsToMany
     {
         return $this->belongsToMany(User::class, 'favorites')
