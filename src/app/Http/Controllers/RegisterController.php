@@ -52,7 +52,7 @@ class RegisterController extends Controller
      * @return \Laravel\Fortify\Contracts\RegisterResponse
      */
     public function store(RegisterRequest $request,
-                          CreatesNewUsers $creator): RegisterResponse
+                        CreatesNewUsers $creator): RegisterResponse
     {
         if (config('fortify.lowercase_usernames')) {
             $request->merge([
@@ -61,6 +61,8 @@ class RegisterController extends Controller
         }
 
         event(new Registered($user = $creator->create($request->all())));
+
+        $this->guard->login($user);
 
         return app(RegisterResponse::class);
 

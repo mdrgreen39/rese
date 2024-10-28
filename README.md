@@ -117,12 +117,13 @@ mysql:
     image: mysql:8.0.37
     environment:
 ```
+> *Dockerコンテナをビルドした後に、vendor ディレクトリが生成されていないため、composer install を実行して依存関係をインストールする必要があります。queue-workerコンテナの`STATUS`が`Restarting`でもそのまま次の手順`composer install`を実行し、実行後に再度dockerコンテナの状態を確認してください。*
 
 ### Laravel環境構築
 #### 1. `docker-compose exec php bash`
 #### 2. `composer install`
 #### 3. `.env.example`ファイルを `.env`ファイルに命名を変更。または、新しく`.env`ファイルを作成
-- .env.localに以下の環境変数を追加
+- `.env`に以下の環境変数を追加
 ``` text
 DB_CONNECTION=mysql
 DB_HOST=mysql
@@ -131,8 +132,8 @@ DB_DATABASE=laravel_db
 DB_USERNAME=laravel_user
 DB_PASSWORD=laravel_pass
 QUEUE_CONNECTION=database
-LIVEWIRE_DEBUG=true
-STORAGE_URL=http://localhost
+LIVEWIRE_DEBUG=true           //追加
+STORAGE_URL=http://localhost  //追加
 ```
 
 #### 4. メール設定
@@ -213,7 +214,14 @@ php artisan key:generate
 php artisan migrate
 ```
 
-#### 10. シーディングの実行
+#### 10. キューワーカーの実行
+``` bash
+php artisan queue:work
+```
+- 実行後、停止させます。
+
+
+#### 11. シーディングの実行
 ``` bash
 php artisan db:seed
 ```
@@ -253,9 +261,4 @@ php artisan db:seed
     - メールアドレス: imakoko39+sub2@gmail.com
     - パスワード: store123
     - ロール: store_manager
-  - **ユーザー**
-    - 名前: User One
-    - メールアドレス: imakoko39+sub3@gmail.com
-    - パスワード: user1234
-    - ロール: user
 
