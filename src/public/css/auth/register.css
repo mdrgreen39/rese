@@ -88,9 +88,9 @@
     font-size: 0.75rem;
     cursor: pointer;
 
-    &:hover {
-        opacity: 0.7;
-    }
+        &:hover {
+            opacity: 0.7;
+        }
 }
 
 /* 登録フォームアイコン */

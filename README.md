@@ -1,6 +1,6 @@
 # Rese(リーズ)
 ## 概要説明
-![art](Rese_top.png)
+![art](rese-top.png)
 このアプリケーションは、飲食店の予約管理システムです。ユーザーは飲食店を検索し、予約を行い、評価やレビューを投稿できます。
 
 ## 作成した目的
@@ -98,6 +98,7 @@ class Kernel extends ConsoleKernel
 - mysql 8.0.37
 
 ## テーブル設計
+![art](rese-tables.png)
 
 ## ER図
 ![art](rese-er.drawio.png)
@@ -160,13 +161,13 @@ MAIL_FROM_NAME="${APP_NAME}"   //メールの送信者に表示される名前
   - Stripeの設定手順
     1. [Stripe公式サイト](https://stripe.com/jp)にアクセスし、アカウントを作成します。
     2. アカウントが作成できたら、ダッシュボードにログインします。
-    3.「開発者」セクションに移動し、テスト用のAPIキーを取得します。
-    - テスト用の公開可能キーとシークレットキーが表示されます。
+    3. 「開発者」セクションに移動し、テスト用のAPIキーを取得します。テスト用の公開可能キーとシークレットキーが表示されます。
     4. 環境変数（`.env`ファイル）に以下のようにAPIキーを設定します。
 ``` text
 STRIPE_KEY=テスト用公開可能キー
 STRIPE_SECRET=テスト用シークレットキー
 ```
+ - Stripe公式テストカード一覧ページ : [Stripe Testing Cards](https://docs.stripe.com/testing)
 
 #### 6. ストレージ設定
 ``` bash
@@ -221,9 +222,10 @@ php artisan db:seed
 - 開発環境：http://localhost/
 - phpMyAdmin:http://localhost:8080/
 - ローカル環境でのメールテスト：http://localhost/test-email
+- AWS URL : http:
 
 ## 他
-- テスト環境用に以下のユーザーが事前に設定されています。
+- ローカル環境用に以下のユーザーが事前に設定されています。
 >*7. 管理者の設定*で設定した場合はそちらを使用してください。
   - **管理者**
     - 名前：Admin Test User
@@ -238,6 +240,22 @@ php artisan db:seed
   - **ユーザー**
     - 名前: User One
     - メールアドレス: user1@example.com
+    - パスワード: user1234
+    - ロール: user
+- 本番環境用に以下のユーザーが事前に設定されています。
+  - **管理者**
+    - 名前：Admin Test User
+    - メールアドレス: imakoko39+sub@gmail.com
+    - パスワード: admin123
+    - ロール: admin
+  - **店舗代表者**
+    - 名前: Store Manager One
+    - メールアドレス: imakoko39+sub2@gmail.com
+    - パスワード: store123
+    - ロール: store_manager
+  - **ユーザー**
+    - 名前: User One
+    - メールアドレス: imakoko39+sub3@gmail.com
     - パスワード: user1234
     - ロール: user
 

@@ -7,10 +7,10 @@
 .owner-register-form__session-message a {
     cursor: pointer;
 
-    &:hover {
-        background-color: #3460f6;
-        color: #fff;
-    }
+        &:hover {
+            background-color: #3460f6;
+            color: #fff;
+        }
 }
 
 .owner-register-form {

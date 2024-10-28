@@ -40,7 +40,7 @@ class UserSeeder extends Seeder
             });
 
             // 他の一般ユーザーをランダムに生成
-            User::factory(3)->create()->each(function ($user) {
+            User::factory(1)->create()->each(function ($user) {
                 $user->assignRole('user');
                 $user->givePermissionTo('user');
             });
@@ -54,16 +54,6 @@ class UserSeeder extends Seeder
             $storeManager->assignRole('store_manager');
             $storeManager->givePermissionTo('store_management');
             $storeManager->update(['email_verified_at' => now()]);
-
-            // 1人目の一般ユーザーを指定して作成
-            $userOne = User::create([
-                'name' => 'User One',
-                'email' => 'imakoko39+sub3@gmail.com',
-                'password' => bcrypt('user1234'),
-            ]);
-            $userOne->assignRole('user');
-            $userOne->givePermissionTo('user');
-            $userOne->update(['email_verified_at' => now()]);
         }
     }
 }
