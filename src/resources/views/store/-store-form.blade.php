@@ -74,7 +74,7 @@
         @enderror
     </p>
     <div class="store-register-form__input-container">
-        <input class="store-register-form__image-url" type="text" name="image_url" id="image_url" placeholder="または画像URLを入力してください" value="{{ $shop->image ? '' : old('image_url', $shop->image_url ?? '')  }}">
+        <input class="store-register-form__image-url" type="text" name="image_url" id="image_url" placeholder="または画像URLを入力してください" value="{{ old('image_url') }}">
     </div>
     <p class="store-register-form__error-message">
         @error('image_url')

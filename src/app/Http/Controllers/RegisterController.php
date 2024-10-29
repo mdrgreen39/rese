@@ -62,10 +62,7 @@ class RegisterController extends Controller
 
         event(new Registered($user = $creator->create($request->all())));
 
-        $this->guard->login($user);
-
         return app(RegisterResponse::class);
-
     }
 
     // 登録完了ページ表示

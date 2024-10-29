@@ -26,7 +26,7 @@ use Laravel\Fortify\Fortify;
 
 // メール検証・認証
 Route::get('/email/verify/{id}/{hash}', [EmailVerificationController::class, '__invoke'])
-    ->middleware(['auth', 'signed'])
+    ->middleware(['signed'])
     ->name('verification.verify');
 Route::get('/email/verify', [EmailVerificationController::class, 'show'])->middleware(['auth', 'throttle:6,1'])->name('verification.notice');
 Route::post('/email/verification-notification', [EmailVerificationController::class, 'resend'])

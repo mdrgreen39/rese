@@ -214,12 +214,10 @@ php artisan key:generate
 php artisan migrate
 ```
 
-#### 10. キューワーカーの実行
+#### 10. キューワーカーの再起動
 ``` bash
-php artisan queue:work
+php artisan queue:restart
 ```
-- 実行後、停止させます。
-
 
 #### 11. シーディングの実行
 ``` bash

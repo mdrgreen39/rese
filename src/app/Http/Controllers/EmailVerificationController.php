@@ -3,26 +3,26 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\Controller;
 use App\Models\User;
 
 class EmailVerificationController extends Controller
 {
+    // メール確認処理
     public function __invoke(Request $request, $id, $hash)
     {
-        $user = User::find($id);
+        $user = User::findOrFail($id);
 
-        if (!$user || !hash_equals(sha1($user->getEmailForVerification()), $hash)) {
-            return redirect()->route('verification.notice');
+        if (hash_equals((string) $hash, sha1($user->getEmailForVerification()))) {
+            if (!$user->hasVerifiedEmail()) {
+                $user->markEmailAsVerified();
+            }
+
+            Auth::login($user);
+
+            return redirect('/')->with('verified', true);
         }
-
-        if ($user->hasVerifiedEmail()) {
-            return redirect()->intended('/');
-        }
-
-        $user->markEmailAsVerified();
-
-        return redirect()->intended('/');
     }
 
     // メール再送信用ページ表示
