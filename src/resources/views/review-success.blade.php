@@ -27,8 +27,8 @@
 @section('content')
 
 <div class="review-success">
-    <h2 class="review-success__heading">{{ $shop->name }}へのレビューを投稿完了しました</h2>
-    <p class="review-success__text">ご意見をお寄せいただきありがとうございます</p>
+    <h2 class="review-success__heading">{{ $shop->name }}へのレビューを<br>投稿完了しました</h2>
+    <p class="review-success__text">ご意見をお寄せいただき<br>ありがとうございます</p>
     <div class="review-success__button-container">
         <a class="review-success__button" href="{{ route('user.mypage') }}">戻る</a>
     </div>

@@ -228,7 +228,7 @@ php artisan db:seed
 - 開発環境：http://localhost/
 - phpMyAdmin:http://localhost:8080/
 - ローカル環境でのメールテスト：http://localhost/test-email
-- AWS URL : http:
+- 本番環境 URL : http://57.180.31.85
 
 ## 他
 - ローカル環境用に以下のユーザーが事前に設定されています。

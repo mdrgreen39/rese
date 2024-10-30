@@ -32,10 +32,10 @@ class RolesAndPermissionsSeeder extends Seeder
         if (app()->environment('production')) {
             // 本番環境の管理者設定
             $adminUser = User::firstOrCreate(
-                ['email' => 'imakoko39+sub@gmail.com'],  // 一意なメールアドレス
+                ['email' => 'imakoko39+sub@gmail.com'],
                 [
-                    'name' => 'Admin Test User',       // 管理者の名前
-                    'password' => bcrypt('admin123'),  // 英数字8文字以上のパスワード
+                    'name' => 'Admin Test User',
+                    'password' => bcrypt('admin123'),
                 ]
             );
         } else {
