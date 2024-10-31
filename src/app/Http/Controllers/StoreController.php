@@ -53,6 +53,11 @@ class StoreController extends Controller
     /* QRコードでの予約確認 */
     public function verify($id)
     {
+        // ログイン状態を確認
+        if (!auth()->check()) {
+            return redirect()->route('login')->withErrors(['message' => 'ログインしてください']);
+        }
+
         $reservation = Reservation::find($id);
 
         if (!$reservation) {
