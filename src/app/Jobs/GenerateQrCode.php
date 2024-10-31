@@ -43,7 +43,7 @@ class GenerateQrCode implements ShouldQueue
             'imageBase64' => false,
         ]);
 
-        $qrCodeData = url("/store/verify/{$reservation->id}") . " | 予約ID: {$reservation->id}";
+        $qrCodeData = url("/store/verify/{$reservation->id}");
 
         $qrcode = (new QRCode($options))->render($qrCodeData);
 
