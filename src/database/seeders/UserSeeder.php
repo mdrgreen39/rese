@@ -40,7 +40,7 @@ class UserSeeder extends Seeder
             });
 
             // 他の一般ユーザーをランダムに生成
-            User::factory(1)->create()->each(function ($user) {
+            User::factory(9)->create()->each(function ($user) {
                 $user->assignRole('user');
                 $user->givePermissionTo('user');
             });
