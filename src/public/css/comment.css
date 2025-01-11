@@ -18,7 +18,7 @@
 .comment-left {
     width: 40%;
     position: relative;
-    padding: 5rem;
+    padding: 2rem 5rem;
 }
 
 .comment-right {
@@ -165,6 +165,8 @@ textarea {
     padding: 1rem;
     border-radius: 0.5rem;
     background-color: #f7f7f7;
+    cursor: pointer;
+    overflow: hidden;
 }
 
 .image-upload-box p {
@@ -172,13 +174,35 @@ textarea {
     color: #777;
 }
 
+.image-upload-box img {
+    object-fit: contain;
+}
+
 .image-upload-box .drag-drop {
     font-size: 0.6rem;
 }
 
+.drop-zone {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    background-color: #f7f7f7;
+    transition: background-color 0.3s ease, border-color 0.3s ease;
+}
+
+.drop-zone.drag-over {
+    background-color: #e0e0e0;
+}
+
+.drag-drop {
+    font-size: 0.9rem;
+    color: #333;
+}
+
 .image-upload-box input[type="file"] {
     display: none;
-    /* ここでinput[type="file"]を隠します */
 }
 
 .comment-send {
@@ -209,7 +233,19 @@ textarea {
 .comment-form__error-message {
     font-size: 1rem;
     color: #cf2222;
-    margin-left: 2.5rem;
+}
+
+.comment-send__error-message {
+    font-size: 1rem;
+    color: #cf2222;
+    margin-bottom: 0.5rem;
+}
+
+
+@media screen and (max-width: 959px) {
+    .comment-left {
+            padding: 2rem;
+        }
 }
 
 
@@ -235,6 +271,7 @@ textarea {
 
     .comment-right {
         width: 100%;
+        padding-left: 0rem;
     }
 
     .comment-left::after {
@@ -257,5 +294,9 @@ textarea {
 
     .comment-send__button {
         width: 100%;
+    }
+
+    .comment-form__error-message {
+        margin-left: 0rem;
     }
 }

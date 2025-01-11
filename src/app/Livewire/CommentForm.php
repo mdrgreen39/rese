@@ -2,63 +2,110 @@
 
 namespace App\Livewire;
 
+use Illuminate\Http\UploadedFile;
 use Livewire\Component;
 use Livewire\WithFileUploads;
 use App\Models\Comment;
-
 
 class CommentForm extends Component
 {
     use WithFileUploads;
 
+    public $shop;
+    public $prefecture;
+    public $genre;
     public $rating = 0; // 星評価
     public $comment = ''; // コメント内容
     public $image; // 画像ファイル
 
-    public function setRating($value)
+    protected $listeners = [
+        'ratingUpdated' => 'updateRating',
+        'commentUpdated' => 'updateComment',
+        'imageUpdated' => 'updateImage'
+    ];
+
+
+    public function mount($shop, $prefecture, $genre, $rating = 0, $comment = '', $image = null)
+    {
+        $this->shop = $shop;
+        $this->prefecture = $prefecture;
+        $this->genre = $genre;
+        $this->rating = $rating ?? 0;
+        $this->comment = $comment;
+        $this->image = $image;
+    }
+
+    // 評価が更新された時の処理
+    public function updateRating($value)
     {
         $this->rating = $value;
     }
 
+    public function updateComment($value)
+    {
+        $this->comment = $value;
+    }
+
+    public function updateImage($image)
+    {
+        $this->image = $image;
+    }
+
     public function submit()
     {
-        // バリデーション
+        $commentCount = Comment::where('user_id', auth()->id()) // 現在のユーザー
+            ->where('shop_id', $this->shop->id) // 現在の店舗
+            ->count(); // 投稿数をカウント
+
+        // もし投稿数が2回以上であれば、エラーメッセージを返す
+        if ($commentCount >= 2) {
+            session()->flash('error', '同じ店舗に2回以上コメントを投稿することはできません');
+            return;
+        }
+
+        if (is_string($this->image)) {
+            $this->image = new UploadedFile(
+                $this->image,
+                basename($this->image),
+                mime_content_type($this->image),
+                null,
+                true
+            );
+
+        }
+
         $this->validate([
             'comment' => ['required', 'string', 'max:400'],
             'rating' => ['required', 'integer', 'min:1', 'max:5'],
-            'image' => ['nullable', 'mimes:jpeg,png', 'max:2048'],
+            'image' => ['nullable', 'mimes:jpeg,png,jpg', 'max:2048'],
         ], $this->messages());
 
-        // 画像保存処理
+
         $imagePath = null;
         if ($this->image) {
-            // 環境に応じて保存先を変更
             if (app()->environment('production')) {
-                // 本番環境ではS3に保存
                 $imagePath = $this->image->store('comments', 's3');
             } else {
-                // 開発環境ではpublicディスクに保存
                 $imagePath = $this->image->store('comments', 'public');
             }
         }
 
-        // コメントデータベース保存
         Comment::create([
             'user_id' => auth()->id(),
-            'shop_id' => $this->shopId,
+            'shop_id' => $this->shop->id,
             'comment' => $this->comment,
             'rating' => $this->rating,
-            'image' => $imagePath,  // 保存した画像のパス
+            'image' => $imagePath,
         ]);
 
-        session()->flash('success', '口コミを投稿しました！');
+        return redirect()->route('comment.success', ['shop_id' => $this->shop->id]);
 
-        // 初期化
-        $this->reset(['rating', 'comment', 'image']);
+
     }
 
     public function render()
     {
+        $this->dispatch('parent-component', 'updateRating', $this->rating);
         return view('livewire.comment-form');
     }
 

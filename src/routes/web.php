@@ -62,10 +62,7 @@ Route::middleware('auth', 'verified', 'role:user')->group(function ()
     Route::get('/payment/success', [ReservationController::class, 'paymentSuccess'])->name('payment.success');
     Route::get('/payment/cancel', [ReservationController::class, 'paymentCancel'])->name('payment.cancel');
     Route::get('shop/{shop_id}/comment', [CommentController::class, 'showCommentForm'])->name('comment.form');
-    Route::post('shop/{shop_id}/comment', [CommentController::class, 'storeComment'])->name('comment.store');
-    Route::get('comment/success', [CommentController::class, 'commentSuccess'])->name('comment.success');
-    Route::get('comment/delete', [CommentController::class, 'commentDelete'])->name('comment.delete');
-    Route::delete('comment/{comment}', [CommentController::class, 'destroyComment'])->name('comment.destroy');
+    Route::get('/comment/success/{shop_id}', [CommentController::class, 'commentSuccess'])->name('comment.success');
 });
 
 // 予約時のログイン確認・予約処理

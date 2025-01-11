@@ -29,7 +29,7 @@
 <div class="comment">
     <h2 class="comment__heading">コメントが投稿されました</h2>
     <div class="comment__button-container">
-        <a class="comment__button" href="{{ route('shop.detail') }}">戻る</a>
+        <a class="comment__button" href="{{ route('shop.detail', ['shop_id' => $shop->id]) }}">戻る</a>
     </div>
 </div>
 

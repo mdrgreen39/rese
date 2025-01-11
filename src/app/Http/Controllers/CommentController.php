@@ -29,38 +29,6 @@ class CommentController extends Controller
         return view('comment', compact('shop', 'prefecture', 'genre','rating', 'comment', 'image'));
     }
 
-    public function storeComment(CommentRequest $request, $shopId)
-    {
-        $comment = new Comment();
-        $comment->user_id = auth()->id();
-        $comment->shop_id = $shopId;
-        $comment->comment = $request->comment;
-        $comment->rating = $request->rating;
-
-        if ($request->hasFile('image')) {
-            if (app()->environment('production')) {
-                $comment->image = $request->file('image')->store('comments', 's3');
-            } else {
-                $comment->image = $request->file('image')->store('comments', 'public');
-            }
-        } elseif ($request->filled('image_url')) {
-            $url = $request->input('image_url');
-            $fileName = basename($url);
-            $fileContents = file_get_contents($url);
-            $comment->image = 'comments/' . $fileName;
-
-            if (app()->environment('production')) {
-                Storage::disk('s3')->put($comment->image, $fileContents);
-            } else {
-                Storage::disk('public')->put($comment->image, $fileContents);
-            }
-        }
-
-        $comment->save();
-
-        return redirect()->route('comment.success');
-    }
-
 
     // コメントの削除
     public function destroyComment(Comment $comment)
@@ -85,9 +53,13 @@ class CommentController extends Controller
     }
 
     // コメント投稿完了ページ表示
-    public function commentSuccess()
+    public function commentSuccess($shop_id)
     {
-        return view('comment-success');
+        // コメントを投稿した店舗を取得
+        $shop = Shop::findOrFail($shop_id);
+
+        // コメント送信完了ページを表示し、店舗情報を渡す
+        return view('comment-success', compact('shop'));
     }
 
     // コメント削除完了ページ表示
