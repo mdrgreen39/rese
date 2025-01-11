@@ -69,12 +69,8 @@
                         <p class="comment-form__group-text">体験を評価してください</p>
                         <div class="stars">
                             @foreach (range(1, 5) as $value)
-                            <span
-                                class="star {{ $value <= $rating ? 'selected' : '' }}"
-                                data-value="{{ $value }}"
-                                wire:click="setRating({{ $value }})">
-                                ★
-                            </span>
+                            <span class="star {{ $value <= $rating ? 'selected' : '' }}" data-value="{{ $value }}" wire:click="setRating({{ $value }})">★</span>
+
                             @endforeach
                         </div>
                     </div>
