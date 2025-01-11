@@ -199,8 +199,8 @@ class StoreController extends Controller
         $shop = auth()->user()->shops()->findOrFail($shopId);
 
         $reservations = $shop->reservations()
-            ->orderBy('date', 'asc') // 日付で昇順
-            ->orderBy('time', 'asc') // 時間で昇順
+            ->orderBy('date', 'asc')
+            ->orderBy('time', 'asc')
             ->paginate(10);
 
         return view('store.reservations', compact('shop', 'reservations'));

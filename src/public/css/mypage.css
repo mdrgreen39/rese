@@ -54,6 +54,7 @@
     border-radius: 0.38rem;
     font-size: 0.75rem;
     cursor: pointer;
+    text-decoration: none;
 
         &:hover {
             background-color: #fff;
@@ -321,6 +322,7 @@ input[type="checkbox"] {
     font-size: 0.75rem;
     padding-right: 0.5rem;
     margin-bottom: 1rem;
+    list-style: none;
 }
 
 .mypage-favorite-wrap__item-button {
@@ -332,6 +334,7 @@ input[type="checkbox"] {
     border-radius: 0.38rem;
     font-size: 0.75rem;
     cursor: pointer;
+    text-decoration: none;
 
         &:hover {
             opacity: 0.7;

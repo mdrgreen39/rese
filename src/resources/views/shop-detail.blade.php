@@ -61,6 +61,8 @@
         @livewire('review-form', ['shop' => $shop])
 
         @endif
+        <a href="{{ route('comment.form', ['shop_id' => $shop->id]) }}" class="detail-container__comment">口コミを投稿する</a>
+
     </div>
 
     @livewire('reservation-form', ['shop' => $shop, 'times' => $times, 'numberOfPeople' => $numberOfPeople])

@@ -13,9 +13,11 @@ return new class extends Migration
         if (app()->environment('local')) {
             Storage::disk('public')->deleteDirectory('qr_codes');
             Storage::disk('public')->deleteDirectory('shops');
+            Storage::disk('public')->deleteDirectory('comments');
 
             Storage::disk('public')->makeDirectory('qr_codes');
             Storage::disk('public')->makeDirectory('shops');
+            Storage::disk('public')->makeDirectory('comments');
         }
 
 

@@ -38,6 +38,7 @@
     background-color: #fff;
     cursor: pointer;
     font-size: 1rem;
+    text-decoration: none;
 }
 
 .detail-heading__name {
@@ -55,10 +56,21 @@
     font-size: 0.88rem;
     padding-right: 0.5rem;
     margin: 1rem 0;
+    list-style: none;
 }
 
 .detail-container__description {
     font-size: 0.88rem;
+}
+
+.detail-container__comment {
+    color: inherit;
+    text-decoration: underline;
+}
+
+.detail-container__comment:hover {
+    color: #3460f6;
+    text-decoration: underline;
 }
 
 /* 予約フォーム */

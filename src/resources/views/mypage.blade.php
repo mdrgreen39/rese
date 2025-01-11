@@ -48,7 +48,7 @@
                     <div class="mypage-favorite-wrap__item">
                         <img class="mypage-favorite-wrap__item-photo" src="{{ $shop->image_url }}" alt="{{ $shop->name }}">
                         <div class="mypage-favorite-wrap__item-content">
-                            <h2 class="mypage-favorite-wrap__item-name">{{ $shop->name }}</h2>
+                            <h3 class="mypage-favorite-wrap__item-name">{{ $shop->name }}</h3>
                             <ul class="mypage-favorite-wrap__item-tag-container">
                                 <li class="mypage-favorite-wrap__item-tag">#{{ $shop->prefecture->name }}</li>
                                 <li class="mypage-favorite-wrap__item-tag">#{{ $shop->genre->name }}</li>
