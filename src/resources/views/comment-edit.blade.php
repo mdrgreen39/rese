@@ -1,10 +1,11 @@
 @extends('layouts.app')
 
 @section('css')
-<link rel="stylesheet" href="{{ asset('css/comment-done.css') }}">
+<link rel="stylesheet" href="{{ asset('css/comment.css') }}">
 @endsection
 
 @section('nav')
+
 <input class="hamburger-input" type="checkbox" id="check">
 <label class="hamburger-label" for="check">
     <span></span>
@@ -26,11 +27,14 @@
 
 @section('content')
 
-<div class="comment">
-    <h2 class="comment__heading">コメントを投稿しました</h2>
-    <div class="comment__button-container">
-        <a class="comment__button" href="{{ route('shop.detail', ['shop_id' => $shop->id]) }}">戻る</a>
-    </div>
-</div>
+@livewire('edit-comment', [
+'shop' => $shop,
+'prefecture' => $prefecture,
+'genre' => $genre,
+'rating' => $rating,
+'comment' => $comment,
+'existingImage' => $existingImage,
+])
+
 
 @endsection

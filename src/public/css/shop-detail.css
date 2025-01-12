@@ -264,6 +264,54 @@
     resize: vertical;
 }
 
+/* クチコミ */
+.comment-area {
+    display: flex;
+    flex-direction: column;
+}
+
+.star {
+    font-size: 2rem;
+    color: #cccccc;
+}
+
+.star.filled {
+    color: #3d5fe5;
+}
+
+.comment-image-thumbnail {
+    width: 150px;
+    /* 横幅を指定 */
+    height: 100px;
+    /* 高さは自動で調整 */
+    object-fit: cover;
+    /* 画像が歪まないようにトリミング */
+}
+
+.comment-actions {
+    display: flex;
+    justify-content: flex-end;
+    /* 右端に配置 */
+    gap: 10px;
+    /* 編集と削除の間に少しスペースをあける */
+}
+
+.edit-link,
+.delete-link {
+    text-decoration: none;
+    font-size: 14px;
+    color: #007bff;
+}
+
+.delete-link {
+    color: red;
+}
+
+.edit-link:hover,
+.delete-link:hover {
+    color: inherit;
+}
+
 @media (max-width: 768px) {
 
     .header {

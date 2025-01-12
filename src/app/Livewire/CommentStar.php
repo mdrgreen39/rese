@@ -7,6 +7,16 @@ use Livewire\Component;
 class CommentStar extends Component
 {
     public $rating = 0;
+    public $isEditing = false;
+
+
+    // 編集用の初期化
+    public function mount($rating = 0, $isEditing = false)
+    {
+        $this->rating = $rating;
+        $this->isEditing = $isEditing;
+    }
+
 
     public function setRating($value)
     {

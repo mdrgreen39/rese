@@ -36,7 +36,7 @@
                         <!-- 星評価 -->
                         <div class="comment-form__group">
                             <p class="comment-form__group-text">体験を評価してください</p>
-                            @livewire('comment-star', ['rating' => $rating], key('comment-star'))
+                            @livewire('comment-star', ['rating' => $rating, 'isEditing' => false], key('comment-star'))
                         </div>
                         @if ($errors->has('rating'))
                         <p class="comment-form__error-message">{{ $errors->first('rating') }}</p>

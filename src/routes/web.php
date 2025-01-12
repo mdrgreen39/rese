@@ -63,6 +63,19 @@ Route::middleware('auth', 'verified', 'role:user')->group(function ()
     Route::get('/payment/cancel', [ReservationController::class, 'paymentCancel'])->name('payment.cancel');
     Route::get('shop/{shop_id}/comment', [CommentController::class, 'showCommentForm'])->name('comment.form');
     Route::get('/comment/success/{shop_id}', [CommentController::class, 'commentSuccess'])->name('comment.success');
+    // 口コミ編集ページへのルート
+    Route::get('/comment/{id}/edit/{shop_id}', [CommentController::class, 'editComment'])->name('comment.editComment');
+
+    Route::get('/comment-update-success/{shop_id}', [CommentController::class, 'commentUpdate'])->name('comment.update.success');
+
+    // 口コミ削除のルート
+    Route::delete('/comment/{comment}', [CommentController::class, 'destroyComment'])
+    ->name('comment.destroy');
+
+    // web.php のルート定義
+    Route::get('/comment/delete/{shop_id}', [CommentController::class, 'commentDelete'])->name('comment.delete');
+
+
 });
 
 // 予約時のログイン確認・予約処理

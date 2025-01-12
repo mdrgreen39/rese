@@ -63,6 +63,83 @@
         @endif
         <a href="{{ route('comment.form', ['shop_id' => $shop->id]) }}" class="detail-container__comment">口コミを投稿する</a>
 
+        <div class="comment-area">
+            <button id="showAllCommentsButton">すべての口コミを見る</button>
+
+            <!-- 最新のコメント -->
+            <div class="latest-comment">
+                @if($latestComment)
+                <div class="comment-actions">
+                    @if($latestComment->user_id === auth()->id()) <!-- 自分のコメントだけ編集・削除可能 -->
+                    <a href="{{ route('comment.editComment', ['id' => $latestComment->id, 'shop_id' => $shop->id]) }}" class="edit-link">口コミを編集</a>
+
+
+
+                    <form action="{{ route('comment.destroy', $latestComment->id) }}" method="POST" style="display:inline;">
+                        @csrf
+                        @method('DELETE')
+                        <button type="submit" class="delete-link">口コミを削除</button>
+                    </form>
+                    @endif
+                </div>
+
+                @if($latestComment->image) <!-- 画像がある場合 -->
+                <img src="{{ url('storage/' . $latestComment->image) }}" alt="Comment Image" class="comment-image-thumbnail">
+                @endif
+
+                <div class="rating">
+                    @for ($i = 1; $i <= 5; $i++)
+                        <span class="star {{ $i <= $latestComment->rating ? 'filled' : '' }}">★</span>
+                        @endfor
+                </div>
+                <p>{{ $latestComment->comment }}</p>
+
+                @else
+                <p>まだコメントはありません。</p>
+                @endif
+            </div>
+
+            <!-- すべての口コミ -->
+            <div class="comments-container" id="commentsContainer" style="display:none;">
+                @foreach($allComments as $comment)
+                @if($comment->id !== $latestComment->id) <!-- 最新のコメントを除外 -->
+                <div class="comment">
+                    <div class="comment-actions">
+                        @if($comment->user_id === auth()->id()) <!-- 自分のコメントだけ編集・削除可能 -->
+                        <a href="{{ route('comment.editComment', ['id' => $comment->id, 'shop_id' => $shop->id]) }}" class="edit-link">口コミを編集</a>
+
+                        <form action="{{ route('comment.destroy', ['comment' => $comment->id]) }}" method="POST" style="display:inline;">
+                            @csrf
+                            @method('DELETE')
+                            <button type="submit" class="delete-link">口コミを削除</button>
+                        </form>
+                        @endif
+                    </div>
+
+                    @if($comment->image) <!-- 画像がある場合 -->
+                    <img src="{{ url('storage/' . $comment->image) }}" alt="Comment Image" class="comment-image-thumbnail">
+                    @endif
+                    <div class="rating">
+                        @for ($i = 1; $i <= 5; $i++)
+                            <span class="star {{ $i <= $comment->rating ? 'filled' : '' }}">★</span>
+                            @endfor
+                    </div>
+                    <p>{{ $comment->comment }}</p>
+                </div>
+                @endif
+                @endforeach
+            </div>
+
+            <script>
+                // 「すべての口コミを見る」ボタンが押されたときにコメントを表示
+                document.getElementById('showAllCommentsButton').addEventListener('click', function() {
+                    const commentsContainer = document.getElementById('commentsContainer');
+                    commentsContainer.style.display = commentsContainer.style.display === 'none' ? 'block' : 'none';
+                });
+            </script>
+        </div>
+
+
     </div>
 
     @livewire('reservation-form', ['shop' => $shop, 'times' => $times, 'numberOfPeople' => $numberOfPeople])

@@ -27,7 +27,7 @@
 @section('content')
 
 <div class="comment">
-    <h2 class="comment__heading">コメントを投稿しました</h2>
+    <h2 class="comment__heading">コメントを更新しました</h2>
     <div class="comment__button-container">
         <a class="comment__button" href="{{ route('shop.detail', ['shop_id' => $shop->id]) }}">戻る</a>
     </div>

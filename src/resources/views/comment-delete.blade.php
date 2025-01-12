@@ -27,9 +27,9 @@
 @section('content')
 
 <div class="comment">
-    <h2 class="comment__heading">コメントが削除されました</h2>
+    <h2 class="comment__heading">コメントを削除しました</h2>
     <div class="comment__button-container">
-        <a class="comment__button" href="{{ route('shop.detail', ['id' => $shop->id]) }}">戻る</a>
+        <a class="comment__button" href="{{ route('shop.detail', ['shop_id' => $shop->id]) }}">戻る</a>
     </div>
 </div>
 

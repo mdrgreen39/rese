@@ -7,6 +7,7 @@ use App\Models\Shop;
 use App\Models\Prefecture;
 use App\Models\Genre;
 use App\Models\Reservation;
+use App\Models\Comment;
 
 
 class ShopController extends Controller
@@ -33,6 +34,8 @@ class ShopController extends Controller
         $prefecture = $shop->prefecture;
         $genre = $shop->genre;
 
+        $comments = Comment::where('shop_id', $shop_id)->get();
+
         $startTime = '11:00';
         $endTime = '21:00';
         $interval = 30;
@@ -56,7 +59,12 @@ class ShopController extends Controller
             return $reservation->can_review && $reservation->visited_at !== null;
         });
 
-        return view('shop-detail', compact('shop', 'prefecture', 'genre', 'times', 'numberOfPeople', 'reservations', 'canReview'));
+        $latestComment = $shop->comments()->latest()->first(); // 最も新しいコメント
+        // すべてのコメントを取得
+        $allComments = $shop->comments()->orderBy('created_at', 'desc')->get();
+
+
+        return view('shop-detail', compact('shop', 'prefecture', 'genre', 'times', 'numberOfPeople', 'reservations', 'canReview','latestComment', 'allComments'));
     }
 }
 

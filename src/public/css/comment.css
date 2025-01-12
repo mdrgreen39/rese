@@ -157,6 +157,7 @@ textarea {
 
 /* 画像アップロードのスタイル */
 .image-upload-box {
+    position: relative;
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -169,36 +170,70 @@ textarea {
     overflow: hidden;
 }
 
-.image-upload-box p {
-    font-size: 0.75rem;
-    color: #777;
-}
 
 .image-upload-box img {
     object-fit: contain;
 }
 
-.image-upload-box .drag-drop {
-    font-size: 0.6rem;
-}
-
+/* ドロップゾーンを常に表示する */
 .drop-zone {
+    position: absolute;
+    /* 常に画像の上に配置 */
+    top: 0;
+    left: 0;
     width: 100%;
+    height: 100%;
     display: flex;
     justify-content: center;
     align-items: center;
     text-align: center;
-    background-color: #f7f7f7;
+    background-color: rgba(247, 247, 247, 0.8);
+    /* 半透明 */
     transition: background-color 0.3s ease, border-color 0.3s ease;
+    z-index: 10;
+    /* 画像より上に表示 */
 }
 
 .drop-zone.drag-over {
-    background-color: #e0e0e0;
+    background-color: rgba(224, 224, 224, 0.8);
+    /* ドラッグ時に色変更 */
+    border-color: #666;
 }
 
-.drag-drop {
+.drop-zone__text {
+    display: flex;
+    flex-direction: column;
+}
+
+.click-upload {
     font-size: 0.9rem;
-    color: #333;
+    color: #777;
+}
+.drag-drop {
+    font-size: 0.6rem;
+    color: #777;
+    /* z-index: 20; */
+}
+
+/* 画像プレビューのスタイル */
+.image-preview img {
+    max-width: 300px;
+    max-height: 300px;
+    object-fit: contain;
+        z-index: 1;
+}
+
+.drop-zone .image-preview {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.1);
+    /* 画像上に薄い背景色を追加 */
 }
 
 .image-upload-box input[type="file"] {

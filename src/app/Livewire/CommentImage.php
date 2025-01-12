@@ -9,6 +9,7 @@ class CommentImage extends Component
 {
     use WithFileUploads;
 
+    public $imagePreview = null;
     public $image;
 
     public function updatedImage()
