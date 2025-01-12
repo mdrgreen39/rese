@@ -50,7 +50,7 @@ Route::get('/', [ShopController::class, 'index'])->name('shops.index');
 Route::get('/detail/{shop_id}', [ShopController::class, 'show'])->name('shop.detail');
 
 // ユーザー
-Route::middleware('auth', 'verified', 'role:user')->group(function ()
+Route::middleware('auth', 'verified','role:user')->group(function ()
 {
     Route::get('/mypage', [MyPageController::class, 'index'])->name('user.mypage');
     Route::get('/shops/{shop}/review-success', [MyPageController::class, 'showReviewSuccess'])->name('review.success');
@@ -73,7 +73,7 @@ Route::middleware('auth', 'verified', 'role:user')->group(function ()
     ->name('comment.destroy');
 
     // web.php のルート定義
-    Route::get('/comment/delete/{shop_id}', [CommentController::class, 'commentDelete'])->name('comment.delete');
+    // Route::get('/comment/delete/{shop_id}', [CommentController::class, 'commentDelete'])->name('comment.delete');
 
 
 });
@@ -90,6 +90,9 @@ Route::middleware(['auth', 'role:admin'])->group(function () {
     Route::get('/admin/email-notification', [AdminController::class, 'showNotificationForm'])->name('admin.emailNotification');
     Route::post('/admin/email-notification/send', [AdminController::class, 'sendNotification'])->name('admin.sendNotification');
     Route::get('/admin/email-notification/sent', [AdminController::class, 'emailSent'])->name('admin.emailNotificationSent');
+
+    Route::get('/admin/comments', [AdminController::class, 'showComments'])->name('admin.showComments');
+    Route::delete('/admin/comments/{comment}', [AdminController::class, 'destroyComments'])->name('admin.destroyComments');
 });
 
 // 店舗代表者

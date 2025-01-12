@@ -18,6 +18,7 @@ class DatabaseSeeder extends Seeder
             RolesAndPermissionsSeeder::class,
             UserSeeder::class,
             ShopsTableSeeder::class,
+            CommentSeeder::class,
         ]);
 
         if (App::environment('local')) {

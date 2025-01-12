@@ -1,0 +1,108 @@
+.comments-all {
+    width: 90%;
+    max-width: 800px;
+    margin: 6rem auto;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+}
+
+.comments-all-heading {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+    justify-content: flex-start;
+    align-items: center;
+    padding-bottom: 1rem;
+    position: fixed;
+    top: 7rem;
+    width: 100%;
+    height: 7rem;
+    background-color: #eeeeee;
+    z-index: 10;
+    overflow: hidden;
+}
+
+.comments-all-heading__button-before {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 1.5rem;
+    height: 1.5rem;
+    color: #000;
+    border: none;
+    border-radius: 0.19rem;
+    box-shadow: 0.25rem 0.25rem 0.25rem rgba(0, 0, 0, 0.4);
+    background-color: #fff;
+    cursor: pointer;
+    font-size: 1rem;
+    text-decoration: none;
+}
+
+.comments-all-heading__title {
+    font-size: 1.75rem;
+}
+
+.comments-all-list {
+    width: 100%;
+    margin: 15rem auto 2rem;
+    padding: 1.75rem;
+    border-radius: 0.38rem;
+    box-shadow: 0.25rem 0.25rem 0.25rem rgba(0, 0, 0, 0.4);
+    background-color: #fff;
+    overflow-x: auto;
+}
+
+.comments-all-table {
+    width: 100%;
+    min-width: 600px;
+    border-collapse: collapse;
+}
+
+.comments-all-table th,
+.comments-all-table td {
+    border: 0.06rem solid #ccc;
+    padding: 1rem;
+    text-align: center;
+}
+
+.comments-all-table th {
+    background-color: #f2f2f2;
+}
+
+.comments-all-table tr:nth-child(even) {
+    background-color: #f9f9f9;
+}
+
+.comments-all-table tr:hover {
+    background-color: #f1f1f1;
+}
+
+.comments-table td img.image-preview {
+    max-width: 50px;
+    max-height: 50px;
+    border-radius: 0.1rem;
+    object-fit: contain;
+}
+
+.flash-message {
+    text-align: center;
+    margin-top: 3.5rem;
+    padding: 1rem 0;
+    color: #3460f6;
+    opacity: 0.7;
+}
+
+@media (max-width: 768px) {
+
+    .header {
+        height: 8.35rem;
+    }
+
+    .header__container {
+        padding-bottom: 0;
+    }
+
+    .comments-all {
+        margin: 10rem auto;
+    }
+}

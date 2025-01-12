@@ -3,7 +3,9 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Storage;
 use App\Models\User;
+use App\Models\Comment;
 use App\Jobs\SendNotificationEmail;
 use App\Http\Requests\AdminRegisterRequest;
 use App\Http\Requests\SendNotificationRequest;
@@ -100,5 +102,34 @@ class AdminController extends Controller
     public function emailSent()
     {
         return view('admin.email-sent');
+    }
+
+    // 口コミ一覧表示
+    public function showComments()
+    {
+        $comments = Comment::with('shop')->orderBy('created_at', 'desc')->get();
+
+        $comments = Comment::paginate(10); 
+
+        return view('admin.comments-all', compact('comments'));
+    }
+
+    // コメント削除メソッド
+    public function destroyComments(Comment $comment)
+    {
+        // 画像が存在する場合は削除
+        if ($comment->image) {
+            if (app()->environment('production')) {
+                Storage::disk('s3')->delete($comment->image);
+            } else {
+                Storage::disk('public')->delete($comment->image);
+            }
+        }
+
+        // コメント削除
+        $comment->delete();
+
+        // 成功メッセージを表示してリダイレクト
+        return redirect()->route('admin.showComments')->with('success', 'コメントが削除されました');
     }
 }

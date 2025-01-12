@@ -14,6 +14,7 @@
 
 .store-dashboard-menu li {
     margin-bottom: 0.63rem;
+    list-style: none;
 }
 
 .store-dashboard-link {

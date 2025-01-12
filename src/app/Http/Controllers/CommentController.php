@@ -16,7 +16,7 @@ class CommentController extends Controller
     public function __construct()
     {
         $this->middleware('auth');
-        $this->middleware('role:user'); // ユーザーが認証されていることを確認
+        $this->middleware('role:user');
     }
 
     // コメント投稿ページ表示
