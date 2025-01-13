@@ -3,6 +3,7 @@
 namespace Database\Factories;
 
 use Illuminate\Database\Eloquent\Factories\Factory;
+use Illuminate\Support\Facades\File;
 use Faker\Generator as Faker;
 use App\Models\User;
 use App\Models\Shop;
@@ -24,7 +25,8 @@ class CommentFactory extends Factory
     public function definition(): array
     {
         // roleが'user'のユーザーIDをランダムに取得
-        $users = User::where('role', 'user')->pluck('id');
+        $users = User::role('user')->pluck('id');
+
         // 全てのショップIDを取得
         $shops = Shop::pluck('id');
 
@@ -42,11 +44,23 @@ class CommentFactory extends Factory
             return [];  // コメントを生成しないため、空の配列を返す
         }
 
-        // 画像はpublic/commentsに保存されると仮定
-        $image = $this->faker->randomElement([
-            null, // 画像なし
-            'comments/' . $this->faker->image(storage_path('app/public/comments'), 640, 480, null, false), // ランダムな画像
-        ]);
+        // 初期設定
+        $image = null;
+        $imageName = 'comment_image_' . uniqid() . '.jpg'; // 画像名を定義
+
+        // 画像をランダムに選んでpublic/commentsに保存
+        if ($this->faker->boolean(50)) { // 50%の確率で画像を設定
+            // images/comments フォルダ内のファイルをランダムに選択
+            $randomImage = $this->faker->randomElement(File::files(public_path('images/comments')));
+            $sourcePath = $randomImage->getRealPath(); // ランダムに選ばれた画像のパス
+            $destinationPath = storage_path('app/public/comments/' . $imageName); // ストレージのパス
+
+            // 画像をコピー
+            if (File::exists($sourcePath)) {
+                File::copy($sourcePath, $destinationPath);
+                $image = 'comments/' . $imageName; // データベースに保存するパス（public/storage経由でアクセス）
+            }
+        }
 
         return [
             'user_id' => $userId,
@@ -55,5 +69,6 @@ class CommentFactory extends Factory
             'comment' => $this->faker->text(),
             'image' => $image,
         ];
+
     }
 }
