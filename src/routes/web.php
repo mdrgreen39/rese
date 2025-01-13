@@ -93,6 +93,10 @@ Route::middleware(['auth', 'role:admin'])->group(function () {
 
     Route::get('/admin/comments', [AdminController::class, 'showComments'])->name('admin.showComments');
     Route::delete('/admin/comments/{comment}', [AdminController::class, 'destroyComments'])->name('admin.destroyComments');
+
+    Route::get('admin/shops/import', [AdminController::class, 'showImportForm'])->name('admin.shops.import');
+    Route::post('admin/shops/import', [AdminController::class, 'import'])->name('admin.shops.import.store');
+
 });
 
 // 店舗代表者

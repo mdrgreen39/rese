@@ -1,0 +1,105 @@
+.shop-import__session-message {
+    margin: 12rem auto 0 auto;
+    text-align: center;
+    color: #3460f6;
+}
+
+.shop-import {
+    width: 90%;
+    max-width: 25rem;
+    margin: 12rem auto;
+    padding: 1.75rem;
+    border-radius: 0.38rem;
+    box-shadow: 0.25rem 0.25rem 0.25rem rgba(0, 0, 0, 0.4);
+    background-color: #fff;
+    position: relative;
+    overflow: hidden;
+}
+
+.shop-import__heading {
+    background-color: #3460f6;
+    color: #fff;
+    padding: 1rem;
+    margin: -1.75rem -1.75rem 1rem -1.75rem;
+    text-align: left;
+    font-size: 1rem;
+    font-weight: 500;
+    border-top-left-radius: 0.38rem;
+    border-top-right-radius: 0.38rem;
+}
+
+.shop-import__form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    margin-bottom: 1rem;
+    position: relative;
+}
+
+.shop-import__group {
+    width: 100%;
+}
+
+.shop-import__input-container {
+    position: relative;
+    display: flex;
+    align-items: center;
+}
+
+.shop-import__input {
+    flex: 1;
+    padding: 1rem 0.5rem 0 0.06rem;
+    border-bottom: 0.06rem solid #000;
+    outline: none;
+}
+
+.shop-import__input:focus {
+    border-bottom: 0.13rem solid #757575;
+}
+
+.shop-import__error-message {
+    font-size: 1rem;
+    color: #cf2222;
+}
+
+.shop-import__button-container {
+    width: 100%;
+    display: flex;
+    justify-content: flex-end;
+    margin-top: 1.5rem;
+}
+
+.shop-import__button {
+    padding: 0.5rem 1rem;
+    background-color: #3460f6;
+    color: #fff;
+    border: none;
+    border-radius: 0.38rem;
+    font-size: 0.75rem;
+    cursor: pointer;
+
+    &:hover {
+        opacity: 0.7;
+    }
+}
+
+
+@media (max-width: 768px) {
+
+    .header {
+        height: 8.35rem;
+    }
+
+    .header__container {
+        padding-bottom: 0;
+    }
+
+    .shop-import {
+        margin: 10rem auto;
+    }
+
+    .shop-import__error-message {
+        font-size: 0.75rem;
+    }
+}

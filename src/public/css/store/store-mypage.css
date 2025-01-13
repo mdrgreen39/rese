@@ -59,6 +59,8 @@
 }
 
 .store-mypage-wrap__item-name {
+    font-size: 1.25rem;
+    font-weight: bold;
     position: relative;
     margin-top: 1rem;
 }

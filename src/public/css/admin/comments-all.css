@@ -14,7 +14,7 @@
     align-items: center;
     padding-bottom: 1rem;
     position: fixed;
-    top: 7rem;
+    top: 8rem;
     width: 100%;
     height: 7rem;
     background-color: #eeeeee;
@@ -44,7 +44,7 @@
 
 .comments-all-list {
     width: 100%;
-    margin: 15rem auto 2rem;
+    margin: 9rem auto 2rem;
     padding: 1.75rem;
     border-radius: 0.38rem;
     box-shadow: 0.25rem 0.25rem 0.25rem rgba(0, 0, 0, 0.4);
@@ -66,7 +66,10 @@
 }
 
 .comments-all-table th {
-    background-color: #f2f2f2;
+    background-color: #3460f6;
+    color: white;
+    padding: 1rem;
+    text-align: center;
 }
 
 .comments-all-table tr:nth-child(even) {
@@ -77,19 +80,31 @@
     background-color: #f1f1f1;
 }
 
-.comments-table td img.image-preview {
+.comments-all-table td img.image-preview {
     max-width: 50px;
     max-height: 50px;
     border-radius: 0.1rem;
     object-fit: contain;
 }
 
-.flash-message {
+.comments-all__button {
+    padding: 0.5rem 1rem;
+    background-color: #3460f6;
+    color: #fff;
+    border: none;
+    border-radius: 0.38rem;
+    font-size: 0.75rem;
+    cursor: pointer;
+
+    &:hover {
+        opacity: 0.7;
+    }
+}
+
+.comments-all__session-message {
+    margin: 12rem auto 0 auto;
     text-align: center;
-    margin-top: 3.5rem;
-    padding: 1rem 0;
     color: #3460f6;
-    opacity: 0.7;
 }
 
 @media (max-width: 768px) {
@@ -104,5 +119,9 @@
 
     .comments-all {
         margin: 10rem auto;
+    }
+
+    .comments-all-list {
+        margin: 5rem auto 2rem;
     }
 }

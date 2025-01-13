@@ -41,7 +41,7 @@
                 <div class="store-mypage-wrap__item">
                     <img class="store-mypage-wrap__item-photo" src="{{ $shop->image_url }}" alt="{{ $shop->name }}">
                     <div class="store-mypage-wrap__item-content">
-                        <h2 class="shop-wrap__item-name">{{ $shop->name }}</h2>
+                        <h2 class="store-mypage-wrap__item-name">{{ $shop->name }}</h2>
                         <ul class="store-mypage-wrap__item-tag-container">
                             <li class="store-mypage-wrap__item-tag">#{{ $shop->prefecture->name }}</li>
                             <li class="store-mypage-wrap__item-tag">#{{ $shop->genre->name }}</li>

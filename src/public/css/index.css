@@ -185,6 +185,8 @@
 }
 
 .shop-wrap__item-name {
+    font-size: 1.25rem;
+    font-weight: bold;
     position: relative;
     margin-top: 1rem;
 }
@@ -245,7 +247,6 @@
         flex-direction: column;
         justify-content: center;
         text-align: center;
-        padding: 2rem;
     }
 
     .header-search-form {

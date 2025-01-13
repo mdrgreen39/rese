@@ -27,12 +27,13 @@
 
 @section('content')
 
+@if (session('success'))
+<div class="comments-all__session-message">
+    {{ session('success') }}
+</div>
+@endif
+
 <div class="comments-all">
-    @if (session('message'))
-    <div class="flash-message">
-        {{ session('message') }}
-    </div>
-    @endif
     <div class="comments-all-heading">
         <a class="comments-all-heading__button-before" href="{{ route('admin.dashboard') }}">&lt;</a>
         <h2 class="comments-all-heading__title">口コミ一覧</h2>
@@ -46,7 +47,7 @@
         @if ($comments->isEmpty())
         <p class="no-results__text">口コミはありません</p>
         @else
-        <table class="comments-table">
+        <table class="comments-all-table">
             <thead>
                 <tr>
                     <th>コメントID</th>
@@ -80,7 +81,7 @@
                         <form action="{{ route('admin.destroyComments', ['comment' => $comment->id]) }}" method="POST" style="display:inline;">
                             @csrf
                             @method('DELETE')
-                            <button type="submit" class="delete-link" onclick="return confirm('本当に削除しますか？')">削除</button>
+                            <button class="comments-all__button" type="submit" class="delete-link" onclick="return confirm('本当に削除しますか？')">削除</button>
                         </form>
                     </td>
                 </tr>

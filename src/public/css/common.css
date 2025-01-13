@@ -46,7 +46,6 @@ input::placeholder {
     height: 9.38rem;
     padding: 0 3rem;
     background-color: #eeeeee;
-    flex-shrink: 0;
     /* overflow: hidden; */
     z-index: 1000;
 }
@@ -56,11 +55,15 @@ input::placeholder {
     justify-content: flex-start;
     justify-content: space-between;
     align-items: center;
-    width: 50%;
+    width: 30%;
     margin: 0 auto;
 }
 
 .header__logo {
+    position: fixed;
+    top: 3rem;
+        /* 上から1remの位置 */
+    left: 2.5rem;
     margin-left: 5rem;
     font-size: 2rem;
     color: #3460f6;

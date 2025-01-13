@@ -10,7 +10,7 @@
     },
     isDragOver: false,
     changeImage() {
-        $refs.fileInput.click(); // クリック時にファイル選択を開く
+        $refs.fileInput.click();
     }
 }">
 
