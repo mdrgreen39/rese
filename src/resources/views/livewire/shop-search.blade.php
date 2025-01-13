@@ -48,7 +48,7 @@
                 <li>
                     <button @click="sortBy = 'random'; showMenu = false; $wire.updateSortBy(sortBy)"
                         :class="{ 'selected': sortBy === 'random' }"
-                        class="menu-item">
+                        class="menu-item menu-item__first">
                         ランダム
                     </button>
                 </li>
@@ -62,7 +62,7 @@
                 <li>
                     <button @click="sortBy = 'low_rating'; showMenu = false; $wire.updateSortBy(sortBy)"
                         :class="{ 'selected': sortBy === 'low_rating' }"
-                        class="menu-item">
+                        class="menu-item menu-item__last">
                         評価が低い順
                     </button>
                 </li>

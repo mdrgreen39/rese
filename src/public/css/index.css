@@ -64,7 +64,7 @@
 
 /* メニューアイテム */
 .menu-item {
-    padding: 12px 16px;
+    padding: 0.75rem 1rem;
     width: 100%;
     text-align: left;
     cursor: pointer;
@@ -72,9 +72,19 @@
 }
 
 .menu-item:hover {
-    border-radius: 0.5rem;
     background-color: #5580f8;
-    color: #ffffff
+    color: #ffffff;
+}
+
+/* 最初の項目と最後の項目がホバーされた時のスタイル */
+.menu-item__first:hover {
+    border-top-left-radius: 0.5rem;
+    border-top-right-radius: 0.5rem;
+}
+
+.menu-item__last:hover {
+    border-bottom-left-radius: 0.5rem;
+    border-bottom-right-radius: 0.5rem;
 }
 
 /* 検索フォーム・検索 */

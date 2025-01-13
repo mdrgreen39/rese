@@ -21,4 +21,5 @@ yarn-error.log
 /.vscode
 src/public/.DS_Store
 src/public/images/.DS_Store
+**/.DS_Store
 
