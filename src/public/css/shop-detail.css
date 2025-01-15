@@ -60,30 +60,21 @@
 }
 
 .detail-container__description {
+    margin-bottom: 1rem;
     font-size: 0.88rem;
 }
 
-.detail-container__comment {
-    color: inherit;
-    text-decoration: underline;
-}
-
-.detail-container__comment:hover {
-    color: #3460f6;
-    text-decoration: underline;
-}
 
 /* 予約フォーム */
 .reserve-form {
     width: 48%;
-    margin: 0 auto 2rem;
+    margin: 5rem auto;
     padding: 1.75rem;
     max-height: 48rem;
     border-radius: 0.38rem;
     box-shadow: 0.25rem 0.25rem 0.25rem rgba(0, 0, 0, 0.4);
     background-color: #3460f6;
     position: relative;
-    z-index: 2000;
 }
 
 .reserve-form__heading {
@@ -195,7 +186,7 @@
         }
 }
 
-/* セレクトフォームアイコン */
+/* 予約フォームセレクトアイコン */
 .fa-caret-down {
     color: #1d2f4e;
     opacity: 0.2;
@@ -264,10 +255,99 @@
     resize: vertical;
 }
 
-/* クチコミ */
+/* 口コミ */
 .comment-area {
     display: flex;
     flex-direction: column;
+}
+
+.comment-area__comment-form--link {
+    font-size: 0.88rem;
+    margin-bottom: 1rem;
+    color: inherit;
+    text-decoration: underline;
+}
+
+.comment-area__comment-form--link:hover {
+    color: #3460f6;
+    text-decoration: underline;
+}
+
+.comment-area__button-container {
+    width: 100%;
+}
+
+.comment-area__button--display {
+    width: 100%;
+    padding: 0.5rem 1rem;
+    margin: 1rem 0;
+    background-color: #3460f6;
+    color: #fff;
+    border: none;
+    border-radius: 0.38rem;
+    font-size: 0.75rem;
+    cursor: pointer;
+        &:hover {
+            opacity: 0.7;
+        }
+}
+
+.comment-content {
+    border-top: 0.13rem solid #d2d2d2;
+    /* padding: 1rem 0; */
+    max-height: 500px;
+    overflow-y: auto;
+
+}
+
+.latest-comment,
+.comment {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    padding: 1rem;
+    border-bottom: 0.13rem solid #d2d2d2;
+}
+
+.comment-actions {
+    display: flex;
+    justify-content: flex-end;
+    gap: 0.75rem;
+}
+
+.edit-link,
+.delete-link {
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 1rem;
+    line-height: 1.5;
+    padding: 0;
+    margin: 0;
+    border: none;
+    background: none;
+    color: inherit;
+    text-decoration: underline;
+    cursor: pointer;
+    -webkit-appearance: none;
+}
+
+.edit-link:hover,
+.delete-link:hover {
+    color: #3460f6;
+    text-decoration: underline;
+}
+
+.delete-link:focus {
+    outline: none;
+    box-shadow: 0 0 4px #3460f6;
+    /* 代わりに青い光を表示 */
+}
+
+.comment-image-thumbnail {
+    width: 150px;
+    height: 100px;
+    object-fit: cover;
 }
 
 .star {
@@ -279,37 +359,13 @@
     color: #3d5fe5;
 }
 
-.comment-image-thumbnail {
-    width: 150px;
-    /* 横幅を指定 */
-    height: 100px;
-    /* 高さは自動で調整 */
-    object-fit: cover;
-    /* 画像が歪まないようにトリミング */
+.comment-text {
+
 }
 
-.comment-actions {
-    display: flex;
-    justify-content: flex-end;
-    /* 右端に配置 */
-    gap: 10px;
-    /* 編集と削除の間に少しスペースをあける */
-}
-
-.edit-link,
-.delete-link {
-    text-decoration: none;
-    font-size: 14px;
-    color: #007bff;
-}
-
-.delete-link {
-    color: red;
-}
-
-.edit-link:hover,
-.delete-link:hover {
-    color: inherit;
+.comment-status-message {
+    text-align: center;
+    color: #cf2222
 }
 
 @media (max-width: 768px) {

@@ -1,4 +1,4 @@
-<div class="header-search-container flex flex-col flex flex-col sm:flex-row-reverse sm:items-center sm:space-x-4">
+<div class="header-search-container flex flex-col flex flex-col sm:flex-row-reverse sm:space-x-4">
 
     <div class=" header-search-form">
         <div class="header-search__select-group">

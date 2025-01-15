@@ -73,7 +73,7 @@ Route::middleware('auth', 'verified','role:user')->group(function ()
     ->name('comment.destroy');
 
     // web.php のルート定義
-    // Route::get('/comment/delete/{shop_id}', [CommentController::class, 'commentDelete'])->name('comment.delete');
+    Route::get('/comment/delete/{shop_id}', [CommentController::class, 'commentDelete'])->name('comment.delete');
 
 
 });

@@ -34,7 +34,6 @@ class CommentController extends Controller
 
         return view('comment', compact('shop', 'prefecture', 'genre','rating', 'comment', 'image'));
     }
-   
 
     // コメント投稿完了ページ表示
     public function commentSuccess($shop_id)

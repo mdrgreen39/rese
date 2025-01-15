@@ -9,16 +9,12 @@
     gap: 1rem;
 }
 
-
-
 /* 検索フォーム・ ソート*/
 .relative {
     position: relative;
-    /* メニューが親要素を基準に配置されるようにする */
     overflow: visible;
-    /* メニューが親要素外に出ても隠れないようにする */
 }
-/* ドロップダウンボタン */
+
 .dropdown-button {
     background-color: #ffffff;
     padding: 0.5rem 1rem;
@@ -35,10 +31,8 @@
 
 .dropdown-button:focus {
     outline: none;
-    /* フォーカス時のスタイルを無効化 */
 }
 
-/* メニューの位置とアニメーション */
 .dropdown-menu {
     position: absolute;
     top: 100%;
@@ -55,14 +49,12 @@
     transition: opacity 0.3s, visibility 0.3s;
 }
 
-/* メニューが表示された時 */
 .dropdown-menu[x-show="showMenu"] {
     opacity: 1;
     visibility: visible;
     z-index: 9999;
 }
 
-/* メニューアイテム */
 .menu-item {
     padding: 0.75rem 1rem;
     width: 100%;
@@ -76,7 +68,6 @@
     color: #ffffff;
 }
 
-/* 最初の項目と最後の項目がホバーされた時のスタイル */
 .menu-item__first:hover {
     border-top-left-radius: 0.5rem;
     border-top-right-radius: 0.5rem;
@@ -229,10 +220,7 @@
 
 @media (max-width: 1200px) {
     .header-search-container {
-            display: flex;
             flex-direction: column;
-            justify-content: center;
-            text-align: center;
             padding: 1rem;
         }
         .dropdown-button {
@@ -244,6 +232,7 @@
 
     .header-search-container {
         display: flex;
+        
         flex-direction: column;
         justify-content: center;
         text-align: center;
