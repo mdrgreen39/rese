@@ -59,8 +59,8 @@ class ShopController extends Controller
             return $reservation->can_review && $reservation->visited_at !== null;
         });
 
-        $latestComment = $shop->comments()->latest()->first(); // 最も新しいコメント
-        // すべてのコメントを取得
+        $latestComment = $shop->comments()->latest()->first();
+
         $allComments = $shop->comments()->orderBy('created_at', 'desc')->get();
 
 

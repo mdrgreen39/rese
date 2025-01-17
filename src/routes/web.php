@@ -61,21 +61,12 @@ Route::middleware('auth', 'verified','role:user')->group(function ()
     Route::get('/payment/process', [ReservationController::class, 'processPayment'])->name('payment.action');
     Route::get('/payment/success', [ReservationController::class, 'paymentSuccess'])->name('payment.success');
     Route::get('/payment/cancel', [ReservationController::class, 'paymentCancel'])->name('payment.cancel');
-    Route::get('shop/{shop_id}/comment', [CommentController::class, 'showCommentForm'])->name('comment.form');
+    Route::get('/shop/{shop_id}/comment', [CommentController::class, 'showCommentForm'])->name('comment.form');
     Route::get('/comment/success/{shop_id}', [CommentController::class, 'commentSuccess'])->name('comment.success');
-    // 口コミ編集ページへのルート
     Route::get('/comment/{id}/edit/{shop_id}', [CommentController::class, 'editComment'])->name('comment.editComment');
-
     Route::get('/comment-update-success/{shop_id}', [CommentController::class, 'commentUpdate'])->name('comment.update.success');
-
-    // 口コミ削除のルート
-    Route::delete('/comment/{comment}', [CommentController::class, 'destroyComment'])
-    ->name('comment.destroy');
-
-    // web.php のルート定義
+    Route::delete('/comment/{comment}', [CommentController::class, 'destroyComment'])->name('comment.destroy');
     Route::get('/comment/delete/{shop_id}', [CommentController::class, 'commentDelete'])->name('comment.delete');
-
-
 });
 
 // 予約時のログイン確認・予約処理
@@ -83,6 +74,7 @@ Route::post('/shops/{shop}/reservations', [ReservationController::class, 'store'
 
 // 管理者
 Route::middleware(['auth', 'role:admin'])->group(function () {
+
     Route::get('/admin/dashboard', [AdminController::class, 'index'])->name('admin.dashboard');
     Route::get('/admin/owner-register', [AdminController::class, 'showRegisterForm'])->name('admin.ownerRegister');
     Route::post('/admin/owner-register', [AdminController::class, 'store'])->name('admin.storeOwner');
@@ -90,13 +82,10 @@ Route::middleware(['auth', 'role:admin'])->group(function () {
     Route::get('/admin/email-notification', [AdminController::class, 'showNotificationForm'])->name('admin.emailNotification');
     Route::post('/admin/email-notification/send', [AdminController::class, 'sendNotification'])->name('admin.sendNotification');
     Route::get('/admin/email-notification/sent', [AdminController::class, 'emailSent'])->name('admin.emailNotificationSent');
-
     Route::get('/admin/comments', [AdminController::class, 'showComments'])->name('admin.showComments');
     Route::delete('/admin/comments/{comment}', [AdminController::class, 'destroyComments'])->name('admin.destroyComments');
-
-    Route::get('admin/shops/import', [AdminController::class, 'showImportForm'])->name('admin.shops.import');
-    Route::post('admin/shops/import', [AdminController::class, 'import'])->name('admin.shops.import.store');
-
+    Route::get('/admin/shops/import', [AdminController::class, 'showImportForm'])->name('admin.shops.import');
+    Route::post('/admin/shops/import', [AdminController::class, 'import'])->name('admin.shops.import.store');
 });
 
 // 店舗代表者
@@ -104,8 +93,7 @@ Route::middleware(['auth', 'verified', 'role:store_manager'])->group(function ()
 
     Route::get('/store/dashboard', [StoreController::class, 'index'])->name('store.dashboard');
     Route::get('/store/mypage', [StoreController::class, 'myPage'])->name('store.mypage');
-    Route::get('/store/store-detail/{id}', [StoreController::class, 'show'])
-    ->name('store.detail');
+    Route::get('/store/store-detail/{id}', [StoreController::class, 'show'])->name('store.detail');
     Route::get('/store/register', [StoreController::class, 'register'])->name('store.register');
     Route::post('/store/register', [StoreController::class, 'store'])->name('store.store');
     Route::get('/store/register/done', [StoreController::class, 'registerDone'])->name('store.register.done');

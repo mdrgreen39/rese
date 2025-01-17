@@ -14,9 +14,9 @@ class CommentForm extends Component
     public $shop;
     public $prefecture;
     public $genre;
-    public $rating = 0; // 星評価
-    public $comment = ''; // コメント内容
-    public $image; // 画像ファイル
+    public $rating = 0;
+    public $comment = '';
+    public $image;
 
     protected $listeners = [
         'ratingUpdated' => 'updateRating',
@@ -35,7 +35,6 @@ class CommentForm extends Component
         $this->image = $image;
     }
 
-    // 評価が更新された時の処理
     public function updateRating($value)
     {
         $this->rating = $value;
@@ -53,11 +52,10 @@ class CommentForm extends Component
 
     public function submit()
     {
-        $commentCount = Comment::where('user_id', auth()->id()) // 現在のユーザー
-            ->where('shop_id', $this->shop->id) // 現在の店舗
-            ->count(); // 投稿数をカウント
+        $commentCount = Comment::where('user_id', auth()->id())
+            ->where('shop_id', $this->shop->id)
+            ->count();
 
-        // もし投稿数が2回以上であれば、エラーメッセージを返す
         if ($commentCount >= 2) {
             session()->flash('error', '同じ店舗に2回以上コメントを投稿することはできません');
             return;
@@ -71,7 +69,6 @@ class CommentForm extends Component
                 null,
                 true
             );
-
         }
 
         $this->validate([
@@ -79,7 +76,6 @@ class CommentForm extends Component
             'rating' => ['required', 'integer', 'min:1', 'max:5'],
             'image' => ['nullable', 'mimes:jpeg,png,jpg', 'max:2048'],
         ], $this->messages());
-
 
         $imagePath = null;
         if ($this->image) {
@@ -99,8 +95,6 @@ class CommentForm extends Component
         ]);
 
         return redirect()->route('comment.success', ['shop_id' => $this->shop->id]);
-
-
     }
 
     public function render()

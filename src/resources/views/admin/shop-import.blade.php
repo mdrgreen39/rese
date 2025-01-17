@@ -27,11 +27,27 @@
 
 @section('content')
 
-@if (session('success'))
-<div class="shop-import__session-message">
-    {{ session('success') }}
+
+<div class="shop-import-status {{ session('import_success') || $errors->any() ? '' : 'no-message' }}">
+
+    @if (session('import_success'))
+    <div class="shop-import__status-success">
+        <strong>成功:</strong>
+        @foreach (session('import_success') as $message)
+        <p>{{ $message }}</p>
+        @endforeach
+    </div>
+    @endif
+
+    @if ($errors->has('import_errors'))
+    <div class="shop-import__status-error">
+        <strong>エラー:</strong>
+        @foreach ($errors->get('import_errors') as $error)
+        <p>{{ is_array($error) ? implode(', ', $error) : $error }}</p>
+        @endforeach
+    </div>
+    @endif
 </div>
-@endif
 
 <div class="shop-import">
     <h2 class="shop-import__heading">CSVインポート</h2>

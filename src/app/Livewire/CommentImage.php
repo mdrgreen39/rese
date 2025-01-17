@@ -15,7 +15,7 @@ class CommentImage extends Component
     public function updatedImage()
     {
         if ($this->image) {
-            $this->dispatch('imageUpdated', $this->image->getRealPath()); // パスを送信
+            $this->dispatch('imageUpdated', $this->image->getRealPath());
         }
     }
 

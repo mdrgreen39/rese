@@ -21,18 +21,18 @@
         @dragleave="isDragOver = false"
         @drop.prevent="handleDrop($event)">
 
-        <div class="drop-zone__text">
-            <p class="click-upload">クリックして写真を追加</p>
-            <p class="drag-drop" @click="$refs.fileInput.click()">またはドラッグアンドドロップ</p>
-        </div>
-
-
         <input
             type="file"
             x-ref="fileInput"
             wire:model="image"
             accept="image/jpeg,image/png"
             style="display:none;" />
+
+        <div class="drop-zone__text">
+            <p class="click-upload" @click="$refs.fileInput.click()">クリックして写真を追加</p>
+            <p class="drag-drop">またはドラッグアンドドロップ</p>
+        </div>
+
     </div>
 
     @if ($image)

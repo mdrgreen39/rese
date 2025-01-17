@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Validator;
 use App\Models\User;
 use App\Models\Shop;
 use App\Models\Prefecture;
@@ -13,9 +14,7 @@ use App\Models\Comment;
 use App\Jobs\SendNotificationEmail;
 use App\Http\Requests\AdminRegisterRequest;
 use App\Http\Requests\SendNotificationRequest;
-use App\Imports\ShopImport;
 use Spatie\Permission\Models\Role;
-use Maatwebsite\Excel\Facades\Excel;
 
 class AdminController extends Controller
 {
@@ -115,15 +114,14 @@ class AdminController extends Controller
     {
         $comments = Comment::with('shop')->orderBy('created_at', 'desc')->get();
 
-        $comments = Comment::paginate(10); 
+        $comments = Comment::paginate(10);
 
         return view('admin.comments-all', compact('comments'));
     }
 
-    // コメント削除メソッド
+    // 口コミ削除処理
     public function destroyComments(Comment $comment)
     {
-        // 画像が存在する場合は削除
         if ($comment->image) {
             if (app()->environment('production')) {
                 Storage::disk('s3')->delete($comment->image);
@@ -132,10 +130,8 @@ class AdminController extends Controller
             }
         }
 
-        // コメント削除
         $comment->delete();
 
-        // 成功メッセージを表示してリダイレクト
         return redirect()->route('admin.showComments')->with('success', 'コメントが削除されました');
     }
 
@@ -148,7 +144,6 @@ class AdminController extends Controller
     // 新規店舗登録CSVインポート
     public function import(Request $request)
     {
-        // バリデーション
         $request->validate([
             'csv' => 'required|file|mimes:csv,txt|max:2048',
         ], [
@@ -158,23 +153,20 @@ class AdminController extends Controller
             'csv.max' => 'CSVファイルのサイズは2MB以下でなければなりません',
         ]);
 
-        // ファイルがアップロードされているか確認
         if (!$request->hasFile('csv') || !$request->file('csv')->isValid()) {
-            return back()->with('error', 'CSVファイルを選択してください。');
+            return back()->with('error', 'CSVファイルを選択してください');
         }
 
-        // ファイルが選択されている場合にのみ処理を実行
         $filePath = $request->file('csv')->getPathname();
 
-        // ファイルパスが取得できた場合のみ handleCSVImport を呼び出す
         if (!$filePath) {
-            return back()->with('error', 'CSVファイルが選択されていないか無効です。');
+            return back()->with('error', 'CSVファイルが選択されていないか無効です');
         }
 
         try {
-            $this->handleCSVImport($filePath);  // ファイルパスを渡す
+            $this->handleCSVImport($filePath);
         } catch (\Exception $e) {
-            return back()->with('error', 'CSVインポート処理中にエラーが発生しました。');
+            return back()->with('error', 'CSVインポート処理中にエラーが発生しました');
         }
 
         return redirect()->back()->with('success', 'CSVデータをインポートしました！');
@@ -182,79 +174,113 @@ class AdminController extends Controller
 
     public function handleCSVImport($filePath)
     {
-        // CSVファイルを読み込み
         $csvData = array_map('str_getcsv', file($filePath));
 
-        // ストレージの保存先ディレクトリ
         $storageDirectory = 'shops/';
+        $errors = [];
+        $successMessages = [];
 
-        // CSVファイルの内容を処理
         if (($handle = fopen($filePath, 'r')) !== false) {
-            $header = fgetcsv($handle); // ヘッダー行を取得
+            $header = fgetcsv($handle);
 
-            // 各行を処理
             while (($data = fgetcsv($handle)) !== false) {
-                try {
-                    // 必要なデータを取得（CSVのカラム順を確認）
-                    $name = $data[0];               // 店舗名
-                    $userName = $data[1];           // ユーザー名
-                    $prefecture = $data[2];         // 地域
-                    $genre = $data[3];              // ジャンル
-                    $description = $data[4];        // 説明
-                    $imageUrl = $data[5];           // 画像URL
 
-                    // CSVデータのチェック
-                    if (empty($name) || empty($userName) || empty($prefecture) || empty($genre) || empty($description) || empty($imageUrl)) {
+                $validator = Validator::make([
+                    'name' => $data[0],
+                    'user_name' => $data[1],
+                    'prefecture' => $data[2],
+                    'genre' => $data[3],
+                    'description' => $data[4],
+                    'image_url' => $data[5],
+                ], [
+                    'name' => 'required|string',
+                    'user_name' => 'required|string',
+                    'prefecture' => 'required|in:東京都,大阪府,福岡県',
+                    'genre' => 'required|in:寿司,焼肉,イタリアン,居酒屋,ラーメン',
+                    'description' => 'required|string',
+                    'image_url' => 'required|url',
+                ], [
+                    'name.required' => '店舗名は必須です',
+                    'name.string' => '店舗名は文字列でなければなりません',
+                    'user_name.required' => 'ユーザー名は必須です',
+                    'user_name.string' => 'ユーザー名は文字列でなければなりません',
+                    'prefecture.required' => '地域は必須です',
+                    'prefecture.in' => '指定された地域は無効です。東京都、大阪府、福岡県のいずれかを選択してください',
+                    'genre.required' => 'ジャンルは必須です',
+                    'genre.in' => 'ジャンルは寿司、焼肉、イタリアン、居酒屋、ラーメンのいずれかを選択してください',
+                    'description.required' => '店舗概要は必須です',
+                    'description.string' => '店舗概要は文字列でなければなりません',
+                    'image_url.required' => '画像URLは必須です',
+                    'image_url.url' => '画像URLは有効なURL形式でなければなりません',
+                ]);
 
+                if ($validator->fails()) {
+                    foreach ($validator->errors()->all() as $error) {
+                        $errors[] = "店舗「{$data[0]}」: {$error}";
                     }
+                    continue;
+                }
 
-                    // ユーザー名からユーザーIDを取得
+                try {
+                    $name = $data[0];
+                    $userName = $data[1];
+                    $prefecture = $data[2];
+                    $genre = $data[3];
+                    $description = $data[4];
+                    $imageUrl = $data[5];
+
                     $user = User::where('name', $userName)->first();
                     if (!$user) {
-                        logger()->error("ユーザーが見つかりません: {$userName}");
-                        continue; // 次の行に進む
+                        $errors[] = "ユーザーが見つかりません: {$userName}";
+                        continue;
                     }
 
-                    // 画像URLが無効でないかチェック
+                    if (!$user->hasRole('store_manager')) {
+                        $errors[] = "店舗代表者ではないユーザーです: {$userName}";
+                        continue;
+                    }
+
                     if (@getimagesize($imageUrl) === false) {
-                        logger()->error("無効な画像URL: {$imageUrl}");
-                        continue; // 次の行に進む
+                        $errors[] = '無効な画像URLです';
+                        continue;
                     }
 
-                    // 画像を保存
-                    $imageName = basename($imageUrl); // URLからファイル名を取得
+                    $imageName = basename($imageUrl);
                     $storagePath = $storageDirectory . $imageName;
 
                     if (app()->environment('production')) {
-                        // 本番環境：S3に保存
                         Storage::disk('s3')->put($storagePath, file_get_contents($imageUrl));
                     } else {
-                        // ローカル環境：public/shops に保存
                         Storage::disk('public')->put($storagePath, file_get_contents($imageUrl));
                     }
 
-                    // Prefecture と Genre を取得してデータベースに登録
                     $prefectureId = Prefecture::where('name', $prefecture)->firstOrFail()->id;
                     $genreId = Genre::where('name', $genre)->firstOrFail()->id;
 
-                    // データベースに登録
                     Shop::create([
                         'name' => $name,
-                        'user_id' => $user->id,        // ユーザーID
+                        'user_id' => $user->id,
                         'prefecture_id' => $prefectureId,
                         'genre_id' => $genreId,
                         'description' => $description,
-                        'image' => $storagePath,      // 保存した画像のパスを登録
+                        'image' => $storagePath,
                     ]);
+
+                    $successMessages[] = "店舗「{$name}」のインポートに成功しました";
+
                 } catch (\Exception $e) {
-                    logger()->error("CSVインポートエラー: {$e->getMessage()}", ['data' => $data]);
-                    continue; // エラーが発生した場合は次の行に進む
+                    $errors[] = "データの処理中にエラーが発生しました: {$e->getMessage()}";
                 }
             }
-            fclose($handle);
+            if (count($errors) > 0) {
+                return back()->with('import_success', $successMessages)
+                    ->withErrors(['import_errors' => $errors])
+                    ->withInput();
+            } else {
+                return back()->with('import_success', $successMessages)->withErrors([]);
+            }
         }
     }
-
 
 }
 

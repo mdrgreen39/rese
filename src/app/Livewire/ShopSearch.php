@@ -47,15 +47,13 @@ class ShopSearch extends Component
     public function updateSortBy($sortBy)
     {
         $this->sortBy = $sortBy;
-        $this->applySort();  // Apply sort after the update
+        $this->applySort();
     }
 
     public function applySort()
     {
-        // Apply sorting logic based on the value of $this->sortBy
         $query = Shop::query();
 
-        // Add filters
         if ($this->prefectureId) {
             $query->where('prefecture_id', $this->prefectureId);
         }
@@ -69,7 +67,6 @@ class ShopSearch extends Component
             });
         }
 
-        // Apply sorting logic
         if ($this->sortBy === 'random') {
             $this->shops = $query->inRandomOrder()->get();
         } elseif ($this->sortBy === 'high_rating') {
@@ -85,7 +82,14 @@ class ShopSearch extends Component
                     return $shop->comments->avg('rating') ?? PHP_INT_MAX;
                 });
         }
+        $this->dispatch('searchUpdated', [
+            'searchTerm' => $this->searchTerm,
+            'prefectureId' => $this->prefectureId,
+            'genreId' => $this->genreId,
+            'sortBy' => $this->sortBy,
+        ]);
     }
+
     public function render()
     {
         $prefectures = Prefecture::all();

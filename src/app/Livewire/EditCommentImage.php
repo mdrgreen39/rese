@@ -13,13 +13,11 @@ class EditCommentImage extends Component
     public $imagePreview;
     public $image;
 
-    // コンストラクタで既存の画像を設定
     public function mount($existingImage)
     {
         $this->existingImage = $existingImage;
     }
 
-    // 画像アップロード処理
     public function uploadImage()
     {
         if ($this->image) {

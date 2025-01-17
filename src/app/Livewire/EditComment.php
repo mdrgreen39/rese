@@ -2,7 +2,6 @@
 
 namespace App\Livewire;
 
-use Illuminate\Http\UploadedFile;
 use Livewire\Component;
 use Livewire\WithFileUploads;
 use App\Models\Comment;
@@ -30,16 +29,14 @@ class EditComment extends Component
 
     public function setRating($rating)
     {
-        $this->rating = $rating; // $rating プロパティに選択された値を設定
+        $this->rating = $rating;
     }
 
     public function updatedImage()
     {
-        // 既存画像をクリア
         $this->existingImage = null;
     }
 
-    
     public function updateComment()
     {
 
@@ -54,17 +51,13 @@ class EditComment extends Component
         $imagePath = $this->existingImage;
 
         if ($this->image) {
-            // 新しい画像がアップロードされた場合
             if (app()->environment('production')) {
-                // S3に保存
                 $imagePath = $this->image->store('comments', 's3');
             } else {
-                // ローカル環境（publicストレージ）に保存
                 $imagePath = $this->image->store('comments', 'public');
             }
         }
 
-        // コメントをデータベースに保存
         Comment::where('shop_id', $this->shop->id)
             ->where('user_id', auth()->id())
             ->update([
@@ -80,7 +73,6 @@ class EditComment extends Component
     {
         return view('livewire.edit-comment');
     }
-
 
     public function messages()
     {

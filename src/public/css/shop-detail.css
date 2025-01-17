@@ -294,10 +294,8 @@
 
 .comment-content {
     border-top: 0.13rem solid #d2d2d2;
-    /* padding: 1rem 0; */
     max-height: 500px;
     overflow-y: auto;
-
 }
 
 .latest-comment,
@@ -340,8 +338,7 @@
 
 .delete-link:focus {
     outline: none;
-    box-shadow: 0 0 4px #3460f6;
-    /* 代わりに青い光を表示 */
+    box-shadow: 0 0 0.06rem #3460f6;
 }
 
 .comment-image-thumbnail {
@@ -357,10 +354,6 @@
 
 .star.filled {
     color: #3d5fe5;
-}
-
-.comment-text {
-
 }
 
 .comment-status-message {

@@ -22,7 +22,6 @@
     box-shadow: 0.25rem 0.25rem 0.25rem rgba(0, 0, 0, 0.4);
     cursor: pointer;
     transition: background-color 0.3s;
-    outline: none;
 }
 
 .dropdown-button:hover {
@@ -31,6 +30,7 @@
 
 .dropdown-button:focus {
     outline: none;
+    box-shadow: 0 0 0 0.06rem rgba(231, 232, 233, 0.5);
 }
 
 .dropdown-menu {
@@ -66,6 +66,11 @@
 .menu-item:hover {
     background-color: #5580f8;
     color: #ffffff;
+}
+
+.menu-item:focus {
+    outline: none;
+    box-shadow: 0 0 0 0.06rem rgba(0, 123, 255, 0.5);
 }
 
 .menu-item__first:hover {
@@ -232,7 +237,6 @@
 
     .header-search-container {
         display: flex;
-        
         flex-direction: column;
         justify-content: center;
         text-align: center;
