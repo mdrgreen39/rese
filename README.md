@@ -369,4 +369,4 @@ php artisan db:seed
     - ロール: store_manager
 - ローカル環境用CSVインポートテスト用データ
   - 以下のデータを使用してテスト用データを作成することができます。
-    -[テストデータ用CSVファイル](./rese-test-csv.csv)
+    - [テストデータ用CSVファイル](./rese-test-csv.csv)
