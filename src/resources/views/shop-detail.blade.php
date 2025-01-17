@@ -69,7 +69,11 @@
                     @if($latestComment)
                     <div class="comment-actions">
                         @if($latestComment->user_id === auth()->id())
-                        <a href="{{ route('comment.editComment', ['id' => $latestComment->id, 'shop_id' => $shop->id]) }}" class="edit-link">口コミを編集</a>
+                        <a href="{{ route('comment.editComment', ['comment' => $latestComment->id, 'shop_id' => $shop->id]) }}" class="edit-link">口コミを編集</a>
+
+
+
+
                         <form action="{{ route('comment.destroy', $latestComment->id) }}" method="POST" style="display:inline;">
                             @csrf
                             @method('DELETE')
@@ -96,7 +100,8 @@
                     <div class="comment">
                         <div class="comment-actions">
                             @if($comment->user_id === auth()->id())
-                            <a href="{{ route('comment.editComment', ['id' => $comment->id, 'shop_id' => $shop->id]) }}" class="edit-link">口コミを編集</a>
+                            <a href="{{ route('comment.editComment', ['comment' => $latestComment->id, 'shop_id' => $shop->id]) }}" class="edit-link">口コミを編集</a>
+
                             <form action="{{ route('comment.destroy', ['comment' => $comment->id]) }}" method="POST" style="display:inline;">
                                 @csrf
                                 @method('DELETE')

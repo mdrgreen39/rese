@@ -259,28 +259,28 @@ php artisan storage:link
 **解決策**
   1. パーミッションの設定: 次のコマンドを実行して、`storage `ディレクトリのパーミッションを適切に設定してください。
 ``` bash
-chmod -R 775 storage
+chmod -R 775 src/storage
 ```
   2. 所有者の確認: ストレージディレクトリの所有者がウェブサーバーのユーザー（通常は `www-data` や `nginx` など）になっているかを確認します。<br>
     確認するコマンド例：
 ``` bash
-ls -la storage
+ls -la src/storage
 ```
 > 出力例:`drwxrwxr-x  2 user group 4096 Oct 11 12:00 app`
    3. 問題が解決されない場合: 必要に応じて、サーバーの設定を見直し、適切なパーミッションが設定されているか再確認してください。
 
 #### 7.ストレージにLivewire用ディレクトリを作成
 ``` bash
-mkdir -p storage/app/livewire-tmp
+mkdir -p src/storage/app/livewire-tmp
 ```
   1. パーミッションの設定: 次のコマンドを実行して、`livewire-tmp `ディレクトリのパーミッションを適切に設定してください。
 ``` bash
-hmod -R 775 storage/app/livewire-tmp
+hmod -R 775 src/storage/app/livewire-tmp
 ```
 2. 所有者の確認: ストレージディレクトリの所有者がウェブサーバーのユーザー（通常は `www-data` や `nginx` など）になっているかを確認します。<br>
     確認するコマンド例：
 ``` bash
-ls -la storage/app/livewire-tmp
+ls -la src/storage/app/livewire-tmp
 ```
 > 出力例:`drwxrwxr-x  2 user group 4096 Oct 11 12:00 app`
    3. 問題が解決されない場合: 必要に応じて、サーバーの設定を見直し、適切なパーミッションが設定されているか再確認してください。

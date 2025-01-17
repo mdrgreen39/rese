@@ -40,26 +40,23 @@ class CommentController extends Controller
     }
 
     // 口コミ編集ページ表示
-    public function editComment($id, $shop_id, $comment)
+    public function editComment(Comment $comment, $shop_id)
     {
         if ($comment->user_id !== auth()->id()) {
             abort(403, 'このコメントを削除する権限がありません');
         }
 
-        $comment = Comment::findOrFail($id);
+        // コメント情報を利用した処理
         $rating = $comment->rating;
-        $existingImage = $comment->image;
+        $existingImage = $comment->image ? url('storage/' . $comment->image) : null;
 
         $shop = Shop::findOrFail($shop_id);
         $prefecture = $shop->prefecture;
         $genre = $shop->genre;
 
-        $existingImage = $comment->image ? url('storage/' . $comment->image) : null;
-
-        $value = 'some_value';
-
         return view('comment-edit', compact('shop', 'prefecture', 'genre', 'rating', 'comment', 'existingImage'));
     }
+
 
     // 口コミ更新完了ページ表示
     public function commentUpdate($shop_id)

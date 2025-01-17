@@ -63,7 +63,10 @@ Route::middleware('auth', 'verified','role:user')->group(function ()
     Route::get('/payment/cancel', [ReservationController::class, 'paymentCancel'])->name('payment.cancel');
     Route::get('/shop/{shop_id}/comment', [CommentController::class, 'showCommentForm'])->name('comment.form');
     Route::get('/comment/success/{shop_id}', [CommentController::class, 'commentSuccess'])->name('comment.success');
-    Route::get('/comment/{id}/edit/{shop_id}', [CommentController::class, 'editComment'])->name('comment.editComment');
+    Route::get('comment/{comment}/edit/{shop_id}', [CommentController::class, 'editComment'])->name('comment.editComment');
+
+
+
     Route::get('/comment-update-success/{shop_id}', [CommentController::class, 'commentUpdate'])->name('comment.update.success');
     Route::delete('/comment/{comment}', [CommentController::class, 'destroyComment'])->name('comment.destroy');
     Route::get('/comment/delete/{shop_id}', [CommentController::class, 'commentDelete'])->name('comment.delete');
