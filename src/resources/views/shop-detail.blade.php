@@ -70,10 +70,6 @@
                     <div class="comment-actions">
                         @if($latestComment->user_id === auth()->id())
                         <a href="{{ route('comment.editComment', ['comment' => $latestComment->id, 'shop_id' => $shop->id]) }}" class="edit-link">口コミを編集</a>
-
-
-
-
                         <form action="{{ route('comment.destroy', $latestComment->id) }}" method="POST" style="display:inline;">
                             @csrf
                             @method('DELETE')
@@ -82,7 +78,7 @@
                         @endif
                     </div>
                     @if($latestComment->image)
-                    <img src="{{ url('storage/' . $latestComment->image) }}" alt="Comment Image" class="comment-image-thumbnail">
+                    <img src="{{ url('storage/' .  $latestComment->image) }}" alt="Comment Image" class="comment-image-thumbnail">
                     @endif
                     <div class="rating">
                         @for ($i = 1; $i <= 5; $i++)

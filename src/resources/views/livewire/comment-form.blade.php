@@ -6,9 +6,7 @@
                 <div class="comment-left">
                     <div class="comment-shop">
                         <h2 class="comment-shop__heading">今回のご利用はいかがでしたか</h2>
-
                         <div class="comment-shop-container">
-
                             <div class="comment-shop-wrap__item">
                                 <img class="comment-shop-wrap__item-photo" src="{{ $shop->image_url }}" alt="{{ $shop->name }}">
                                 <div class="comment-shop-wrap__item-content">
@@ -25,11 +23,9 @@
                                     </div>
                                 </div>
                             </div>
-
                         </div>
                     </div>
                 </div>
-
                 <!-- 右側の評価フォーム -->
                 <div class="comment-right">
                     <div class="comment-form">

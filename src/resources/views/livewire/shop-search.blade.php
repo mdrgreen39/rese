@@ -29,12 +29,10 @@
 
     @auth
     <div x-data="{ sortBy: @entangle('sortBy'), showMenu: false }" class="relative inline-block">
-        <!-- 並び替えラベル -->
         <button id="sort-button" @click="showMenu = !showMenu" class="dropdown-button">
             並び替え：<span x-text="sortBy === 'random' ? 'ランダム' : (sortBy === 'high_rating' ? '評価高/低' : '評価低/高')"></span>
         </button>
 
-        <!-- フローティングメニュー -->
         <div x-show="showMenu"
             @click.away="showMenu = false"
             x-transition:enter="transition ease-out duration-200"

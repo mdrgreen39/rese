@@ -21,15 +21,6 @@ img {
     height: auto;
 }
 
-/* a { */
-    /* color: inherit; */
-    /* text-decoration: none; */
-/* } */
-
-/* li { */
-    /* list-style: none; */
-/* } */
-
 input::placeholder {
     color: #757575;
 }
@@ -46,7 +37,6 @@ input::placeholder {
     height: 9.38rem;
     padding: 0 3rem;
     background-color: #eeeeee;
-    /* overflow: hidden; */
     z-index: 1000;
 }
 
@@ -62,7 +52,6 @@ input::placeholder {
 .header__logo {
     position: fixed;
     top: 3rem;
-        /* 上から1remの位置 */
     left: 2.5rem;
     margin-left: 5rem;
     font-size: 2rem;

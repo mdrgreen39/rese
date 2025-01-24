@@ -48,7 +48,7 @@ class CommentController extends Controller
 
         // コメント情報を利用した処理
         $rating = $comment->rating;
-        $existingImage = $comment->image ? url('storage/' . $comment->image) : null;
+        $existingImage = $comment->image ? $comment->image : null;
 
         $shop = Shop::findOrFail($shop_id);
         $prefecture = $shop->prefecture;

@@ -25,6 +25,9 @@ class EditComment extends Component
         $this->comment = $comment ? $comment->comment : '';
         $this->existingImage = $existingImage;
 
+        logger()->info('Existing Image:', [$this->existingImage]);
+    
+
     }
 
     public function setRating($rating)
