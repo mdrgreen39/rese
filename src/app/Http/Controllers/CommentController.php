@@ -32,7 +32,6 @@ class CommentController extends Controller
             ->exists();
 
         if ($existingComment) {
-            // コメント投稿済みの場合はエラーメッセージを表示して店舗詳細ページにリダイレクト
             return redirect()->route('shop.detail', ['shop_id' => $shop_id])
                 ->with('error', 'この店舗には既にコメントを投稿しています');
         }

@@ -43,7 +43,6 @@
 
 .detail-heading__name {
     font-size: 1.75rem;
-
 }
 
 .detail-container__item {
@@ -215,7 +214,6 @@
     border-radius: 0.38rem;
     font-size: 0.75rem;
     cursor: pointer;
-
         &:hover {
             background-color: #fff;
             color: #003ff5;
@@ -328,6 +326,7 @@
     text-decoration: underline;
     cursor: pointer;
     -webkit-appearance: none;
+    appearance: none;
 }
 
 .edit-link:hover,

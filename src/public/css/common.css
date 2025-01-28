@@ -319,10 +319,6 @@ input::placeholder {
         padding: 4rem 0 1rem;
     }
 
-    .hamburger-label {
-            /* top: 4rem; */
-    }
-
     .header-nav {
         width: 100vw;
         height: 100vh;

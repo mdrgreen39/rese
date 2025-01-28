@@ -34,16 +34,13 @@
                         @if ($errors->has('rating'))
                         <p class="comment-form__error-message">{{ $errors->first('rating') }}</p>
                         @endif
-
                         <div class="comment-form__group">
                             <label for="comment" class="comment-form__group-text">口コミを投稿</label>
                             @livewire('comment-textarea')
-
                         </div>
                         @if ($errors->has('comment'))
                         <p class="comment-form__error-message">{{ $errors->first('comment') }}</p>
                         @endif
-
                         <div class="comment-form__group">
                             <label for="image-upload" class="comment-form__group-text">画像の追加</label>
                             @livewire('comment-image', key('comment-image'))
@@ -52,7 +49,6 @@
                     @if ($errors->has('image'))
                     <p class="comment-form__error-message">{{ $errors->first('image') }}</p>
                     @endif
-
                 </div>
             </div>
             <div class="comment-send">

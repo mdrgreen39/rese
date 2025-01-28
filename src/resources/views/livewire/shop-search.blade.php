@@ -67,10 +67,5 @@
             </ul>
         </div>
     </div>
-
-
-
-
-
     @endauth
 </div>
