@@ -163,6 +163,12 @@ class AdminController extends Controller
             return back()->with('error', 'CSVファイルが選択されていないか無効です');
         }
 
+        $fileData = file_get_contents($filePath);
+
+        if (!$this->isValidCSV($fileData)) {
+            return back()->withInput()->withErrors(['csv' => 'CSVの内容が不正です']);
+        }
+
         try {
             $this->handleCSVImport($filePath);
         } catch (\Exception $e) {
@@ -170,6 +176,31 @@ class AdminController extends Controller
         }
 
         return redirect()->back()->with('success', 'CSVデータをインポートしました！');
+    }
+
+    private function isValidCSV($fileData)
+    {
+        $lines = explode(PHP_EOL, $fileData);
+
+        $header = str_getcsv($lines[0]);
+
+        $requiredColumns = ['店舗名', 'ユーザー名', '地域', 'ジャンル', '店舗概要', '画像URL'];
+
+        foreach ($requiredColumns as $column) {
+            if (!in_array($column, $header)) {
+                return false;
+            }
+        }
+
+        foreach (array_slice($lines, 1) as $line) {
+            $columns = str_getcsv($line);
+
+            if (count($columns) < count($requiredColumns)) {
+                return false;
+            }
+        }
+
+        return true;
     }
 
     public function handleCSVImport($filePath)

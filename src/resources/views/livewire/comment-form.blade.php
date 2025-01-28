@@ -2,7 +2,6 @@
     <div class="comment">
         <form wire:submit.prevent="submit" enctype="multipart/form-data" novalidate>
             <div class="comment-content">
-                <!-- 左側の店舗情報 -->
                 <div class="comment-left">
                     <div class="comment-shop">
                         <h2 class="comment-shop__heading">今回のご利用はいかがでしたか</h2>
@@ -26,10 +25,8 @@
                         </div>
                     </div>
                 </div>
-                <!-- 右側の評価フォーム -->
                 <div class="comment-right">
                     <div class="comment-form">
-                        <!-- 星評価 -->
                         <div class="comment-form__group">
                             <p class="comment-form__group-text">体験を評価してください</p>
                             @livewire('comment-star', ['rating' => $rating, 'isEditing' => false], key('comment-star'))
@@ -38,7 +35,6 @@
                         <p class="comment-form__error-message">{{ $errors->first('rating') }}</p>
                         @endif
 
-                        <!-- 口コミ入力フォーム -->
                         <div class="comment-form__group">
                             <label for="comment" class="comment-form__group-text">口コミを投稿</label>
                             @livewire('comment-textarea')
@@ -48,7 +44,6 @@
                         <p class="comment-form__error-message">{{ $errors->first('comment') }}</p>
                         @endif
 
-                        <!-- 画像追加 -->
                         <div class="comment-form__group">
                             <label for="image-upload" class="comment-form__group-text">画像の追加</label>
                             @livewire('comment-image', key('comment-image'))
@@ -60,7 +55,6 @@
 
                 </div>
             </div>
-            <!-- 投稿ボタン -->
             <div class="comment-send">
                 @if (session()->has('error'))
                 <div class="comment-send__error-message">

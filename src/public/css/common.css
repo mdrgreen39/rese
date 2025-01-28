@@ -38,11 +38,11 @@ input::placeholder {
     padding: 0 3rem;
     background-color: #eeeeee;
     z-index: 1000;
+    max-width: 2000px;
 }
 
 .header__container {
     display: flex;
-    justify-content: flex-start;
     justify-content: space-between;
     align-items: center;
     width: 30%;
@@ -310,7 +310,7 @@ input::placeholder {
     .header {
         flex-direction: column;
         padding: 2rem;
-        height: 20rem
+        height: 20rem;
     }
 
 
@@ -320,7 +320,7 @@ input::placeholder {
     }
 
     .hamburger-label {
-            top: 4rem;
+            /* top: 4rem; */
     }
 
     .header-nav {

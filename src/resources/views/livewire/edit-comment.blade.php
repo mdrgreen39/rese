@@ -2,7 +2,6 @@
     <div class="comment">
         <form wire:submit.prevent="updateComment" enctype="multipart/form-data" novalidate>
             <div class="comment-content">
-                <!-- 左側の店舗情報 -->
                 <div class="comment-left">
                     <div class="comment-shop">
                         <h2 class="comment-shop__heading">今回のご利用はいかがでしたか</h2>
@@ -19,16 +18,15 @@
                                         <a class="comment-shop-wrap__item-button" href="{{ route('shop.detail', ['shop_id' => $shop->id]) }}">詳しく見る</a>
 
                                         @livewire('favorite-toggle', ['shop' => $shop], key('favorite-toggle-' . $shop->id))
+
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
-                <!-- 右側の評価フォーム -->
                 <div class="comment-right">
                     <div class="comment-form">
-                        <!-- 星評価 -->
                         <div class="comment-form__group">
                             <p class="comment-form__group-text">体験を評価してください</p>
                             <div class="stars">
@@ -40,21 +38,18 @@
                         @if ($errors->has('rating'))
                         <p class="comment-form__error-message">{{ $errors->first('rating') }}</p>
                         @endif
-                        <!-- 口コミ入力フォーム -->
                         <div class="comment-form__group">
                             <label for="comment" class="comment-form__group-text">口コミを編集</label>
                             <textarea
                                 id=" comment"
                                 name="comment"
                                 placeholder="カジュアルな夜のお出かけにおすすめのスポット"
-                                maxlength="400"
                                 wire:model.live="comment"></textarea>
                             <div class="comment-form__char-count">{{ mb_strlen($comment, 'UTF-8') }}/400(最高文字数)</div>
                         </div>
                         @if ($errors->has('comment'))
                         <p class="comment-form__error-message">{{ $errors->first('comment') }}</p>
                         @endif
-                        <!-- 画像追加 -->
                         <div class="image-upload-box" x-data="{
                             imagePreview: @entangle('imagePreview'),
                             handleDrop(event) {
@@ -70,10 +65,9 @@
                                 $refs.fileInput.click();
                             }
                         }">
-                            <!-- 既存画像がある場合に表示 -->
                             @if ($existingImage)
                             <div class="image-preview" @click="changeImage()">
-                                <img src="{{ $existingImage }}" alt="Existing Image">
+                                <img src="{{ Storage::url($existingImage) }}" alt="Existing Image">
                             </div>
                             @endif
                             <div class="drop-zone"
@@ -96,7 +90,6 @@
                                 </div>
 
                             </div>
-                            <!-- 画像が選ばれた場合にプレビュー表示 -->
                             @if ($image)
                             <div class="image-preview" @click="changeImage()">
                                 <img src="{{ $image->temporaryUrl() }}" alt="Image Preview">
@@ -109,7 +102,6 @@
                     @endif
                 </div>
             </div>
-            <!-- 編集ボタン -->
             <div class="comment-send">
                 @if (session()->has('error'))
                 <div class="comment-send__error-message">

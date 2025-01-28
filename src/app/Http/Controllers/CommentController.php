@@ -27,6 +27,15 @@ class CommentController extends Controller
         $comment = '';
         $image = null;
 
+        $existingComment = Comment::where('user_id', auth()->id())
+            ->where('shop_id', $shop_id)
+            ->exists();
+
+        if ($existingComment) {
+            // コメント投稿済みの場合はエラーメッセージを表示して店舗詳細ページにリダイレクト
+            return redirect()->route('shop.detail', ['shop_id' => $shop_id])
+                ->with('error', 'この店舗には既にコメントを投稿しています');
+        }
 
         return view('comment', compact('shop', 'prefecture', 'genre','rating', 'comment', 'image'));
     }
@@ -46,7 +55,6 @@ class CommentController extends Controller
             abort(403, 'このコメントを削除する権限がありません');
         }
 
-        // コメント情報を利用した処理
         $rating = $comment->rating;
         $existingImage = $comment->image ? $comment->image : null;
 

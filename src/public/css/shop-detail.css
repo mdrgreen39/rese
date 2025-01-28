@@ -356,6 +356,10 @@
     color: #3d5fe5;
 }
 
+.comment-area__error-message {
+    color: #cf2222
+}
+
 .comment-status-message {
     text-align: center;
     color: #cf2222

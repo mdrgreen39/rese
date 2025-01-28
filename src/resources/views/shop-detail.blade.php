@@ -61,6 +61,11 @@
         @endif
         <div class="comment-area">
             <a href="{{ route('comment.form', ['shop_id' => $shop->id]) }}" class="comment-area__comment-form--link">口コミを投稿する</a>
+            @if (session('error'))
+            <div class="comment-area__error-message">
+                {{ session('error') }}
+            </div>
+            @endif
             <div class="comment-area__button-container">
                 <button id="showAllCommentsButton" class="comment-area__button--display">全ての口コミ情報</button>
             </div>
@@ -83,7 +88,7 @@
                     <div class="rating">
                         @for ($i = 1; $i <= 5; $i++)
                             <span class="star {{ $i <= $latestComment->rating ? 'filled' : '' }}">★</span>
-                            @endfor
+                        @endfor
                     </div>
                     <p class="comment-text">{{ $latestComment->comment }}</p>
                     @else
@@ -111,7 +116,7 @@
                         <div class="rating">
                             @for ($i = 1; $i <= 5; $i++)
                                 <span class="star {{ $i <= $comment->rating ? 'filled' : '' }}">★</span>
-                                @endfor
+                            @endfor
                         </div>
                         <p>{{ $comment->comment }}</p>
                     </div>

@@ -28,7 +28,7 @@
 @section('content')
 
 
-<div class="shop-import-status {{ session('import_success') || $errors->any() ? '' : 'no-message' }}">
+<div class="shop-import-status {{ session('import_success') || $errors->any() && !$errors->has('csv') ? '' : 'no-message' }}">
 
     @if (session('import_success'))
     <div class="shop-import__status-success">

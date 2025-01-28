@@ -56,8 +56,8 @@ class CommentForm extends Component
             ->where('shop_id', $this->shop->id)
             ->count();
 
-        if ($commentCount >= 2) {
-            session()->flash('error', '同じ店舗に2回以上コメントを投稿することはできません');
+        if ($commentCount >= 1) {
+            session()->flash('error', '同じ店舗に1回しかコメントを投稿することはできません');
             return;
         }
 

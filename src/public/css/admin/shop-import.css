@@ -8,12 +8,14 @@
     padding: 0 1rem;
     max-height: 300px;
     overflow-y: auto;
-    background-color: #f9f9f9
+    background-color: #f9f9f9;
+    position: relative;
 }
 
 .shop-import-status.no-message {
     margin-top: 0;
     justify-content: flex-start;
+    position: absolute;
 }
 
 .shop-import__status-success {
